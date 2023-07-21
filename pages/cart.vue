@@ -8,6 +8,14 @@ const productStore = useProductStore()
 const isHover = ref(false)
 const isSelected = ref(false)
 
+const totalPriceComputed = computed(() => {
+  let total = 0
+  productStore.cart.forEach((product) => {
+
+    total += product.value.cumulativeCost
+  })
+  return total
+})
 
 </script>
 
@@ -25,9 +33,9 @@ const isSelected = ref(false)
             </div>
 
             <div id="Items" class="bg-white rounded-lg shadow-sm p-4 mt-0">
-              <div v-for="product in productStore.cart" :key="product.id">
-                <!-- :selectArray='selectedArray' -->
-                <CartItem :product='product' @selectedRadio='selectedRadioFunc' />
+              <div v-for="(product, index) in productStore.cart" :key="index">
+                <!-- :selectArray='selectedArray' @selectedRadio='selectedRadioFunc' -->
+                <CartItem :product='product' :index="index" />
               </div>
             </div>
           </div>
@@ -40,7 +48,7 @@ const isSelected = ref(false)
               <div class="flex items-center justify-between my-4">
                 <div class="font-semibold">Total</div>
                 <div class="text-2xl font-semibold">
-                  Ksh.<span class="font-extrabold">{{ totalPriceComputed }}</span>
+                  <span class="font-extrabold">{{ useCurrencyFormatter(totalPriceComputed) }}</span>
                 </div>
               </div>
 

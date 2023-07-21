@@ -26,7 +26,7 @@ const ctyRoute = ref('')
 const ctyEstate = ref('')
 const cityRoute = ref([])
 const estate = ref([])
-const deliveryCost = ref(null)
+const deliveryCost = ref(0)
 const selectedFont = ref('')
 const customName = ref('')
 
@@ -110,6 +110,8 @@ const closeModal = () => {
 const selectedProduct = ref({})
 
 const addToCart = () => {
+  let total = productStore.product.price + deliveryCost.value + productStore.customizationFee
+
   selectedProduct.value = {
     title: productStore.product.title,
     price: productStore.product.price,
@@ -122,7 +124,8 @@ const addToCart = () => {
     selectedFont: productStore.selectedFont,
     customName: productStore.customName,
     customizationFee: productStore.customizationFee,
-    productId: productStore.product.productId
+    productId: productStore.product.productId,
+    cumulativeCost: total
   }
 
   productStore.cart.push(selectedProduct)

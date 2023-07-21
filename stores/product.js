@@ -13,7 +13,7 @@ export const useProductStore = defineStore('product', {
 
     customName: '',
     selectedFont: '',
-    customizationFee: '',
+    customizationFee: 0,
     customizedBottle: false,
 
     products: [
@@ -108,7 +108,7 @@ export const useProductStore = defineStore('product', {
       },
     ],
     product: null,
-    cart: []
+    cart: [],
   }),
   // could also be defined as
   // state: () => ({ count: 0 })

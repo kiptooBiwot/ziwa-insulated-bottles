@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    'nuxt-icon'
+    'nuxt-icon',
+    'nuxt-mailer'
   ],
   pinia: {
     autoImports: [
@@ -15,4 +16,15 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
+  runtimeConfig: {
+    mailerUser: '',
+    mailerPass: '',
+    mailerLog: '',
+    mailerDriver: '',
+    mailerHost: '',
+    mailerPort: '',
+    mailerSmtpTls: '',
+    mailerFromAddress: '',
+    mailerToAddress: '',
+  }
 })
