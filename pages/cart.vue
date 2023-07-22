@@ -17,6 +17,12 @@ const totalPriceComputed = computed(() => {
   return total
 })
 
+
+const goToCheckout = () => {
+  if (productStore.cart.length > 0) {
+    return navigateTo('/checkout')
+  }
+}
 </script>
 
 <template>
@@ -53,7 +59,7 @@ const totalPriceComputed = computed(() => {
               </div>
 
               <button @click="goToCheckout"
-                class="flex items-center justify-center bg-[#fd374f] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4">
+                class="flex items-center justify-center bg-[#39519f] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4">
                 Checkout
               </button>
             </div>

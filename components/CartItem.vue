@@ -1,5 +1,5 @@
 <script setup>
-import { useProductStore } from '@/stores/product'
+import { useProductStore } from '~/stores/product'
 
 const productStore = useProductStore()
 const props = defineProps({
@@ -25,9 +25,8 @@ const removeFromCart = (index) => {
 <template>
   <div class=" justify-start my-2 rounded-md shadow-md bg-white border py-5 px-5">
     <div class="grid grid-cols-1 md:grid-cols-12 space-y-7">
-      INDEX!: {{ index }}
       <div class="col-span-4">
-        <img class="rounded-md mx-auto md:w-auto md:h-[150px] w-[90px] md:ml-10 md:mr-10" :src="product.currentImage">
+        <img class="rounded-md mx-auto md:w-auto md:h-[150px] w-[90px] md:ml-5 md:mr-10" :src="product.currentImage">
       </div>
       <div class="col-span-8 overflow-hidden pl-2 w-full">
         <div class="flex items-center justify-between w-full">

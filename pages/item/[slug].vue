@@ -129,6 +129,12 @@ const addToCart = () => {
   }
 
   productStore.cart.push(selectedProduct)
+
+  // Reset customization
+  productStore.selectedFont = ''
+  productStore.customName = ''
+  productStore.customizedBottle = false
+
   navigateTo('/cart')
 }
 

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     'nuxt-icon',
-    'nuxt-mailer'
+    '@pinia-plugin-persistedstate/nuxt'
   ],
   pinia: {
     autoImports: [
@@ -26,5 +26,10 @@ export default defineNuxtConfig({
     mailerSmtpTls: '',
     mailerFromAddress: '',
     mailerToAddress: '',
+    MAILHOST: '',
+    MAILPORT: '',
+    MAILUSER: '',
+    MAILPASSWORD: '',
+    CONTACTMAIL: ''
   }
 })
