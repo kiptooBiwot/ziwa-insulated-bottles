@@ -3,6 +3,10 @@ import bottle from '~/assets/images/products/bottle1-bg.png'
 import about_img from '~/assets/images/MOK_4820.jpg'
 import about_img1 from '~/assets/images/MOK_4835.jpg'
 
+useHead({
+  title: 'Ziwa | About Us'
+})
+
 </script>
 
 <template>

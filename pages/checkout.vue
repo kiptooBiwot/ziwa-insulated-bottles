@@ -11,14 +11,14 @@ const productStore = useProductStore()
 // })
 
 const formData = ref({
-  firstName: 'Kiptoo',
-  lastName: 'biwot',
+  firstName: '',
+  lastName: '',
   // fullName: '',
-  subject: 'You have a new ORDER',
-  phoneNumber: '0987654321',
-  email: 'mail@mail.com',
-  address: 'Upper Elgon view Road',
-  optionalMessage: 'Optinal',
+  subject: '',
+  phoneNumber: '',
+  email: '',
+  address: '',
+  optionalMessage: '',
   cartItems: []
 })
 

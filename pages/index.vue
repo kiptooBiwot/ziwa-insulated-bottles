@@ -3,6 +3,10 @@ import { useProductStore } from '@/stores/product'
 import bottle from '~/assets/images/products/bottle1-bg.png'
 
 const productStore = useProductStore()
+
+useHead({
+  title: 'Ziwa | Home of Insulated Water bottles'
+})
 </script>
 
 <template>
