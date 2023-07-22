@@ -110,9 +110,9 @@ export const useProductStore = defineStore('product', {
     product: null,
     cart: [],
   }),
-  persist: {
-    storage: persistedState.localStorage
-  },
+  // persist: {
+  //   storage: persistedState.localStorage
+  // },
   // could also be defined as
   // state: () => ({ count: 0 })
   actions: {

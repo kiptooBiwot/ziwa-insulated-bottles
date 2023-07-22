@@ -10,10 +10,12 @@ const isSelected = ref(false)
 
 const totalPriceComputed = computed(() => {
   let total = 0
+
   productStore.cart.forEach((product) => {
 
     total += product.value.cumulativeCost
   })
+
   return total
 })
 
@@ -66,11 +68,12 @@ const goToCheckout = () => {
 
             <div id="PaymentProtection" class="bg-white rounded-lg p-4 mt-4">
               <div class="text-lg font-semibold mb-2">Payment methods</div>
-              <div class="flex items-center justify-start gap-8 my-4">
+              <p class="text-sm">Payment methods to be added soon.</p>
+              <!-- <div class="flex items-center justify-start gap-8 my-4">
                 <div v-for="card in cards" :key=card>
                   <img :src="card" class="h-6" alt="">
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -18,16 +18,16 @@ export default defineEventHandler(async (event) => {
       ignoreTLS: true,
     }
   });
-  try {
-    const body = await readBody(event);
-    // const bodyContentValid = await isValid(body)
+  // try {
+  const body = await readBody(event);
+  // const bodyContentValid = await isValid(body)
 
-    // console.log('BODY TOP', bodyContentValid);
-    const fullName = body.firstName + ' ' + body.lastName
-    let template = '<div>'
+  console.log('BODY TOP', body);
+  const fullName = body.firstName + ' ' + body.lastName
+  let template = '<div>'
 
-    body.cartItems.forEach(item => {
-      template += `
+  body.cartItems.forEach(item => {
+    template += `
                   <h1>Product Ordered: ${item._value.currentBottleColor} ${item._value.title} ${item._value.capacity}</h1>
                   <p style="font-weight: bold;">Customer to pay: ${item._value.price} for the bottle</p>
                   <h3>ORDER DEIVERY ADDRESS</h3>
@@ -43,12 +43,12 @@ export default defineEventHandler(async (event) => {
                   <p style="font-weight: bold;">Customer to pay: ${item._value.cumulativeCost} in total.</p>
                   <hr>
                   `
-    });
+  });
 
-    template += '</div>'
+  template += '</div>'
 
-    const emailFormat =
-      `
+  const emailFormat =
+    `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -86,32 +86,57 @@ export default defineEventHandler(async (event) => {
       </html>
     `
 
-    // if (bodyContentValid) {
+  const mailOptions = {
+    from: `"${fullName}" <${body.email}>`,
+    to: config.CONTACTMAIL,
+    subject: body.subject,
+    // text: data.message,
+    html: emailFormat,
+  }
 
-    // console.log('BODY TO EMAIL', body)
+  try {
+    // isValid(body)
+    //   .then(async (body) => {
+    const mail = await transporter.sendMail(mailOptions)
+    // })
 
-    const mailOptions = {
-      from: `"${fullName}" <${body.email}>`,
-      to: config.CONTACTMAIL,
-      subject: body.subject,
-      // text: data.message,
-      html: emailFormat,
+    console.log('Message sent: %s', mail.messageId);
+    console.log('Mail: %s', mail.accepted);
+
+    if (mail.accepted.length > 0) {
+      setResponseStatus(event, 200)
+      return { statusCode: 200 }
     }
 
-    await transporter.sendMail(mailOptions, function (err, info) {
-      if (err) {
-        console.log('Error is', err);
-        resolve(false)
-      } else {
-        console.log('Email sent', info.response);
-        return { status: 'OK' }
-      }
-    })
+    if (mail.rejected.length > 0) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Your order was not registered sucessfully. Please try again.'
+      })
+    }
+
+    // return Promise.resolve()
   } catch (error) {
-    return Promise.reject(error)
-    // console.log('CATCH ERROR', error);
-    // sendError(event, createError({ statusCode: 400, statusMessage: error }));
+
+    return Promise.reject()
   }
+
+
+
+  //   await transporter.sendMail(mailOptions, function (err, info) {
+  //     if (err) {
+  //       console.log('Error is', err);
+  //       resolve(false)
+  //     } else {
+  //       console.log('Email sent', info.response);
+  //       return { statusCode: 200 }
+  //     }
+  //   })
+  // } catch (error) {
+  //   return Promise.reject(error)
+  //   // console.log('CATCH ERROR', error);
+  //   // sendError(event, createError({ statusCode: 400, statusMessage: error }));
+  // }
 });
 
 async function isValid(body) {
