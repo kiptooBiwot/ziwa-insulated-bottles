@@ -1,6 +1,9 @@
 <script setup>
 import { useProductStore } from '@/stores/product'
 import { useDeliveryStore } from '@/stores/delivery'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
+
 import bottle from '~/assets/images/products/bottle1-bg.png'
 import bottle2 from '~/assets/images/products/bottle2-bg.png'
 import bottle3 from '~/assets/images/products/bottle3-bg.png'
@@ -17,6 +20,17 @@ const route = useRoute()
 
 const props = defineProps(['image'])
 
+const rules = computed(() => {
+  return {
+    ctyRoute: {
+      required: helpers.withMessage('Please select a route', required)
+    },
+    ctyEstate: {
+      required: helpers.withMessage('Please select the estate to deliver your product ', required)
+    }
+  }
+})
+
 const currentImage = ref('')
 const currentBottleColor = ref('')
 const customizeBottle = ref(false)
@@ -29,6 +43,9 @@ const estate = ref([])
 const deliveryCost = ref(0)
 const selectedFont = ref('')
 const customName = ref('')
+
+
+const v$ = useVuelidate(rules, { ctyRoute, ctyEstate })
 
 const images = [
   bottle,
@@ -110,32 +127,36 @@ const closeModal = () => {
 const selectedProduct = ref({})
 
 const addToCart = () => {
-  let total = productStore.product.price + deliveryCost.value + productStore.customizationFee
+  v$.value.$validate()
 
-  selectedProduct.value = {
-    title: productStore.product.title,
-    price: productStore.product.price,
-    capacity: productStore.product.capacity,
-    currentImage: currentImage.value,
-    currentBottleColor: currentBottleColor.value,
-    ctyRoute: ctyRoute.value,
-    ctyEstate: ctyEstate.value,
-    deliveryCost: deliveryCost.value,
-    selectedFont: productStore.selectedFont,
-    customName: productStore.customName,
-    customizationFee: productStore.customizationFee,
-    productId: productStore.product.productId,
-    cumulativeCost: total
+  if (!v$.value.$error) {
+    let total = productStore.product.price + deliveryCost.value + productStore.customizationFee
+
+    selectedProduct.value = {
+      title: productStore.product.title,
+      price: productStore.product.price,
+      capacity: productStore.product.capacity,
+      currentImage: currentImage.value,
+      currentBottleColor: currentBottleColor.value,
+      ctyRoute: ctyRoute.value,
+      ctyEstate: ctyEstate.value,
+      deliveryCost: deliveryCost.value,
+      selectedFont: productStore.selectedFont,
+      customName: productStore.customName,
+      customizationFee: productStore.customizationFee,
+      productId: productStore.product.productId,
+      cumulativeCost: total
+    }
+
+    productStore.cart.push(selectedProduct)
+
+    // Reset customization
+    productStore.selectedFont = ''
+    productStore.customName = ''
+    productStore.customizedBottle = false
+
+    navigateTo('/cart')
   }
-
-  productStore.cart.push(selectedProduct)
-
-  // Reset customization
-  productStore.selectedFont = ''
-  productStore.customName = ''
-  productStore.customizedBottle = false
-
-  navigateTo('/cart')
 }
 
 const isInCart = computed(() => {
@@ -176,19 +197,6 @@ const isInCart = computed(() => {
                 :src="currentImage" alt="">
             </div>
           </div>
-
-          <!-- <div class="w-full py-10 bg-[#89CFF0] rounded-xl">
-            <img v-if="currentImage" :src="currentImage"
-              class="rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
-              alt="">
-          </div> -->
-          <!-- <div v-if="images[0] !== ''" class="flex items-center justify-center mt-2">
-            <div v-for="image in images" :key="image">
-              <img :src="image" @mouseover="currentImage = image" @click="currentImage = image" width="70"
-                class="rounded-md object-fit border-[3px] cursor-pointer transition duration-300 ease-in-out"
-                :class="currentImage === image ? 'border-[#39519f]' : ''" alt="">
-            </div>
-          </div> -->
           <div class="md:hidden">
             <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
             <div class="flex gap-2">
@@ -244,21 +252,36 @@ const isInCart = computed(() => {
               <div class="flex flex-col gap-2 w-full">
                 <label>Select your Route</label>
                 <select v-model="ctyRoute" @change="getEstate(ctyRoute)" name="" id=""
-                  class="py-3 px-4 border placeholder:text-sm  rounded-md">
+                  class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
+                    'border-red-500 focus:border-red-500': v$.ctyRoute.$error,
+                    'border-[#42d392] ': !v$.ctyRoute.$invalid,
+                  }">
                   <option value="" disabled selected>Select your delivery route</option>
                   <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name }}
                   </option>
                 </select>
+                <div>
+                  <span class="text-xs text-red-500" v-if="v$.ctyRoute.$error">
+                    {{ v$.ctyRoute.$errors[0].$message }}
+                  </span>
+                </div>
               </div>
               <div class="flex flex-col gap-2 w-full">
                 <label for="">Select your estate</label>
-                <select v-model="ctyEstate" name="" id="" class="py-3 px-4 border placeholder:text-sm  rounded-md"
-                  :class="[!cityRoute ? disabled : '']" @change="setDeliveryFees(ctyEstate)">
+                <select v-model="ctyEstate" name="" id="" class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
+                  'border-red-500 focus:border-red-500': v$.ctyEstate.$error,
+                  'border-[#42d392] ': !v$.ctyEstate.$invalid,
+                }" @change="setDeliveryFees(ctyEstate)">
                   <option value="" disabled selected>Select your estate</option>
                   <option :value="estate.estateName" v-for="(estate, i) in cityRoute.estate" :key="i">
                     {{ estate.estateName }}
                   </option>
                 </select>
+                <div>
+                  <span class="text-xs text-red-500" v-if="v$.ctyEstate.$error">
+                    {{ v$.ctyEstate.$errors[0].$message }}
+                  </span>
+                </div>
               </div>
 
             </div>

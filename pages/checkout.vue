@@ -48,7 +48,7 @@ const v$ = useVuelidate(rules, formData)
 
 
 const errors = ref(false)
-const succsess = ref(false)
+const success = ref(false)
 const waiting = ref(false)
 
 // const getFull = () => {
@@ -61,6 +61,11 @@ onMounted(() => {
       formData.value.cartItems.push(product)
     }
   })
+})
+
+const isDisabled = computed(() => {
+  // const disabled = 
+  return success.value == true || waiting.value == true
 })
 
 const submit = async (form) => {
@@ -79,7 +84,7 @@ const submit = async (form) => {
 
       if (data.value.statusCode === 200) {
         errors.value = false
-        succsess.value = true
+        success.value = true
         waiting.value = false
         formData.value = {
           name: '',
@@ -93,7 +98,7 @@ const submit = async (form) => {
     } catch (error) {
       // console.log('ERROR', error)
       errors.value = true
-      succsess.value = false
+      success.value = false
       waiting.value = false
     }
   }
@@ -104,10 +109,10 @@ const submit = async (form) => {
 <template>
   <div class="bg-gray-50">
     <div class="max-w-6xl mx-auto pt-40 min-h-screen px-5 xl:px-0">
-      <h1 class="text-2xl font-medium">Checkout</h1>
+      <h1 v-if="!success" class="text-2xl font-medium">Checkout</h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-7 mt-5 pb-20">
-        <form action="" @submit.prevent="submit(form)"
+      <div v-if="!success" class="grid grid-cols-1 md:grid-cols-12 gap-7 mt-5 pb-20">
+        <form @submit.prevent="submit(form)"
           class="order-last md:order-first flex flex-col col-span-7 border space-y-5 px-5 py-5 rounded-md border-gray-800 text-gray-800">
           <p class="text-sm  pt-2">Please fill the form below accurately to complete your order. Thank you.
           </p>
@@ -214,16 +219,14 @@ const submit = async (form) => {
           </div>
 
           <div>
-            <button type="submit" class="w-full py-2 px-auto bg-green-500 text-white rounded-md"
-              :class="`[ ${succsess} ? 'disabled' : '' ]`"><span v-if="!waiting">Process</span> <span
-                v-else>Processing...</span></button>
+            <button type="submit"
+              class="w-full py-2 px-auto bg-green-500 shadow-md text-white rounded-md hover:bg-green-600 hover:text-gray-100 hover:shadow-lg"
+              :disabled="isDisabled"><span v-if="!waiting">Process</span> <span v-else>Processing...</span></button>
           </div>
 
           <p v-if="errors">🔥 Your order was not processed. Kindly try again.</p>
-          <div v-if="succsess" class="w-full border-green-500 text-green rounded-md p-5">
-            <p class="">📩 Your order is well received! We will get back to you concerning your order.</p>
-          </div>
         </form>
+
 
         <div class="order-1 md:order-last col-span-5 bg-white shadow-sm rounded-md py-5 px-4">
           <h3 class="text-xl text-gray-800 font-medium">Order Summary</h3>
@@ -232,6 +235,13 @@ const submit = async (form) => {
             <CartItem :product='product' :index="index" />
           </div>
         </div>
+      </div>
+      <div v-else
+        class="w-full max-w-3xl mx-auto border border-green-500 text-green rounded-md py-10 px-10 space-y-5 text-center">
+        <p class="text-2xl">📩 Your order is well received! We will get back to you concerning your order.</p>
+        <p class="text-xl">If you have any questions don't hesitate to reach out to us on <span
+            class="text-orange-500">+254-703-968-795</span>
+        </p>
       </div>
     </div>
   </div>
