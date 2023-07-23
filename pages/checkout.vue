@@ -108,7 +108,7 @@ const submit = async (form) => {
 
 <template>
   <div class="bg-gray-50">
-    <div class="max-w-6xl mx-auto pt-40 min-h-screen px-5 xl:px-0">
+    <div class="max-w-6xl mx-auto pt-40 pb-20 h-auto px-5 xl:px-0">
       <h1 v-if="!success" class="text-2xl font-medium">Checkout</h1>
 
       <div v-if="!success" class="grid grid-cols-1 md:grid-cols-12 gap-7 mt-5 pb-20">
