@@ -2,11 +2,49 @@
 import { useProductStore } from '@/stores/product'
 import bottle from '~/assets/images/products/bottle1-bg.png'
 
+import image from '~/assets/images/MOK_4601.jpeg'
+import image_13 from '~/assets/images/MOK_4602.jpeg'
+import image_1 from '~/assets/images/MOK_4783.jpg'
+import image_2 from '~/assets/images/MOK_4796.jpg'
+import image_3 from '~/assets/images/MOK_4797.jpg'
+import image_4 from '~/assets/images/MOK_4802.jpg'
+import image_5 from '~/assets/images/MOK_4804.jpg'
+import image_6 from '~/assets/images/MOK_4808.jpg'
+import image_7 from '~/assets/images/MOK_4815.jpg'
+import image_8 from '~/assets/images/MOK_4820.jpg'
+import image_9 from '~/assets/images/MOK_4829.jpg'
+import image_10 from '~/assets/images/MOK_4835.jpg'
+import image_11 from '~/assets/images/MOK_4849.jpg'
+import image_12 from '~/assets/images/MOK_4858.jpg'
+
 const productStore = useProductStore()
 
 useHead({
   title: 'Ziwa | Home of Insulated Water bottles'
 })
+
+const images = reactive([image,
+  image_13,
+  image_1,
+  image_10,
+  image_4,
+  image_6,
+  image_2,
+  image_8,
+  image_5,
+  image_9,
+  image_3,
+  image_11,
+  image_7,
+  image_12,
+])
+
+const loadCarousel = ref(false)
+
+const closeModal = () => {
+  loadCarousel.value = !loadCarousel.value
+}
+
 </script>
 
 <template>
@@ -19,6 +57,7 @@ useHead({
 
     <section id="shop" class="py-20 min-h-screen">
       <div class="max-w-6xl mx-auto">
+        <h3 class="text-[#39519f] font-semibold">Shop</h3>
         <h2 class="text-gray-900 font-medium text-3xl tracking-tight">
           Our Bottle Varieties
         </h2>
@@ -58,6 +97,28 @@ useHead({
             </div>
           </template>
         </div>
+      </div>
+    </section>
+
+
+    <section class="py-20 bg-slate-100 relative">
+      <div class="max-w-6xl mx-auto px-5 xl:px-0">
+        <h3 class="text-[#39519f] font-semibold">Stylish</h3>
+        <h3 class="text-3xl font-medium text-gray-800 pb-8">Take us anywhere with you</h3>
+        <div class="columns-1 md:columns-3 xl:columns-4 gap-8 space-y-8">
+          <template v-for="(image, index) in images" :key="index">
+            <img :src="image" alt="" class="rounded-xl shadow-xl cursor-pointer" @click="loadCarousel = !loadCarousel">
+          </template>
+        </div>
+      </div>
+
+      <div v-if="loadCarousel"
+        class="abolute inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center"
+        @dblclick="loadCarousel = !loadCarousel">
+        <!-- <template v-for="(image, index) in images" :key="index"> -->
+        <!-- <ImageModal @closeModal="closeModal" :images="images" /> -->
+        <ImageSlider @closeModal="closeModal" :images="images" />
+        <!-- </template> -->
       </div>
     </section>
   </div>
