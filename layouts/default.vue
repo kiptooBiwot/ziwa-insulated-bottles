@@ -10,7 +10,7 @@
     <main>
       <slot />
     </main>
-    <footer>
+    <footer id="Contact">
       <Footer />
     </footer>
   </div>

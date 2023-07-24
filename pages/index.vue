@@ -49,13 +49,13 @@ const closeModal = () => {
 
 <template>
   <div class="">
-    <section id="home" class="">
+    <section id="Home" class="">
       <Hero />
     </section>
     <!-- bg-[#e8efff] -->
 
 
-    <section id="shop" class="py-20 min-h-screen">
+    <section id="Shop" class="py-20 min-h-screen">
       <div class="max-w-6xl mx-auto">
         <h3 class="text-[#39519f] font-semibold">Shop</h3>
         <h2 class="text-gray-900 font-medium text-3xl tracking-tight">
@@ -101,7 +101,7 @@ const closeModal = () => {
     </section>
 
 
-    <section class="py-20 bg-slate-100 relative">
+    <section id="" class="py-20 bg-slate-100 relative">
       <div class="max-w-6xl mx-auto px-5 xl:px-0">
         <h3 class="text-[#39519f] font-semibold">Stylish</h3>
         <h3 class="text-3xl font-medium text-gray-800 pb-8">Take us anywhere with you</h3>
