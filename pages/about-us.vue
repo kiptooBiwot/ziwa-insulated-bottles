@@ -13,8 +13,10 @@ useHead({
   <section id="about" class="min-h-screen bg-slate-100">
     <div class="max-w-6xl mx-auto py-40 px-5 xl:px-0">
       <h3 class="text-[#39519f] font-medium text-lg">About Us</h3>
-      <h2 class="text-gray-900 font-medium text-[36px] md:text-[45px] tracking-tight">Quality is our strength</h2>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+      <h2 class="text-gray-900 font-medium text-[36px] md:text-[36px] tracking-tight">
+        Do good. For you. For the environment.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mt-5">
         <div
           class="md:col-span-7 space-y-8 text-justify flex leading-relaxed flex-col justify-center order-last md:order-first">
           <p class="text-xl font-medium">
