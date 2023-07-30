@@ -25,56 +25,56 @@ export const useProductStore = defineStore('product', {
             id: 1001,
             url: bottle,
             color: 'Jungle Green',
-            bottleColor: '#204E4C',
+            bottleColor: '#1D4D4B',
             bottleTitle: 'Jungle Green Water Bottle'
           },
           {
             id: 1002,
             url: bottle2,
             color: 'Grey',
-            bottleColor: '#4C617C',
+            bottleColor: '#435A76',
             bottleTitle: 'Grey Water Bottle'
           },
           {
             id: 1003,
             url: bottle3,
             color: 'Wine Red',
-            bottleColor: '#820B21',
+            bottleColor: '#810820',
             bottleTitle: 'Wine Red Water Bottle'
           },
           {
             id: 1004,
             url: bottle4,
             color: 'Mint',
-            bottleColor: '#92BCCA',
+            bottleColor: '#96C0CF',
             bottleTitle: 'Mint Water Bottle'
           },
           {
             id: 1005,
             url: bottle5,
             color: 'Navy',
-            bottleColor: '#001D49',
+            bottleColor: '#001541',
             bottleTitle: 'Navy Water Bottle'
           },
           {
             id: 1006,
             url: bottle6,
             color: 'Shadow',
-            bottleColor: '#01061A',
+            bottleColor: '#000013',
             bottleTitle: 'Shadow Water Bottle'
           },
           {
             id: 1007,
             url: bottle7,
             color: 'Orange',
-            bottleColor: '#A03503',
+            bottleColor: '#A33806',
             bottleTitle: 'Orange Water bottle'
           },
           {
             id: 1008,
             url: bottle8,
             color: 'Blush',
-            bottleColor: '#8A5866',
+            bottleColor: '#8D596A',
             bottleTitle: 'Blush Water Bottle'
           },
         ],

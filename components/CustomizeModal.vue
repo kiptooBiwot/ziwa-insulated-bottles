@@ -79,6 +79,15 @@ const addCustomization = () => {
         <h4 class="text-xs text-gray-800 mb-2">Your bottle of choice will be customised at an additional fee of <span
             class="text-green-500 font-semibold">KSH.400/=</span>
         </h4>
+        <div class="p-0">
+          <!-- <svg id="path" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="10" />
+            <textpath x-link:href="#path">
+              <span class="text-xs text-white">Victor Wahome</span>
+            </textpath>
+          </svg> -->
+        </div>
+
         <div class="space-y-3 border rounded-md p-4 h-3/4">
           <div>
             <div class="flex justify-between items-baseline">

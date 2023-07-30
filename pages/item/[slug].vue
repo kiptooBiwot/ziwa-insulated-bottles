@@ -59,14 +59,14 @@ const images = [
 ]
 
 const bottleColor = [
-  '#204E4C',
-  '#4C617C',
-  '#820B21',
-  '#92BCCA',
-  '#001D49',
-  '#01061A',
-  '#A03503',
-  '#8A5866',
+  '#1D4D4B',
+  '#435A76',
+  '#810820', //done
+  '#96C0CF',
+  '#001541',
+  '#000013', //done
+  '#A33806',
+  '#8D596A',
 ]
 onMounted(() => {
   productStore.getSingleProduct(route.params.slug)
