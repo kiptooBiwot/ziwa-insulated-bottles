@@ -27,8 +27,8 @@ const props = defineProps({
       <!-- <p class="text-white text-xs">Double  to exit</p> -->
     </div>
     <Swiper :navigation="false" :loop="true" :modules="[]" :effect="'creative'">
-      <SwiperSlide v-for="image in images" :key="image">
-        <img :src="image" class="mx-auto block object-cover md:object-fill  w-auto h-screen " alt="...">
+      <SwiperSlide v-for="imag in images" :key="imag">
+        <img :src="imag" class="mx-auto block object-cover md:object-fill  w-auto h-screen " alt="...">
       </SwiperSlide>
     </Swiper>
   </div>

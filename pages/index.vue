@@ -3,6 +3,7 @@ import { useProductStore } from '@/stores/product'
 import bottle from '~/assets/images/products/bottle1-bg.png'
 
 import image from '~/assets/images/MOK_4601.jpeg'
+import img from '~/assets/images/ziwa_phenomenal.jpg'
 import image_13 from '~/assets/images/MOK_4602.jpeg'
 import image_1 from '~/assets/images/MOK_4783.jpg'
 import image_2 from '~/assets/images/MOK_4796.jpg'
@@ -16,6 +17,8 @@ import image_9 from '~/assets/images/MOK_4829.jpg'
 import image_10 from '~/assets/images/MOK_4835.jpg'
 import image_11 from '~/assets/images/MOK_4849.jpg'
 import image_12 from '~/assets/images/MOK_4858.jpg'
+import image_14 from '~/assets/images/MOK_4886.jpg'
+import image_15 from '~/assets/images/MOK_4902.jpg'
 
 const productStore = useProductStore()
 
@@ -23,20 +26,16 @@ useHead({
   title: 'Ziwa | Home of Insulated Water bottles'
 })
 
-const images = reactive([image,
+const images = reactive([
+  image,
+  img,
   image_13,
-  image_1,
-  image_10,
-  image_4,
   image_6,
-  image_2,
-  image_8,
-  image_5,
-  image_9,
-  image_3,
   image_11,
   image_7,
-  image_12,
+  image_14,
+  image_15,
+  // image_12,
 ])
 
 const loadCarousel = ref(false)
@@ -105,9 +104,9 @@ const closeModal = () => {
       <div class="max-w-6xl mx-auto px-5 xl:px-0">
         <h3 class="text-[#39519f] font-semibold">Stylish</h3>
         <h3 class="text-3xl font-medium text-gray-800 pb-8">Take us with you</h3>
-        <div class="columns-1 md:columns-3 xl:columns-4 gap-8 space-y-8">
-          <template v-for="(image, index) in images" :key="index">
-            <img :src="image" alt="" class="rounded-xl shadow-xl cursor-pointer" @click="loadCarousel = !loadCarousel">
+        <div class="columns-1 md:columns-3  gap-8 space-y-8">
+          <template v-for="(imgs, index) in images" :key="index">
+            <img :src="imgs" alt="" class="rounded-xl shadow-xl cursor-pointer" @click="loadCarousel = !loadCarousel">
           </template>
         </div>
       </div>
