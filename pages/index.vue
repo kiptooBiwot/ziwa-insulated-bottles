@@ -104,7 +104,7 @@ const closeModal = () => {
       <div class="max-w-6xl mx-auto px-5 xl:px-0">
         <h3 class="text-[#39519f] font-semibold">Stylish</h3>
         <h3 class="text-3xl font-medium text-gray-800 pb-8">Take us with you</h3>
-        <div class="columns-1 md:columns-3  gap-8 space-y-8">
+        <div class="columns-1 md:columns-3 xl:columns-4 gap-8 space-y-8">
           <template v-for="(imgs, index) in images" :key="index">
             <img :src="imgs" alt="" class="rounded-xl shadow-xl cursor-pointer" @click="loadCarousel = !loadCarousel">
           </template>
