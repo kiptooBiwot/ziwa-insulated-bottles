@@ -108,37 +108,6 @@ const closeModal = () => {
       </div>
     </section>
 
-    <section class="py-20 relative">
-      <div class="max-w-6xl mx-auto px-5 xl-px-0">
-        <h3>Data from the database</h3>
-        {{ productStore.dbProducts }}
-
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          <template v-for="product in productStore.dbProducts" :key="product._id">
-            <div v-for="(prod, index) in product.images" :key="index">
-              <img :src="prod.url" alt="" srcset="" class="w-full rounded-md h-auto">
-              <h3>{{ product.title }}</h3>
-              <p class="truncate">{{ product.description }}</p>
-
-            </div>
-          </template>
-        </div>
-
-        <!-- <div v-if="productStore.dbProducts">
-          <div class="w-24 h-36 rounded-sm bg-white shadow-md p-2">
-            <div v-for="product in products" :key="product._id">
-              <div>
-                <img :src="product.images.url" alt="" srcset="" class="w-full object-cover h-auto rounded-sm">
-              </div>
-              <h3>{{ product.title }}</h3>
-              <p>{{ product.description }}</p>
-            </div>
-          </div>
-        </div> -->
-      </div>
-    </section>
-
-
     <section id="" class="py-20 bg-slate-100 relative">
       <div class="max-w-6xl mx-auto px-5 xl:px-0">
         <h3 class="text-[#39519f] font-semibold">Stylish</h3>
