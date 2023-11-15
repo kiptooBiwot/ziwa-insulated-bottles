@@ -1,11 +1,16 @@
 <script setup>
+import { storeToRefs } from 'pinia'
 import { useProductStore } from '@/stores/product'
+import { useToastStore } from '@/stores/toast'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
+import mpesa from '@/assets/images/lipa-na-mpesa.png'
 
 
 
 const productStore = useProductStore()
+const toast = useToastStore()
+const { mpesaProcessComplete, orderUserId } = storeToRefs(productStore)
 
 const formData = ref({
   firstName: '',
@@ -18,6 +23,8 @@ const formData = ref({
   optionalMessage: '',
   cartItems: []
 })
+
+const showMpesaModal = ref(false)
 
 const rules = computed(() => {
   return {
@@ -46,7 +53,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formData)
 
 
-
+const orderSaved = ref(false)
 const errors = ref(false)
 const success = ref(false)
 const waiting = ref(false)
@@ -68,46 +75,165 @@ const isDisabled = computed(() => {
   return success.value == true || waiting.value == true
 })
 
-const submit = async (form) => {
+let productPriceComputed = computed(() => {
+  let total = 0
 
-  v$.value.$validate()
-  if (!v$.value.$error && productStore.cart.length > 0) {
-    try {
-      const { pending, data, refresh } = await useFetch('/api/contact', {
-        method: 'POST',
-        body: formData
-      })
+  productStore.cart.forEach((product) => {
 
-      if (pending) {
-        waiting.value = true
-      }
+    total += product.value.cumulativeCost
+  })
 
-      if (data.value.statusCode === 200) {
-        errors.value = false
-        success.value = true
-        waiting.value = false
-        formData.value = {
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        }
+  return total
+})
 
-        productStore.cart = []
-      }
-    } catch (error) {
-      // console.log('ERROR', error)
-      errors.value = true
-      success.value = false
-      waiting.value = false
-    }
+const totalPriceComputed = computed(() => {
+  let total = 0
+  if (productStore.deliveryCost > 0) {
+    total = productPriceComputed.value + productStore.deliveryCost
   }
 
+  return total
+})
+
+const submit = async () => {
+
+  try {
+    // Validate the form save userInfo to the database
+    // const saveUser = async () => {
+    const response = await $fetch('/user/newUser', {
+      method: 'POST',
+      body: formData.value
+    })
+
+    productStore.orderUserId = response._id
+
+    // Initiate M-PESA PAYMENT
+    const loadMpesaModal = () => {
+      showMpesaModal.value = true
+    }
+
+    loadMpesaModal()
+
+    watch(() => mpesaProcessComplete.value, async () => {
+
+      if (mpesaProcessComplete.value) {
+
+        showMpesaModal.value = false
+        // console.log('MPESA PROCESS COMPLETE?', mpesaProcessComplete?.value);
+
+        // Get User Id and append it to an order
+        const order = {
+          deliveryRoute: productStore.deliveryRoute.name,
+          deliveryLocation: productStore.deliveryLocation,
+          deliveryCost: productStore.deliveryCost,
+          isPaidFor: true,
+          products: formData.value.cartItems,
+          orderedBy: productStore.orderUserId,
+          payment: productStore.paymentDetails._id
+        }
+        const resp = await $fetch('/order/newOrder', {
+          method: 'POST',
+          body: order
+        })
+
+        // console.log('ORDER DATA', resp)
+
+
+        orderSaved.value = true
+
+        toast.add({
+          type: 'success',
+          message: 'Your order is being processed.'
+        })
+
+        // After order is saved, send and email to the admin of the order
+
+        if (!v$.value.$error && orderSaved.value) {
+          const result = await $fetch('/api/contact', {
+            method: 'POST',
+            body: {
+              formData: formData.value,
+              order: resp,
+              paymentDetails: productStore.paymentDetails
+            }
+          })
+
+          // if (pending) {
+          //   waiting.value = true
+          // }
+          console.log('RESULT:', result);
+
+          // if (result) {
+          errors.value = false
+          success.value = true
+          waiting.value = false
+          formData.value = {
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          }
+
+          productStore.cart = []
+
+          // }
+        }
+      }
+    })
+  } catch (error) {
+    // console.log(error);
+    toast.add({
+      type: 'error',
+      message: 'You payment was received successfully, but an error occurred while processing your order.'
+    })
+    // throw createError({
+    //   statusCode: 400,
+    //   statusMessage: 'An error occurred'
+    // })
+  }
 }
+
+
+// v$.value.$validate()
+// if (!v$.value.$error && productStore.cart.length > 0) {
+//   try {
+
+
+//     const { pending, data, refresh } = await useFetch('/api/contact', {
+//       method: 'POST',
+//       body: formData
+//     })
+
+//     if (pending) {
+//       waiting.value = true
+//     }
+
+//     if (data.value.statusCode === 200) {
+//       errors.value = false
+//       success.value = true
+//       waiting.value = false
+//       formData.value = {
+//         name: '',
+//         email: '',
+//         subject: '',
+//         message: ''
+//       }
+
+//       productStore.cart = []
+//     }
+//   } catch (error) {
+//     // console.log('ERROR', error)
+//     errors.value = true
+//     success.value = false
+//     waiting.value = false
+//   }
+// }
+
+// }
 </script>
 
 <template>
-  <div class="bg-gray-50">
+  <div class="bg-slate-50">
     <div class="max-w-6xl mx-auto pt-40 pb-20 h-auto px-5 xl:px-0">
       <h1 v-if="!success" class="text-2xl font-medium">Checkout</h1>
 
@@ -228,12 +354,40 @@ const submit = async (form) => {
         </form>
 
 
-        <div class="order-1 md:order-last col-span-5 bg-white shadow-sm rounded-md py-5 px-4">
-          <h3 class="text-xl text-gray-800 font-medium">Order Summary</h3>
-          <div v-for="(product, index) in productStore.cart" :key="index">
-            <!-- :selectArray='selectedArray' @selectedRadio='selectedRadioFunc' -->
-            <CartItem :product='product' :index="index" />
+        <div class="order-1 md:order-last col-span-5 bg-white shadow-sm rounded-md py-10 px-7">
+          <h3 class="text-2xl font-extrabold mb-2 text-gray-700">Order Summary</h3>
+          <!-- <div class="text-2xl font-extrabold mb-2">Summary</div> -->
+          <div class="space-y-1">
+            <div v-if="productStore.deliveryCost > 0" class="flex items-center justify-between">
+              <div class="font-medium text-sm">Delivery fees</div>
+              <div class="text-xl font-semibold">
+                <span class="font-semibold text-sm">{{ useCurrencyFormatter(productStore.deliveryCost) }}</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="font-medium text-sm">Cumulative water bottle cost </div>
+              <div class="text-xl font-semibold">
+                <span class="font-semibold text-sm">{{ useCurrencyFormatter(productPriceComputed) }}</span>
+              </div>
+            </div>
           </div>
+          <hr class="my-4">
+          <div class="flex items-center justify-between my-4">
+            <div class="font-semibold">Total</div>
+            <div v-if="productStore.deliveryCost > 0" class="text-xl font-semibold">
+              <span class="font-bold">{{ useCurrencyFormatter(totalPriceComputed) }}</span>
+            </div>
+            <div v-else class="text-xl font-semibold">
+              <span class="font-bold">
+                {{ useCurrencyFormatter(productPriceComputed) }}</span>
+
+            </div>
+          </div>
+          <hr class="border-gray-700">
+          <!-- <div v-for="(product, index) in productStore.cart" :key="index"> -->
+          <!-- :selectArray='selectedArray' @selectedRadio='selectedRadioFunc' -->
+          <!-- <CartItem :product='product' :index="index" /> -->
+          <!-- </div> -->
         </div>
       </div>
       <div v-else
@@ -244,6 +398,12 @@ const submit = async (form) => {
         </p>
       </div>
     </div>
+
+    <div v-if="showMpesaModal"
+      class="inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
+      <Mpesa :amount="totalPriceComputed" :mpesaLogo="mpesa" />
+    </div>
+    <div v-if="showMpesaModal" class="opacity-25 fixed inset-0 z-10 bg-black"></div>
   </div>
 </template>
 

@@ -26,20 +26,28 @@ useHead({
   title: 'Ziwa | Home of Insulated Water bottles'
 })
 
+onMounted(async () => {
+  productStore.getAllProducts()
+})
+
 const images = reactive([
   image,
   img,
   image_13,
   image_6,
   image_11,
-  image_7,
+  // image_7,
   image_14,
-  image_15,
+  // image_15,
   // image_12,
 ])
 
-const loadCarousel = ref(false)
+const sendId = (id) => {
+  productStore.imageId = id
+}
 
+const loadCarousel = ref(false)
+const products = ref([])
 const closeModal = () => {
   loadCarousel.value = !loadCarousel.value
 }
@@ -62,8 +70,8 @@ const closeModal = () => {
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <template v-for="(product, index) in productStore.products" :key="index">
-            <div v-for="(img, i) in product.images" :key="i"
+          <template v-for="(product, index) in productStore.dbProducts" :key="index">
+            <div v-for="img in product.images" :key="img._id"
               class="flex-shrink-0 m-6 relative overflow-hidden bg-blue-300 rounded-lg max-w-xs shadow-lg">
               <!-- [#89CFF0] -->
               <!-- :class="`bg-${product.bgColor}`" -->
@@ -80,22 +88,53 @@ const closeModal = () => {
                 <img class="relative w-auto h-[250px]" :src="img.url" alt="">
               </div>
               <div class="relative text-white px-6 pb-6 mt-6">
-                <span class="block opacity-75 -mb-1 text-gray-600 text-xs">{{ img.bottleTitle }}</span>
+                <span class="block opacity-75 -mb-1 text-gray-600 text-xs">{{ img.color }} Water Bottle </span>
                 <div class="flex justify-between">
-                  <NuxtLink :to="`/item/${product.slug}`" :image="img.id">
+                  <!-- <NuxtLink :to="`/item/${product.slug}`" :image="img._id"> -->
+                  <NuxtLink :to="{ name: 'item-slug', params: { slug: product.slug } }" @click="sendId(img._id)">
                     <span
                       class="block font-medium text-lg text-gray-800 transform duration-500 ease-in-out hover:scale-105 hover:text-gray-700 ">View
                       Details</span>
                   </NuxtLink>
                   <span
                     class="block bg-white rounded-full text-orange-500 text-[11px] font-bold px-1 py-2 leading-none items-center">
-                    {{ useCurrencyFormatter(product.price) }}
+                    {{ useCurrencyFormatter(img.price) }}
                   </span>
                 </div>
               </div>
             </div>
           </template>
         </div>
+      </div>
+    </section>
+
+    <section class="py-20 relative">
+      <div class="max-w-6xl mx-auto px-5 xl-px-0">
+        <h3>Data from the database</h3>
+        {{ productStore.dbProducts }}
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <template v-for="product in productStore.dbProducts" :key="product._id">
+            <div v-for="(prod, index) in product.images" :key="index">
+              <img :src="prod.url" alt="" srcset="" class="w-full rounded-md h-auto">
+              <h3>{{ product.title }}</h3>
+              <p class="truncate">{{ product.description }}</p>
+
+            </div>
+          </template>
+        </div>
+
+        <!-- <div v-if="productStore.dbProducts">
+          <div class="w-24 h-36 rounded-sm bg-white shadow-md p-2">
+            <div v-for="product in products" :key="product._id">
+              <div>
+                <img :src="product.images.url" alt="" srcset="" class="w-full object-cover h-auto rounded-sm">
+              </div>
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.description }}</p>
+            </div>
+          </div>
+        </div> -->
       </div>
     </section>
 

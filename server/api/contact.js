@@ -22,30 +22,42 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   // const bodyContentValid = await isValid(body)
 
-  console.log('BODY TOP', body);
-  const fullName = body.firstName + ' ' + body.lastName
+  // console.log('BODY TOP', body);
+  const fullName = body.formData.firstName + ' ' + body.formData.lastName
   let template = '<div>'
 
-  body.cartItems.forEach(item => {
+  body.order.products.forEach(item => {
     template += `
-                  <h1>Product Ordered: ${item._value.currentBottleColor} ${item._value.title} ${item._value.capacity}</h1>
-                  <p style="font-weight: bold;">Customer to pay: ${item._value.price} for the bottle</p>
-                  <h3>ORDER DEIVERY ADDRESS</h3>
-                  <p style="font-weight: bold;">Delivery to Route: ${item._value.ctyRoute}</p>
-                  <p style="font-weight: bold;">
-                  Estate: ${item._value.ctyRoute}</p>
-                  <p style="font-weight: bold;">Cost to Deliver: ${item._value.deliveryCost} for delivery</p>
+                  <h1>Product Ordered: ${item._value.currentBottleColor} ${item._value.title} ${item._value.capacity}ml</h1>
+                  
                   <h3>ORDER CUSTOMIZATION</h3>
                   <p style="font-weight: bold;">Customization Name: ${item._value.customName}</p>
                   <p style="font-weight: bold;">Customization Font: ${item._value.selectedFont}</p>
                   <p style="font-weight: bold;">Customization Fee: ${item._value.customizationFee}</p>
                   <h3>TOTAL COST</h3>
-                  <p style="font-weight: bold;">Customer to pay: ${item._value.cumulativeCost} in total.</p>
+                  <p style="font-weight: bold;">The Total Cost of the bottle and customization fees: ${item._value.cumulativeCost} in total.</p>
                   <hr>
                   `
   });
 
   template += '</div>'
+
+  template += `
+            <h3>ORDER DELIVERY ADDRESS</h3>
+                  <p style="font-weight: bold;">Delivery to Route: ${body.order.deliveryRoute}</p>
+                  <p style="font-weight: bold;">
+                  Estate: ${body.order.deliveryLocation}</p>
+                  <p style="font-weight: bold;">Cost to Deliver: KSH.${body.order.deliveryCost} for delivery</p>
+            <h3>PAYMENT DETAILS</h3>
+                  <p style="font-weight: bold;">M-PESA Transaction ID: ${body.paymentDetails.transactionID}</p>
+                  <p style="font-weight: bold;">
+                  Phone Number: +${body.paymentDetails.phoneNumber}</p>
+                  <p style="font-weight: bold;">Amount Paid: KSH.${body.paymentDetails.amount} </p>
+                  
+  `
+
+  template += '</div>'
+
 
   const emailFormat =
     `
@@ -71,10 +83,10 @@ export default defineEventHandler(async (event) => {
             <h3 style="background: #39519f; padding: 10px; text-align: center; color: #ffffff;">The Order is from:</h3>
             <ul style="color: #0c0c0c">
               <li>Full Name: ${fullName}</li>
-              <li>Customer's Email Address: ${body.email}</li>
-              <li>Customer's Phone Number: ${body.phoneNumber}</li>
-              <li>Customer's Physical Address: ${body.address}</li>
-              <li>Customer's specific order information: ${body.optionalMessage}</li>
+              <li>Customer's Email Address: ${body.formData.email}</li>
+              <li>Customer's Phone Number: ${body.formData.phoneNumber}</li>
+              <li>Customer's Physical Address: ${body.formData.address}</li>
+              <li>Customer's specific order information: ${body.formData.optionalMessage}</li>
             </ul>
             <h3 style="background: #39519f; padding: 10px; text-align: center; color: #ffffff;">ORDER PARTICULARS</h3>
             <div style="padding: 5px 30px 5px 30px; color: #0c0c0c">
@@ -87,9 +99,9 @@ export default defineEventHandler(async (event) => {
     `
 
   const mailOptions = {
-    from: `"${fullName}" <${body.email}>`,
+    from: `"${fullName}" <${body.formData.email}>`,
     to: config.CONTACTMAIL,
-    subject: body.subject,
+    subject: body.formData.subject,
     // text: data.message,
     html: emailFormat,
   }
@@ -100,8 +112,8 @@ export default defineEventHandler(async (event) => {
     const mail = await transporter.sendMail(mailOptions)
     // })
 
-    console.log('Message sent: %s', mail.messageId);
-    console.log('Mail: %s', mail.accepted);
+    // console.log('Message sent: %s', mail.messageId);
+    // console.log('Mail: %s', mail.accepted);
 
     if (mail.accepted.length > 0) {
       setResponseStatus(event, 200)
@@ -117,7 +129,7 @@ export default defineEventHandler(async (event) => {
 
     // return Promise.resolve()
   } catch (error) {
-
+    // console.log(error);
     return Promise.reject()
   }
 
@@ -142,30 +154,31 @@ export default defineEventHandler(async (event) => {
 async function isValid(body) {
   const errors = [];
 
-  if (validator.isEmpty(body.email || ''))
+  if (validator.isEmpty(body.formData.email || ''))
     errors.push({
       field: 'email',
       error: 'Field is required.',
     });
-  if (validator.isEmpty(body.firstName || ''))
+  if (validator.isEmpty(body.formData.firstName || '')) {
     errors.push({ field: 'name', error: 'Field is required.' });
-  if (validator.isEmpty(body.lastName || ''))
-    errors.push({ field: 'name', error: 'Field is required.' });
-  // if (validator.isEmpty(body.subject || ''))
-  //   errors.push({ field: 'subject', error: 'Field is required.' });
-  if (validator.isEmpty(body.optionalMessage || ''))
-    errors.push({ field: 'message', error: 'Field is required.' });
-  if (!validator.isEmail(body.email || ''))
-    errors.push({ field: 'email', error: 'Field should be a valid email.' });
+    if (validator.isEmpty(body.formData.lastName || ''))
+      errors.push({ field: 'name', error: 'Field is required.' });
+    // if (validator.isEmpty(body.subject || ''))
+    //   errors.push({ field: 'subject', error: 'Field is required.' });
+    // if (validator.isEmpty(body.formData.optionalMessage || ''))
+    //   errors.push({ field: 'message', error: 'Field is required.' });
+    if (!validator.isEmail(body.formData.email || ''))
+      errors.push({ field: 'email', error: 'Field should be a valid email.' });
 
-  if (errors.length > 0) {
-    return Promise.reject(errors);
-  } else {
-    return Promise.resolve({
-      email: validator.normalizeEmail(body.email),
-      subject: validator.escape(body.subject),
-      name: validator.escape(body.name),
-      message: validator.escape(body.message),
-    });
+    if (errors.length > 0) {
+      return Promise.reject(errors);
+    } else {
+      return Promise.resolve({
+        email: validator.normalizeEmail(body.formData.email),
+        subject: validator.escape(body.formData.subject),
+        name: validator.escape(body.formData.name),
+        // message: validator.escape(body.formData.optionalMessage),
+      });
+    }
   }
 }

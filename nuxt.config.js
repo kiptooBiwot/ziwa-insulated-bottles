@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     autoImports: [
       // automatically imports `defineStore`
       'defineStore', // import { defineStore } from 'pinia'
-      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+      ['defineStore', 'definePiniaStore', 'storeToRefs', 'acceptHMRUpdate'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
   runtimeConfig: {
@@ -31,6 +31,9 @@ export default defineNuxtConfig({
     MAILPORT: '',
     MAILUSER: '',
     MAILPASSWORD: '',
-    CONTACTMAIL: ''
+    CONTACTMAIL: '',
+    MONGODB_URI: process.env.MONGODB_URI,
+    CONSUMER_KEY: process.env.CONSUMER_KEY,
+    CONSUMER_SECRET: process.env.CONSUMER_SECRET,
   }
 })

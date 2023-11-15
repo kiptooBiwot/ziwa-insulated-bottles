@@ -10,7 +10,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: 'Mona Sans';
   src: url('~/assets/fonts/Mona-Sans/Mona-Sans.woff');
@@ -48,5 +47,9 @@
   h5,
   h6 {
     @apply text-gray-800 font-medium;
+  }
+
+  input {
+    @apply text-sm;
   }
 }

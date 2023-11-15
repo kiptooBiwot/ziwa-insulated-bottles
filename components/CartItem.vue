@@ -13,7 +13,7 @@ const { product, selectedArray } = toRefs(props)
 
 const totalCost = computed(() => {
   let total = 0
-  total = product.value.price + product.value.deliveryCost + product.value.customizationFee
+  total = product.value.price + product.value.customizationFee
   return total
 })
 
@@ -45,7 +45,7 @@ const removeFromCart = (index) => {
           </button>
         </div>
 
-        <div class="flex justify-between mt-5">
+        <div class="flex justify-between mt-7 ">
           <div class="text-[#009A66] text-sm font-semibold pt-1">Price:</div>
           <div class="font-medium">
             {{ useCurrencyFormatter(product.price)
@@ -53,7 +53,7 @@ const removeFromCart = (index) => {
           </div>
         </div>
 
-        <div class="flex justify-between">
+        <!-- <div class="flex justify-between">
           <p class="text-[#009A66] text-sm font-semibold pt-1">
             Delivery fee to {{ product.ctyEstate }} - {{ product.ctyRoute }}
           </p>
@@ -61,18 +61,23 @@ const removeFromCart = (index) => {
             {{ useCurrencyFormatter(product.deliveryCost)
             }}
           </div>
-        </div>
+        </div> -->
 
         <div v-if="product.selectedFont && product.customName" class="flex justify-between">
           <p class="text-[#009A66] text-sm font-semibold pt-1">
-            Bottle customization cost
+            Bottle personalization cost (Name: {{ product.customName }} Chosen font: {{ product.selectedFont }})
           </p>
           <div class="font-medium text-sm">
             {{ useCurrencyFormatter(product.customizationFee)
             }}
           </div>
         </div>
-        <hr class="my-4">
+        <!-- <div v-else>
+          <p class="text-[#009A66] text-sm font-semibold pt-1">
+            The bottle will not be customized.
+          </p>
+        </div> -->
+        <hr class="mb-4 mt-4">
         <div class="flex justify-between">
           <div>
             <h3 class="text-lg uppercase font-medium">TOTAL</h3>

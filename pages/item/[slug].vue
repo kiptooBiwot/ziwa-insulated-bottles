@@ -1,38 +1,20 @@
 <script setup>
 import { useProductStore } from '@/stores/product'
 import { useDeliveryStore } from '@/stores/delivery'
-import { useVuelidate } from '@vuelidate/core'
-import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
-
-import bottle from '~/assets/images/products/bottle1-bg.png'
-import bottle2 from '~/assets/images/products/bottle2-bg.png'
-import bottle3 from '~/assets/images/products/bottle3-bg.png'
-import bottle4 from '~/assets/images/products/bottle4-bg.png'
-import bottle5 from '~/assets/images/products/bottle5-bg.png'
-import bottle6 from '~/assets/images/products/bottle6-bg.png'
-import bottle7 from '~/assets/images/products/bottle7-bg.png'
-import bottle8 from '~/assets/images/products/bottle8-bg.png'
+import { useToastStore } from '@/stores/toast'
 
 const productStore = useProductStore()
 const deliveryStore = useDeliveryStore()
+const toast = useToastStore()
 const route = useRoute()
-// const { currencyFormatter } = useCurrencyFormatter()
 
-const props = defineProps(['image'])
+const currentImage = ref(null)
 
-const rules = computed(() => {
-  return {
-    ctyRoute: {
-      required: helpers.withMessage('Please select a route', required)
-    },
-    ctyEstate: {
-      required: helpers.withMessage('Please select the estate to deliver your product ', required)
-    }
-  }
-})
-
-const currentImage = ref('')
 const currentBottleColor = ref('')
+const currentPrice = ref(0)
+const currentCapacity = ref('')
+const currentColorCode = ref('')
+
 const customizeBottle = ref(false)
 
 // Calculate delivery fee
@@ -44,19 +26,19 @@ const deliveryCost = ref(0)
 const selectedFont = ref('')
 const customName = ref('')
 
+const productImg = ref('')
+// const v$ = useVuelidate(rules, { ctyRoute, ctyEstate })
 
-const v$ = useVuelidate(rules, { ctyRoute, ctyEstate })
-
-const images = [
-  bottle,
-  bottle2,
-  bottle3,
-  bottle4,
-  bottle5,
-  bottle6,
-  bottle7,
-  bottle8
-]
+// const images = [
+//   bottle,
+//   bottle2,
+//   bottle3,
+//   bottle4,
+//   bottle5,
+//   bottle6,
+//   bottle7,
+//   bottle8
+// ]
 
 const bottleColor = [
   '#1D4D4B',
@@ -68,56 +50,61 @@ const bottleColor = [
   '#A33806',
   '#8D596A',
 ]
+
 onMounted(() => {
   productStore.getSingleProduct(route.params.slug)
-  // changeImage
-  currentImage.value = productStore.product.images[2].url
-  currentBottleColor.value = productStore.product.images[2].color
+
+  if (productStore.imageId) {
+    const id = productStore.imageId
+    // productStore.customName = ''
+
+    productStore.product.images.filter((image) => {
+      if (image._id === id) {
+        // console.log('IMAGE:', image);
+        productStore.selectedProduct = image
+
+        productImg.value = productStore.selectedProduct
+        // currentBottleColor.value = image.color
+        // currentImage.value = image.url
+        // currentPrice.value = image.price
+        // currentCapacity.value = image.capacity
+      }
+    })
+
+    // currentBottleColor.value = img[0].color
+    // currentImage.value = img[0].url
+    // currentPrice.value = img[0].price
+    // currentCapacity.value = img[0].capacity
+  }
 })
+// changeImage
 
 
 const priceComputed = computed(() => {
-  if (productStore.product.price) {
-    return productStore.product.price
+  if (productImg.value.price) {
+    return productImg.value.price
   }
-  return '0.00'
+  return 0.00
 })
 
-const showImageWithColor = (color) => {
 
+const showImageWithColor = (color) => {
   const productColors = productStore.product.images
 
   productColors.find((product) => {
-    if (product.bottleColor === color) {
-      currentBottleColor.value = product.color
-      return currentImage.value = product.url
+    if (product.colorCode === color) {
+      productStore.selectedProduct = product
+
+      productImg.value = productStore.selectedProduct
+      // currentBottleColor.value = product.color
+      // currentImage.value = product.url
+      // currentPrice.value = product.price
+      // currentCapacity.value = product.capacity
     }
   })
 }
 
-// Populate Estate Dropdown
-const getEstate = (ctyRoute) => {
-  // Reset cityRoute array
-  cityRoute.value = []
 
-  if (ctyRoute) {
-    deliveryStore.route.find((item) => {
-      if (item.name === ctyRoute) {
-        return cityRoute.value = item
-      }
-    })
-  }
-}
-
-const setDeliveryFees = (ctyEstate) => {
-  if (ctyEstate) {
-    cityRoute.value.estate.find((item) => {
-      if (item.estateName === ctyEstate) {
-        return deliveryCost.value = item.cost
-      }
-    })
-  }
-}
 
 
 const closeModal = () => {
@@ -126,38 +113,52 @@ const closeModal = () => {
 
 const selectedProduct = ref({})
 
+// console.log('PRICE:', priceComputed.value);
+// console.log('Customization fees:', productStore.customizationFee);
+
 const addToCart = () => {
-  v$.value.$validate()
+  // v$.value.$validate()
 
-  if (!v$.value.$error) {
-    let total = productStore.product.price + deliveryCost.value + productStore.customizationFee
+  // if (!v$.value.$error) {
+  // let total = productStore.product.price + deliveryCost.value + productStore.customizationFee
+  let total = 0
+  total = productImg.value.price + productStore.customizationFee
 
-    selectedProduct.value = {
-      title: productStore.product.title,
-      price: productStore.product.price,
-      capacity: productStore.product.capacity,
-      currentImage: currentImage.value,
-      currentBottleColor: currentBottleColor.value,
-      ctyRoute: ctyRoute.value,
-      ctyEstate: ctyEstate.value,
-      deliveryCost: deliveryCost.value,
-      selectedFont: productStore.selectedFont,
-      customName: productStore.customName,
-      customizationFee: productStore.customizationFee,
-      productId: productStore.product.productId,
-      cumulativeCost: total
-    }
+  console.log('TOTAL:', total);
 
-    productStore.cart.push(selectedProduct)
-
-    // Reset customization
-    productStore.selectedFont = ''
-    productStore.customName = ''
-    productStore.customizedBottle = false
-
-    navigateTo('/cart')
+  selectedProduct.value = {
+    title: productStore.product.title,
+    price: productImg.value.price,
+    capacity: productImg.value.capacity,
+    currentImage: productImg.value.url,
+    currentBottleColor: productImg.value.color,
+    // ctyRoute: ctyRoute.value,
+    // ctyEstate: ctyEstate.value,x
+    // deliveryCost: deliveryCost.value,
+    selectedFont: productStore.selectedFont,
+    customName: productStore.customName,
+    customizationFee: productStore.customizationFee,
+    productId: productStore.product._id,
+    cumulativeCost: total
   }
+
+  productStore.cart.push(selectedProduct)
+
+  toast.add({
+    type: 'success',
+    message: 'Good choice. The product was added to the cart.',
+    timeout: 5000
+  })
+
+  // Reset customization
+  productStore.selectedFont = ''
+  productStore.customName = ''
+  productStore.customizationFee = 0
+  productStore.customizedBottle = false
+
+  navigateTo('/cart')
 }
+// }
 
 const isInCart = computed(() => {
   let res = false
@@ -192,34 +193,38 @@ const isInCart = computed(() => {
               <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
                 style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
               </div>
-              <img v-if="currentImage"
+              <img v-if="productImg.url"
                 class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
-                :src="currentImage" alt="">
+                :src="productImg.url" alt="">
             </div>
           </div>
           <div class="md:hidden">
             <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
             <div class="flex gap-2">
+              <!-- <template v-for="product in productStore.product" :key="product._id"> -->
               <div v-for="color in bottleColor" :key="color"
                 class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
                 :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
                 @click="showImageWithColor(color)">
+                {{ color }}
               </div>
+              <!-- </template> -->
             </div>
           </div>
         </div>
         <div class="md:w-[60%] space-y-2 text-sm">
-          <h2 class="text-gray-900 text-3xl font-semibold">{{ currentBottleColor }} {{ productStore.product.capacity }}
+          <!-- <template v-for="image in productStore.product" :key="image._id"> -->
+          <h2 class="text-gray-900 text-3xl font-semibold">{{ productImg.color }} [{{ productImg.capacity }} ml]
             Water Bottle</h2>
           <hr class="">
-          <div v-html="productStore.product.productDescription" class="space-y-3">
+          <div v-html="productStore.product.description" class="space-y-3">
           </div>
-          <div class="space-y-1">
+          <div v-if="productStore.product" class="space-y-1">
             <h2 class="text-xl">Features</h2>
-            <ul v-for="feature in productStore.product.productFeatures" :key="feature" class="pl-10 text-sm ">
+            <ul v-for="feature in productStore.product.features" :key="feature" class="pl-10 text-sm ">
               <div class="flex items-center gap-4 space-y-3">
                 <Icon :name="feature.icon" color="" class="w-6 h-6" />
-                <li class="flex items-center">{{ feature.description }}</li>
+                <li class="flex items-center">{{ feature.title }}</li>
               </div>
             </ul>
           </div>
@@ -245,7 +250,7 @@ const isInCart = computed(() => {
               <!-- <span class="bg-[#f5f5f5] border text-[#c08562] text-[9px] font-semibold px-1.5 rounded-sm">On Offer</span> -->
             </div>
             <hr>
-            <h3 class=" font-medium text-lg text-gray-800 ">
+            <!-- <h3 class=" font-medium text-lg text-gray-800 ">
               Delivery Fees Calculator
             </h3>
             <div class="block space-y-5 md:space-y-0 md:flex border rounded-sm w-full gap-5 p-4">
@@ -257,7 +262,8 @@ const isInCart = computed(() => {
                     'border-[#42d392] ': !v$.ctyRoute.$invalid,
                   }">
                   <option value="" disabled selected>Select your delivery route</option>
-                  <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name }}
+                  <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name
+                  }}
                   </option>
                 </select>
                 <div>
@@ -283,16 +289,15 @@ const isInCart = computed(() => {
                   </span>
                 </div>
               </div>
-
-            </div>
-            <p v-if="ctyRoute && ctyEstate" class="font-medium">The delivery fees to {{ ctyRoute }} - {{ ctyEstate }} is
+            </div> -->
+            <!-- <p v-if="ctyRoute && ctyEstate" class="font-medium">The delivery fees to {{ ctyRoute }} - {{ ctyEstate }} is
               <span class="text-lg text-red-500">{{
                 useCurrencyFormatter(deliveryCost) }}</span>
-            </p>
+            </p> -->
             <!-- <p class="text-[#009a66] text-xs font-semibold pt-1">
-            Free shipping
-          </p> -->
-            <hr>
+              Free shipping
+            </p> -->
+            <!-- <hr> -->
             <h3 v-if="productStore.customizedBottle" class=" font-medium text-lg text-gray-800 ">
               Your Bottle Customization
             </h3>
@@ -311,6 +316,7 @@ const isInCart = computed(() => {
               <div v-else>Add to Cart</div>
             </button>
           </div>
+          <!-- </template> -->
         </div>
       </div>
       <div v-else class="w-full">
@@ -330,8 +336,8 @@ const isInCart = computed(() => {
         </div>
       </div>
       <div v-if="customizeBottle"
-        class="abolute inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
-        <CustomizeModal @closeModal="closeModal" :bottle="currentBottleColor" :slug="route.params.slug" />
+        class="absoute inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
+        <CustomizeModal @closeModal="closeModal" :bottle="productImg.color" :slug="route.params.slug" />
       </div>
       <div v-if="customizeBottle" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </div>

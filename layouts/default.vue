@@ -1,4 +1,6 @@
 <script setup>
+// import ToastList from '@/components/ToastList'
+
 
 </script>
 
@@ -8,7 +10,13 @@
       <NavBar />
     </header>
     <main>
+      <!-- <ClientOnly>
+        <ToastList />
+      </ClientOnly> -->
       <slot />
+      <ClientOnly>
+        <ToastList />
+      </ClientOnly>
     </main>
     <footer id="Contact">
       <Footer />

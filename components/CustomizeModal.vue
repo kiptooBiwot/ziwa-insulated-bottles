@@ -1,9 +1,11 @@
 <script setup>
 import { useProductStore } from '@/stores/product'
+import { useToastStore } from '@/stores/toast'
 // import bottle from '~/assets/images/products/bottle1-bg.png'
 
 const props = defineProps(['bottle', 'slug'])
 const productStore = useProductStore()
+const toast = useToastStore()
 const emits = defineEmits('closeModal')
 
 const customName = ref('')
@@ -21,7 +23,7 @@ const customizedBottle = ref('')
 const images = ref([])
 
 onMounted(() => {
-  productStore.products.find((item) => {
+  productStore.dbProducts.find((item) => {
     if (item.slug === props.slug) {
       images.value = item.images
     }
@@ -46,6 +48,12 @@ const addCustomization = () => {
   productStore.selectedFont = selectedFont.value
   productStore.customizationFee = 400
   emits('closeModal')
+
+  toast.add({
+    type: 'success',
+    message: `Customizations added. The name:"${productStore.customName}" will be printed on your bottle`,
+    timeout: 5000
+  })
 }
 
 </script>
