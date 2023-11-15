@@ -15,7 +15,7 @@ const productSchema = new Schema({
     trim: true
   },
   features: [{
-    title: {
+    description: {
       type: String
     },
     icon: String

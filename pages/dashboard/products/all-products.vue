@@ -43,13 +43,13 @@ onMounted(async () => {
               </div>
               <p class="text-gray-700 text-base">{{ product.description }}</p>
             </div>
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <img class="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink">
               <div class="text-sm">
                 <p class="text-gray-900 leading-none">Jonathan Reinink</p>
                 <p class="text-gray-600">Aug 18</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
