@@ -224,7 +224,7 @@ const isInCart = computed(() => {
             <ul v-for="feature in productStore.product.features" :key="feature" class="pl-10 text-sm ">
               <div class="flex items-center gap-4 space-y-3">
                 <Icon :name="feature.icon" color="" class="w-6 h-6" />
-                <li class="flex items-center">{{ feature.title }}</li>
+                <li class="flex items-center">{{ feature.description }}</li>
               </div>
             </ul>
           </div>
