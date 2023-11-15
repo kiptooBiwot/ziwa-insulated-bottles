@@ -71,8 +71,8 @@ const onChange = async (e, index) => {
   })
 
   if (resp.message == 'success') {
-    product.images[index].imageUrl = `../../assets/images/uploads/${image.name}`
-    product.images[index].url = `../../assets/images/uploads/${image.name}`
+    product.images[index].imageUrl = `~/public/images/${image.name}`
+    product.images[index].url = `~/public/images/${image.name}`
 
     isUploadingImage.value = false
   }
