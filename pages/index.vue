@@ -118,7 +118,7 @@ const closeModal = () => {
       </div>
     </section>
 
-    <section id="" class="py-20 bg-slate-100 relative">
+    <section id="" class="py-20 bg-white relative">
       <div class="max-w-6xl mx-auto px-5 xl:px-0">
         <h3 class="text-[#39519f] font-semibold">Stylish</h3>
         <h3 class="text-3xl font-medium text-gray-800 pb-8">Take us with you</h3>
