@@ -181,8 +181,8 @@ const isInCart = computed(() => {
         <div class="md:w-[40%] mb-7 md:mb-0">
 
           <div
-            class="flex-shrink-0 md:m-6 relative overflow-hidden bg-[#89CFF0] rounded-xl max-w-sm shadow-lg w-full pb-10">
-            <!-- [#89CFF0] -->
+            class="flex-shrink-0 md:m-6 relative overflow-hidden bg-blue-200 rounded-xl max-w-sm shadow-lg w-full pb-10">
+            <!-- [#89CFF0] bg-[#89CFF0] -->
             <!-- :class="`bg-${product.bgColor}`" -->
             <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
               style="transform: scale(1.5); opacity: 0.1;">
@@ -206,7 +206,7 @@ const isInCart = computed(() => {
                 class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
                 :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
                 @click="showImageWithColor(color)">
-                {{ color }}
+                <!-- {{ color }} -->
               </div>
               <!-- </template> -->
             </div>

@@ -239,7 +239,7 @@ const submit = async () => {
 
       <div v-if="!success" class="grid grid-cols-1 md:grid-cols-12 gap-7 mt-5 pb-20">
         <form @submit.prevent="submit(form)"
-          class="order-last md:order-first flex flex-col col-span-7 border space-y-5 px-5 py-5 rounded-md border-gray-800 text-gray-800">
+          class="order-last md:order-first flex flex-col col-span-12 md:col-span-7 border space-y-5 px-5 py-5 rounded-md border-gray-800 text-gray-800">
           <p class="text-sm  pt-2">Please fill the form below accurately to complete your order. Thank you.
           </p>
           <hr>
@@ -354,7 +354,7 @@ const submit = async () => {
         </form>
 
 
-        <div class="order-1 md:order-last col-span-5 bg-white shadow-sm rounded-md py-10 px-7">
+        <div class="order-1 md:order-last col-span-12 md:col-span-5 bg-white shadow-sm rounded-md py-10 px-7">
           <h3 class="text-2xl font-extrabold mb-2 text-gray-700">Order Summary</h3>
           <!-- <div class="text-2xl font-extrabold mb-2">Summary</div> -->
           <div class="space-y-1">

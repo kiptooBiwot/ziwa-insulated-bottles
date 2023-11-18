@@ -46,7 +46,7 @@
   h4,
   h5,
   h6 {
-    @apply text-gray-800 font-medium;
+    @apply text-gray-600 font-medium;
   }
 
   input {
