@@ -104,8 +104,8 @@ onClickOutside(target, () => {
 
       <!-- phone number -->
       <div class="ml-auto md:w-auto hidden sm:flex flex-col place-items-end">
-        <span class="font-bold md:text-xl">+254 703 968 795</span>
-        <span class="font-semibold text-sm text-[#395A9F]">Support 24/7</span>
+        <span class="font-bold md:text-lg">+254 703 968 795</span>
+        <span class="font-semibold text-xs text-gray-500">Support 24/7</span>
       </div>
 
       <!-- buttons -->

@@ -5,9 +5,9 @@ import products from '@/assets/images/products/products1.png'
 <template>
   <!-- bg-[#395A9F] to-[#89CFF0] -->
   <div class="w-full bg-white  bg-opacity-90 relative min-h-screen inset-0 overflow-x-hidden">
-    <div class=" grid grid-cols-1 md:grid-cols-2">
+    <div class=" grid grid-cols-1 md:grid-cols-2 md:h-screen">
       <div
-        class="space-y-5 flex-1 w-[90%] md:mx-24 mx-auto h-full flex items-center justify-center mt-[80px] pb-10 md:pb-0  md:mt-0">
+        class="space-y-5 flex-1 w-[90%] md:mx-16 mx-auto h-full flex items-center justify-center mt-[80px] pb-10 md:pb-0  md:mt-0">
         <div class="block space-y-4 md:space-y-8 mb-20 md:mb-0">
           <h1 class="text-5xl md:text-6xl xl:text-7xl lg:leading-loose font-display font-extrabold text-gray-800">
             Stay <br> Refreshed, <br><span class="text-[#395A9F]">Stay Hydrated.</span>

@@ -15,8 +15,8 @@ const router = useRouter()
 const userStore = useUserStore()
 
 const credentials = reactive({
-  email: 'elviskb@gmail.com',
-  password: 'password'
+  email: '',
+  password: ''
 })
 
 const signIn = async () => {

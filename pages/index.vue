@@ -70,7 +70,7 @@ const closeModal = () => {
     <section id="Shop" class="py-20 min-h-screen bg-[#39519f] bg-opacity-5">
       <div class="max-w-6xl mx-auto px-5">
         <h3 class="text-[#39519f] font-semibold">Shop</h3>
-        <h2 class="text-gray-900 font-medium text-3xl tracking-tight">
+        <h2 class="text-gray-900 font-medium text-3xl tracking-tight mb-4">
           Our Bottle Varieties
         </h2>
 
@@ -81,7 +81,7 @@ const closeModal = () => {
           <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <template v-for="(product, index) in productStore.dbProducts" :key="index">
               <div v-for="img in product.images" :key="img._id"
-                class="flex-shrink-0 m-6 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg">
+                class="flex-shrink-0 m-6 md:m-2 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg">
                 <!-- [#89CFF0] -->
                 <!-- :class="`bg-${product.bgColor}`" -->
                 <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"

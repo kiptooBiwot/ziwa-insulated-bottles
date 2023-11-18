@@ -173,10 +173,11 @@ const isInCart = computed(() => {
 </script>
 
 <template>
-  <div class="relative py-36 md:py-40">
+  <div class="relative py-36 md:py-25">
     <div class="max-w-6xl mx-auto px-5 xl:px-0">
-      <h2 class="text-gray-900 font-semibold text-3xl md:text-4xl pb-5">Product Details
+      <h2 class="text-gray-900 font-semibold text-3xl md:text-4xl pb-2">Product Details
       </h2>
+      <!-- <hr class="md:w-[280px] border-1 border-gray-300"> -->
       <div v-if="productStore.product" class="md:flex gap-10 justify-between mx-auto w-full">
         <div class="md:w-[40%] mb-7 md:mb-0">
 
