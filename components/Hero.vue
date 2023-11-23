@@ -1,5 +1,6 @@
 <script setup>
 import products from '@/assets/images/products/products1.png'
+import heroImg from '@/assets/images/hero_img-no-bg.png'
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import products from '@/assets/images/products/products1.png'
         </div>
       </div>
       <div class="flex-1 h-full flex items-center justify-center bg-[#395A9F] bg-opacity-10 py-10 md:pb-0">
-        <img :src="products" alt="" class="w-auto px-5 py-10 md:px-0 md:py-0 md:w-[550px] mx-auto h-auto object-fill">
+        <img :src="heroImg" alt="" class="w-auto px-5 py-10 md:px-0 md:py-0 md:w-auto mx-auto object-cover">
       </div>
     </div>
   </div>
