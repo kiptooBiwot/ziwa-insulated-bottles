@@ -10,7 +10,7 @@ useHead({
 </script>
 
 <template>
-  <section id="about" class="min-h-screen bg-slate-100">
+  <section id="about" class="min-h-screen">
     <div class="max-w-6xl mx-auto py-40 px-5 xl:px-0">
       <h3 class="text-[#39519f] font-medium text-lg">About Us</h3>
       <h2 class="text-gray-900 font-medium text-[36px] md:text-[36px] tracking-tight">

@@ -65,9 +65,9 @@ const closeModal = () => {
     </section>
 
     <!-- bg-[#e8efff] -->
+    <!-- bg-[#39519f] bg-opacity-5 -->
 
-
-    <section id="Shop" class="py-20 min-h-screen bg-[#39519f] bg-opacity-5">
+    <section id="Shop" class="py-20 min-h-screen md:bg-[#39519f] md:bg-opacity-5">
       <div class="max-w-6xl mx-auto px-5">
         <h3 class="text-[#39519f] font-semibold">Shop</h3>
         <h2 class="text-gray-900 font-medium text-3xl tracking-tight mb-4">
