@@ -18,7 +18,7 @@ import heroImg from '@/assets/images/hero_img-no-bg.png'
         </div>
       </div>
       <div class="flex-1 h-full flex items-center justify-center bg-[#395A9F] bg-opacity-10 py-10 md:pb-0">
-        <img :src="heroImg" alt="" class="w-auto px-5 py-10 md:px-0 md:py-0 md:w-auto mx-auto object-cover">
+        <img :src="heroImg" alt="" class="w-auto px-5 py-10 md:px-0 md:py-0 md:w-auto h-full mx-auto object-cover">
       </div>
     </div>
   </div>
