@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic.woff2') format('woff2'),
+        url('CocoGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-Bold.woff2') format('woff2'),
+        url('CocoGothic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-BoldItalic.woff2') format('woff2'),
+        url('CocoGothic-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic ExtBlk';
+    src: url('CocoGothic-Fat.woff2') format('woff2'),
+        url('CocoGothic-Fat.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic ExtBlk';
+    src: url('CocoGothic-FatItalic.woff2') format('woff2'),
+        url('CocoGothic-FatItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-Heavy.woff2') format('woff2'),
+        url('CocoGothic-Heavy.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-HeavyItalic.woff2') format('woff2'),
+        url('CocoGothic-HeavyItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-Italic.woff2') format('woff2'),
+        url('CocoGothic-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-Light.woff2') format('woff2'),
+        url('CocoGothic-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    src: url('CocoGothic-LightItalic.woff2') format('woff2'),
+        url('CocoGothic-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic ExtLt';
+    src: url('CocoGothic-UltraLight.woff2') format('woff2'),
+        url('CocoGothic-UltraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coco Gothic ExtLt';
+    src: url('CocoGothic-UltraLightItalic.woff2') format('woff2'),
+        url('CocoGothic-UltraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+

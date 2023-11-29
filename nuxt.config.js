@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-swiper'
   ],
+  swiper: {
+
+  },
   pinia: {
     autoImports: [
       // automatically imports `defineStore`

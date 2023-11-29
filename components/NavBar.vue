@@ -13,6 +13,15 @@ const links = reactive([
   { title: 'Contact', url: '#Contact' },
 ])
 
+const newLinks = reactive([
+  { title: 'Bottles', url: '#Home' },
+  { title: 'About', url: 'about-us' },
+  { title: 'Tumblers', url: '#Shop' },
+  { title: 'Kids', url: '#Home' },
+  { title: 'Bulk Custom', url: '#Contact' },
+  { title: 'Shop', url: '#Shop' },
+])
+
 const atTopOfPage = ref(true)
 const isMenuOpen = ref(false)
 const target = ref(null)
@@ -41,18 +50,25 @@ onClickOutside(target, () => {
 </script>
 
 <template>
-  <nav :class="{ 'scrolled': !atTopOfPage }" class="w-full fixed inset-x-0 top-0 z-10 py-0 md:pt-2 bg-white border-none">
+  <nav :class="{ 'scrolled': !atTopOfPage }" class="w-full fixed inset-x-0 top-0 z-10 py-0 md:pt-0 bg-white border-none">
+    <div>
+      <FreeOrderStrip />
+    </div>
     <div class="max-w-6xl mx-auto flex items-center px-5 md:px-0">
 
       <!-- logo -->
-      <NuxtLink to="/" class="mr-auto md:w-48 flex-shrink-0">
-        <img class="h-16 w-auto" :src="logo" alt="">
+      <NuxtLink to="/" class="mr-auto md:w-48 flex-shrink-0 pt-3">
+        <!-- <img class="h-16 w-auto" :src="logo" alt=""> -->
+        <h2 class="text-3xl font-logoFont font-normal text-[#395A9F]">Ziwa<span
+            class="text-xs relative -top-3 font-light">&reg;</span>
+        </h2>
       </NuxtLink>
 
-      <div class="flex items-center">
+      <div class="flex items-center pt-3">
         <div class="hidden md:block">
           <ul class="flex gap-4 font-semibold">
-            <li v-for="(link, index) in links" :key="index" class="">
+            <!-- <li v-for="(link, index) in links" :key="index" class=""> -->
+            <li v-for="(link, index) in newLinks" :key="index" class="">
               <NuxtLink :to="`/${link.url}`" class="pb-2 px-3 hover:text-[#395A9F] hover:border-b-2 border-[#395A9F]">
                 {{ link.title }}
               </NuxtLink>
@@ -91,7 +107,9 @@ onClickOutside(target, () => {
               </div>
             </div>
             <ul class="space-y-12 text-white">
-              <li v-for="link in links" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
+              <!-- <li v-for="link in links" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
+                class="text-lg text-center font-medium "> -->
+              <li v-for="link in newLinks" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
                 class="text-lg text-center font-medium ">
                 <RouterLink :to="`/${link.url}`">
                   {{ link.title }}
@@ -103,13 +121,13 @@ onClickOutside(target, () => {
       </div>
 
       <!-- phone number -->
-      <div class="ml-auto md:w-auto hidden sm:flex flex-col place-items-end">
-        <span class="font-bold md:text-lg">+254 703 968 795</span>
+      <div class="ml-auto md:w-auto hidden sm:flex flex-col place-items-end pt-3">
+        <span class="font-bold md:text-lg">+254 701 939 883</span>
         <span class="font-semibold text-xs text-gray-500">Support 24/7</span>
       </div>
 
       <!-- buttons -->
-      <nav class="contents">
+      <nav class="contents pt-3">
         <ul class="ml-4 xl:w-auto flex items-center justify-end">
           <li class="ml-2 lg:ml-4 relative inline-block">
             <NuxtLink to="/signin" class="">

@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['Mona Sans'],
+        script: ['Kaushan Script'],
         display: ['Mona Sans'],
         fontOne: ['Frunchy Sage'],
         fontTwo: ['Antic Didone'],
@@ -20,6 +21,7 @@ module.exports = {
         fontFive: ['One Little Font'],
         fontSix: ['Tomorrow'],
         fontSeven: ['Charm'],
+        logoFont: ['Coco Gothic']
       }
     },
   },
