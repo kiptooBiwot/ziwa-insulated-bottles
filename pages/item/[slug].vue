@@ -309,10 +309,10 @@ const isInCart = computed(() => {
               }}</span> </p>
             <hr v-if="productStore.customizedBottle">
             <button @click="customizeBottle = !customizeBottle"
-              class="px-6 w-full py-3 text-white text-lg font-semibold shadow-md rounded bg-purple-600">Customize
-              your bottle</button>
+              class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600">Customize
+              for Ksh.400</button>
             <button @click="addToCart"
-              class="px-6 w-full py-3  text-white text-lg font-semibold shadow-md rounded bg-green-500">
+              class="px-6 w-full py-3  text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500">
               <div v-if="isInCart">Add Another Bottle to Cart</div>
               <div v-else>Add to Cart</div>
             </button>

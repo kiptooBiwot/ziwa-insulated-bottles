@@ -95,7 +95,7 @@ const sendEmail = async () => {
       </div>
       <div class="p-5">
         <div v-if="!emailSent" class="w-full md:w-[80%] mx-auto space-y-5">
-          <h5 class="text-lg">Fill in the form below to drop us a message</h5>
+          <h5 class="text-lg">Fill in the form below to drop us a message or inquiry.</h5>
 
           <form action="" class="space-y-3" @submit.prevent="sendEmail">
             <div class=" flex flex-col">

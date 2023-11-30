@@ -4,10 +4,11 @@ export const useGeneralStore = defineStore('general', {
     newLinks: [
       { title: 'About', url: 'about-us' },
       { title: 'Bottles', url: '#Home' },
-      { title: 'Tumblers', url: '#Shop' },
+      { title: 'Tumblers', url: 'tumblers' },
       { title: 'Kids', url: '#Home' },
-      { title: 'Bulk Custom', url: '#Contact' },
+      { title: 'Bulk Custom', url: 'contact' },
       { title: 'Shop', url: '#Shop' },
+      { title: 'Contact', url: 'contact' },
     ]
   }),
   actions: {

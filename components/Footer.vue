@@ -6,8 +6,8 @@ import products from '~/assets/images/products/products1.png'
 const generalStore = useGeneralStore()
 
 const otherLinks = ref([
-  { title: 'Wholesale Inquiries', url: '#Home' },
-  { title: 'Warranty', url: '#Home' },
+  { title: 'Wholesale Inquiries', url: 'contact' },
+  { title: 'Warranty', url: 'warranty' },
 ])
 
 </script>
@@ -55,12 +55,13 @@ const otherLinks = ref([
                 </svg>
               </a>
               <!-- Twitter -->
-              <a href="/" class="ml-3 text-white cursor-pointer hover:text-[#39519f] transform duration-500 ease-in-out">
-                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6"
-                  viewBox="0 0 24 24">
-                  <path
-                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                  </path>
+              <a href="https://www.tiktok.com/@ziwa_ke" target="_blank"
+                class="ml-3 text-white cursor-pointer hover:text-[#39519f] transform duration-500 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="w-7 h-7 fill-white text-white cursor-pointer hover:fill-[#39519f] transform duration-500 ease-in-out"
+                  width="32" height="32" viewBox="0 0 24 24">
+                  <path fill=""
+                    d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z" />
                 </svg>
               </a>
               <!-- Instagram -->
@@ -72,7 +73,8 @@ const otherLinks = ref([
                   <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                 </svg>
               </a>
-              <a href="/" class="ml-3 text-white cursor-pointer hover:text-[#39519f] transform duration-500 ease-in-out">
+              <a href="https://www.linkedin.com/company/ziwa-kenya/about/" target="_blank"
+                class="ml-3 text-white cursor-pointer hover:text-[#39519f] transform duration-500 ease-in-out">
                 <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="0" class="w-6 h-6" viewBox="0 0 24 24">
                   <path stroke="none"
