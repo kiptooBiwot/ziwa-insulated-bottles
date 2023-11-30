@@ -98,88 +98,93 @@ const totalPriceComputed = computed(() => {
 const submit = async () => {
 
   try {
-    // Validate the form save userInfo to the database
-    // const saveUser = async () => {
-    const response = await $fetch('/user/newUser', {
-      method: 'POST',
-      body: formData.value
-    })
+    v$.value.$validate()
 
-    productStore.orderUserId = response._id
+    if (!v$.value.$error) {
 
-    // Initiate M-PESA PAYMENT
-    const loadMpesaModal = () => {
-      showMpesaModal.value = true
-    }
+      // Validate the form save userInfo to the database
+      // const saveUser = async () => {
+      const response = await $fetch('/user/newUser', {
+        method: 'POST',
+        body: formData.value
+      })
 
-    loadMpesaModal()
+      productStore.orderUserId = response._id
 
-    watch(() => mpesaProcessComplete.value, async () => {
+      // Initiate M-PESA PAYMENT
+      const loadMpesaModal = () => {
+        showMpesaModal.value = true
+      }
 
-      if (mpesaProcessComplete.value) {
+      loadMpesaModal()
 
-        showMpesaModal.value = false
-        // console.log('MPESA PROCESS COMPLETE?', mpesaProcessComplete?.value);
+      watch(() => mpesaProcessComplete.value, async () => {
 
-        // Get User Id and append it to an order
-        const order = {
-          deliveryRoute: productStore.deliveryRoute.name,
-          deliveryLocation: productStore.deliveryLocation,
-          deliveryCost: productStore.deliveryCost,
-          isPaidFor: true,
-          products: formData.value.cartItems,
-          orderedBy: productStore.orderUserId,
-          payment: productStore.paymentDetails._id
-        }
-        const resp = await $fetch('/order/newOrder', {
-          method: 'POST',
-          body: order
-        })
+        if (mpesaProcessComplete.value) {
 
-        // console.log('ORDER DATA', resp)
+          showMpesaModal.value = false
+          // console.log('MPESA PROCESS COMPLETE?', mpesaProcessComplete?.value);
 
-
-        orderSaved.value = true
-
-        toast.add({
-          type: 'success',
-          message: 'Your order is being processed.'
-        })
-
-        // After order is saved, send and email to the admin of the order
-
-        if (!v$.value.$error && orderSaved.value) {
-          const result = await $fetch('/api/contact', {
+          // Get User Id and append it to an order
+          const order = {
+            deliveryRoute: productStore.deliveryRoute.name,
+            deliveryLocation: productStore.deliveryLocation,
+            deliveryCost: productStore.deliveryCost,
+            isPaidFor: true,
+            products: formData.value.cartItems,
+            orderedBy: productStore.orderUserId,
+            payment: productStore.paymentDetails._id
+          }
+          const resp = await $fetch('/order/newOrder', {
             method: 'POST',
-            body: {
-              formData: formData.value,
-              order: resp,
-              paymentDetails: productStore.paymentDetails
-            }
+            body: order
           })
 
-          // if (pending) {
-          //   waiting.value = true
-          // }
-          console.log('RESULT:', result);
+          // console.log('ORDER DATA', resp)
 
-          // if (result) {
-          errors.value = false
-          success.value = true
-          waiting.value = false
-          formData.value = {
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
+
+          orderSaved.value = true
+
+          toast.add({
+            type: 'success',
+            message: 'Your order is being processed.'
+          })
+
+          // After order is saved, send and email to the admin of the order
+
+          if (!v$.value.$error && orderSaved.value) {
+            const result = await $fetch('/api/contact', {
+              method: 'POST',
+              body: {
+                formData: formData.value,
+                order: resp,
+                paymentDetails: productStore.paymentDetails
+              }
+            })
+
+            // if (pending) {
+            //   waiting.value = true
+            // }
+            // console.log('RESULT:', result);
+
+            // if (result) {
+            errors.value = false
+            success.value = true
+            waiting.value = false
+            formData.value = {
+              name: '',
+              email: '',
+              subject: '',
+              message: ''
+            }
+
+            productStore.cart = []
+
+            // }
           }
-
-          productStore.cart = []
-
-          // }
         }
-      }
-    })
+      })
+    }
   } catch (error) {
     // console.log(error);
     toast.add({

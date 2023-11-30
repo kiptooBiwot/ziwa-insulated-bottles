@@ -2,9 +2,11 @@
 // import logo from '~/assets/images/logo/ziwa-logo.png'
 import logo from "~/assets/images/logo/ziwa-logo.png"
 import { useProductStore } from '~/stores/product'
+import { useGeneralStore } from "@/stores/general";
 import { onClickOutside } from '@vueuse/core'
 
 const productStore = useProductStore()
+const generalStore = useGeneralStore()
 
 const links = reactive([
   { title: 'Home', url: '#Home' },
@@ -13,14 +15,14 @@ const links = reactive([
   { title: 'Contact', url: '#Contact' },
 ])
 
-const newLinks = reactive([
-  { title: 'Bottles', url: '#Home' },
-  { title: 'About', url: 'about-us' },
-  { title: 'Tumblers', url: '#Shop' },
-  { title: 'Kids', url: '#Home' },
-  { title: 'Bulk Custom', url: '#Contact' },
-  { title: 'Shop', url: '#Shop' },
-])
+// const newLinks = reactive([
+//   { title: 'Bottles', url: '#Home' },
+//   { title: 'About', url: 'about-us' },
+//   { title: 'Tumblers', url: '#Shop' },
+//   { title: 'Kids', url: '#Home' },
+//   { title: 'Bulk Custom', url: '#Contact' },
+//   { title: 'Shop', url: '#Shop' },
+// ])
 
 const atTopOfPage = ref(true)
 const isMenuOpen = ref(false)
@@ -68,7 +70,7 @@ onClickOutside(target, () => {
         <div class="hidden md:block">
           <ul class="flex gap-4 font-semibold">
             <!-- <li v-for="(link, index) in links" :key="index" class=""> -->
-            <li v-for="(link, index) in newLinks" :key="index" class="">
+            <li v-for="(link, index) in generalStore.newLinks" :key="index" class="">
               <NuxtLink :to="`/${link.url}`" class="pb-2 px-3 hover:text-[#395A9F] hover:border-b-2 border-[#395A9F]">
                 {{ link.title }}
               </NuxtLink>
