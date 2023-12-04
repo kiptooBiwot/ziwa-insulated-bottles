@@ -1,6 +1,7 @@
 <script setup>
 import { useProductStore } from '@/stores/product'
 import { useToastStore } from '@/stores/toast'
+import { storeToRefs } from 'pinia'
 // import bottle from '~/assets/images/products/bottle1-bg.png'
 
 const props = defineProps(['bottle', 'slug'])
@@ -8,8 +9,11 @@ const productStore = useProductStore()
 const toast = useToastStore()
 const emits = defineEmits('closeModal')
 
-const customName = ref('')
-const selectedFont = ref('')
+const { customName, selectedFont, textPosition } = storeToRefs(productStore)
+
+// const customName = ref('')
+// const selectedFont = ref('')
+// const textPosition = ref('center')
 
 const checkNameLength = computed(() => {
   if (customName.value.length >= 7) {
@@ -64,7 +68,8 @@ const addCustomization = () => {
       <div class="bg-blue-300 px-20 py-10">
         <div class="relative">
           <img :src="customizedBottle" alt="" class="h-[300px]">
-          <div class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex items-center justify-center">
+          <div class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex justify-center"
+            :class="[textPosition === 'center' ? 'items-center' : '', textPosition === 'bottom' ? 'items-end' : '', textPosition === 'top' ? 'items-start' : '']">
             <!-- -[#4F584E] #636e62 -->
             <p class="font-medium text-[#4F584E] text-2xl vertical-text transform rotate-180"
               :class="[selectedFont === 'Frunchy Sage' ? 'font-fontOne' : '', selectedFont === 'Antic Didone' ? 'font-fontTwo' : '', selectedFont === 'Alta' ? 'font-fontThree' : '', selectedFont === 'Retropix' ? 'font-fontFour' : '', selectedFont === 'One Little Font' ? 'font-fontFive' : '', selectedFont === 'Tomorrow' ? 'font-fontSix' : '', selectedFont === 'Charm' ? 'font-fontSeven' : '']">
@@ -100,7 +105,8 @@ const addCustomization = () => {
           <div>
             <div class="flex justify-between items-baseline">
               <p class="text-gray-600 text-sm">Enter a custom name:</p>
-              <p class="text-xs" :class="[checkNameLength ? 'text-red-500' : 'text-green-500']">Max characters
+              <p class="text-xs" :class="[checkNameLength ? 'text-red-500' : 'text-green-500']">Max
+                characters
                 {{
                   customName.length }} / 10</p>
             </div>
@@ -109,12 +115,30 @@ const addCustomization = () => {
           </div>
 
           <div>
+            <label for="" class="text-sm">Choose your name's position on the bottle:</label>
+            <div class="flex space-x-10 pt-2">
+              <div class="space-x-2 text-sm text-gray-500">
+                <input v-model="textPosition" type="radio" value="top" name="top" id="top">
+                <label for="top">Top</label>
+              </div>
+              <div class="space-x-2 text-sm text-gray-500">
+                <input v-model="textPosition" type="radio" value="center" name="center" id="center">
+                <label for="center">Center</label>
+              </div>
+              <div class="space-x-2 text-sm text-gray-500">
+                <input v-model="textPosition" type="radio" value="bottom" name="bottom" id="bottom">
+                <label for="bottom">Bottom</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
             <p class="text-gray-600 text-sm">Please select a font</p>
             <select v-model="selectedFont" name="" id=""
-              class="py-2 px-4 border border-gray-300 w-full rounded-md placeholder:text-gray-500 placeholder:text-sm">
-              <option value="" selected disabled>Please Select a font</option>
+              class="py-2 px-4 border text-sm border-gray-300 w-full rounded-md placeholder:text-gray-500 placeholder:text-sm">
+              <option value="" disabled>Please Select a font</option>
               <option value="Frunchy Sage">Frunchy Sage</option>
-              <option value="Antic Didone">Antic Didone</option>
+              <option value="Antic Didone" selected>Antic Didone</option>
               <option value="Alta">Alta</option>
               <option value="Retropix">Retropix</option>
               <option value="One Little Font">One Little Font</option>

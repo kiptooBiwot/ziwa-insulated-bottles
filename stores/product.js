@@ -13,6 +13,7 @@ export const useProductStore = defineStore('product', {
 
     customName: '',
     selectedFont: '',
+    textPosition: '',
     customizationFee: 0,
     customizedBottle: false,
 

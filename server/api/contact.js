@@ -32,6 +32,7 @@ export default defineEventHandler(async (event) => {
                   
                   <h3>ORDER CUSTOMIZATION</h3>
                   <p style="font-weight: bold;">Customization Name: ${item._value.customName}</p>
+                  <p style="font-weight: bold;">Name Printing Position: ${item._value.textPosition}</p>
                   <p style="font-weight: bold;">Customization Font: ${item._value.selectedFont}</p>
                   <p style="font-weight: bold;">Customization Fee: ${item._value.customizationFee}</p>
                   <h3>TOTAL COST</h3>

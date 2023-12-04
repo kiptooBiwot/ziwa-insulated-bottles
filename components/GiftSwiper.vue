@@ -12,7 +12,9 @@ const props = defineProps({
     :class="`{ backgroundColor: ${gift.color} }`">
     <!-- <div class="absolute top-8 left-10 space-y-3">
     </div> -->
-    <img :src="gift.giftImage" alt="gifts" class="absolute top-8 rounded-md object-contain h-[70%] w-full">
+    <!-- <img :src="gift.giftImage" alt="gifts" class="absolute top-8 rounded-md object-contain h-[70%] w-full"> -->
+    <img :src="gift.giftImage" alt="gifts"
+      class="absolute inset-0 overflow-hidden  object-fill rounded-3xl shadow-lg h-full w-full">
 
     <div class="absolute bottom-8 left-8">
       <p class="text-2xl font-bold font-script">{{ gift.text }}</p>

@@ -178,7 +178,27 @@ const submit = async () => {
               message: ''
             }
 
-            productStore.cart = []
+            productStore.customName = '',
+              productStore.selectedFont = '',
+              productStore.textPosition = '',
+              productStore.customizationFee = 0,
+              productStore.customizedBottle = false,
+
+              productStore.selectedProduct = null,
+
+              productStore.dbProducts = [],
+              productStore.product = null,
+              productStore.cart = [],
+              // product detail page id to select product color & image
+              productStore.imageId = '',
+              // destination: {
+              productStore.deliveryRoute = [],
+              productStore.deliveryLocation = '',
+              productStore.deliveryCost = 0,
+              productStore.orderUserId = '',
+              productStore.mpesaProcessComplete = false,
+              productStore.paymentResponse = null,
+              productStore.paymentDetails = null
 
             // }
           }
@@ -397,9 +417,9 @@ const submit = async () => {
       </div>
       <div v-else
         class="w-full max-w-3xl mx-auto border border-green-500 text-green rounded-md py-10 px-10 space-y-5 text-center">
-        <p class="text-2xl">📩 Your order is well received! We will get back to you concerning your order.</p>
+        <p class="text-2xl">📩 Your order is well received! We are processing your order.</p>
         <p class="text-xl">If you have any questions don't hesitate to reach out to us on <span
-            class="text-orange-500">+254-703-968-795</span>
+            class="text-orange-500">+254-701-939-883</span>
         </p>
       </div>
     </div>

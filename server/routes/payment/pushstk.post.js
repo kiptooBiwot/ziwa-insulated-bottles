@@ -111,10 +111,11 @@ export default defineEventHandler(async (event) => {
 
     // return response.data
   } catch (error) {
-    // console.log(error.response.data)
+    console.log(error.response)
     throw createError({
       statusCode: 400,
-      statusMessage: 'Something went wrong!'
+      // statusMessage: 'Something went wrong!'
+      statusMessage: error['response']['statusText']
     })
   }
 

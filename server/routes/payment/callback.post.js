@@ -6,11 +6,12 @@ export default defineEventHandler(async (event) => {
 
   const callbackData = await readBody(event)
 
-  // console.log('BODY', callbackData)
+  // console.log('CALLBACK BODY', callbackData)
 
   if (!callbackData.Body.stkCallback.CallbackMetadata) {
     // console.log('PAYMENT FAILURE', callbackData.Body.stkCallback.ResultDesc);
-    return { message: callbackData.Body.stkCallback.ResultDesc }
+    // return { message: callbackData.Body.stkCallback.ResultDesc }
+    return 'OK'
   }
 
   // In Success, save response to database for future reference

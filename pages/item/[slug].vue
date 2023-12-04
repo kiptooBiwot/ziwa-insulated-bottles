@@ -137,6 +137,7 @@ const addToCart = () => {
     // deliveryCost: deliveryCost.value,
     selectedFont: productStore.selectedFont,
     customName: productStore.customName,
+    textPosition: productStore.textPosition,
     customizationFee: productStore.customizationFee,
     productId: productStore.product._id,
     cumulativeCost: total
@@ -153,6 +154,7 @@ const addToCart = () => {
   // Reset customization
   productStore.selectedFont = ''
   productStore.customName = ''
+  productStore.textPosition = ''
   productStore.customizationFee = 0
   productStore.customizedBottle = false
 

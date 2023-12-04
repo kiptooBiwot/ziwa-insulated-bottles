@@ -7,6 +7,10 @@ import bottle3 from '~/assets/images/products/bottle4-bg.png'
 import bottle4 from '~/assets/images/products/bottle5-bg.png'
 import bottle5 from '~/assets/images/products/bottle6-bg.png'
 
+import celebrate from '/assets/images/celebrate.jpeg'
+import tisTheSeason from '/assets/images/tis-the-season.jpeg'
+import toast from '/assets/images/toast.jpeg'
+
 import image from '~/assets/images/MOK_4601.jpeg'
 import img from '~/assets/images/ziwa_phenomenal.jpg'
 import image_13 from '~/assets/images/MOK_4602.jpeg'
@@ -52,10 +56,12 @@ const images = reactive([
 ])
 
 const giftItems = ref([
-  { text: 'Gift It!', giftImage: bottle3, color: 'bg-rose-800' },
-  { text: 'Sip It!', giftImage: bottle, color: 'bg-yellow-500' },
-  { text: 'Carry It!', giftImage: bottle4, color: 'bg-teal-500' },
-  { text: 'Love It!', giftImage: bottle5, color: 'bg-blue-500' },
+  // { text: 'Gift It!', giftImage: celebrate, color: 'bg-rose-800' },
+  { text: '', giftImage: celebrate, color: 'bg-rose-800' },
+  // { text: 'Sip It!', giftImage: bottle, color: 'bg-yellow-500' },
+  { text: '', giftImage: toast, color: 'bg-yellow-500' },
+  // { text: 'Carry It!', giftImage: bottle4, color: 'bg-teal-500' },
+  // { text: 'Love It!', giftImage: bottle5, color: 'bg-blue-500' },
 ])
 
 const bestSellers = ref([
@@ -87,16 +93,19 @@ const closeModal = () => {
       <div class="max-w-6xl mx-auto py-10 px-5 md:px-0 min-h-screen">
         <div class="grid grid-cols-1 gap-6 md:gap-0 lg:grid-cols-2">
           <div class="rounded-3xl h-[550px] flex items-center justify-center bg-[#0B3624] text-white relative">
-            <div class="absolute top-8 left-5 md:left-10 space-y-3">
+            <!-- <div class="absolute top-8 left-5 md:left-10 space-y-3">
               <h2 class="text-5xl md:text-6xl font-bold text-white font-script">
                 Give the Season
               </h2>
               <p class="text-base md:text-xl">
                 Gift ideas for all seasons
               </p>
-            </div>
-            <img :src="bottle2" alt="gifts"
-              class="absolute bottom-32 md:bottom-8 rounded-md object-contain h-[50%] md:h-[70%] w-full" />
+            </div> -->
+            <!-- <img :src="tisTheSeason" alt="gifts"
+              class="absolute bottom-32 md:bottom-8 rounded-md object-contain h-[50%] md:h-[70%] w-full" /> -->
+
+            <img :src="tisTheSeason" alt="gifts"
+              class="absolute inset-0  rounded-3xl overflow-hidden object-fill h-full w-full" />
 
             <div class="absolute bottom-8 md:bottom-16 left-8">
               <NuxtLink to="#Shop">
@@ -157,6 +166,7 @@ const closeModal = () => {
       </div>
     </section>
 
+    <!-- Shop section -->
     <section id="Shop" class="py-20 min-h-screen md:bg-[#39519f] md:bg-opacity-5">
       <div class="max-w-6xl mx-auto px-5">
         <h3 class="text-[#39519f] font-semibold">Shop</h3>
