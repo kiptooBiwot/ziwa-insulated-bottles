@@ -28,6 +28,14 @@ import image_11 from '~/assets/images/MOK_4849.jpg'
 import image_12 from '~/assets/images/MOK_4858.jpg'
 import image_14 from '~/assets/images/MOK_4886.jpg'
 import image_15 from '~/assets/images/MOK_4902.jpg'
+import image_16 from '~/assets/images/the-season.jpg'
+
+import bg_1 from '~/assets/images/hero/MOK_4815-removebg.png'
+import bg_2 from '~/assets/images/hero/MOK_4820-removebg.png'
+import bg_3 from '~/assets/images/hero/MOK_4829-removebg.png'
+import bg_4 from '~/assets/images/hero/MOK_4835-removebg.png'
+import bg_5 from '~/assets/images/hero/MOK_4886-removebg.png'
+import bg_6 from '~/assets/images/hero/MOK_4910-removebg.png'
 
 const productStore = useProductStore()
 
@@ -57,9 +65,13 @@ const images = reactive([
 
 const giftItems = ref([
   // { text: 'Gift It!', giftImage: celebrate, color: 'bg-rose-800' },
-  { text: '', giftImage: celebrate, color: 'bg-rose-800' },
+  { text: 'Love It!', giftImage: bg_5, color: '', bgImage: 'https://images.unsplash.com/photo-1606310737718-01c223c7425b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { text: 'Gift It!', giftImage: bg_2, color: '', bgImage: 'https://images.unsplash.com/photo-1576072320516-24b83088e525?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { text: 'Carry It!', giftImage: bg_6, color: '', bgImage: 'https://images.unsplash.com/photo-1575110201245-23bee4c5aa62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { text: 'Sip It!', giftImage: bg_4, color: '', bgImage: 'https://images.unsplash.com/photo-1545735089-fe9e1e4f4569?q=80&w=1533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  // { text: '', giftImage: celebrate, color: 'bg-rose-800' },
   // { text: 'Sip It!', giftImage: bottle, color: 'bg-yellow-500' },
-  { text: '', giftImage: toast, color: 'bg-yellow-500' },
+  // { text: '', giftImage: toast, color: 'bg-yellow-500' },
   // { text: 'Carry It!', giftImage: bottle4, color: 'bg-teal-500' },
   // { text: 'Love It!', giftImage: bottle5, color: 'bg-blue-500' },
 ])
@@ -92,25 +104,30 @@ const closeModal = () => {
     <section>
       <div class="max-w-6xl mx-auto py-10 px-5 md:px-0 min-h-screen">
         <div class="grid grid-cols-1 gap-6 md:gap-0 lg:grid-cols-2">
-          <div class="rounded-3xl h-[550px] flex items-center justify-center bg-[#0B3624] text-white relative">
-            <!-- <div class="absolute top-8 left-5 md:left-10 space-y-3">
-              <h2 class="text-5xl md:text-6xl font-bold text-white font-script">
-                Give the Season
+          <!-- bg-[#0B3624] -->
+          <div
+            class="rounded-3xl h-[550px] flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]  text-white relative">
+            <div class="absolute top-10 left-5 md:left-10 space-y-3">
+              <h2 class="text-5xl md:text-5xl font-bold text-red-400 font-script">
+                <!-- Give the Season -->
+                Celebrate the Season
               </h2>
-              <p class="text-base md:text-xl">
+              <p class="text-base text-red-100 md:text-xl">
                 Gift ideas for all seasons
               </p>
-            </div> -->
-            <!-- <img :src="tisTheSeason" alt="gifts"
-              class="absolute bottom-32 md:bottom-8 rounded-md object-contain h-[50%] md:h-[70%] w-full" /> -->
+            </div>
+            <img :src="image_16" alt="gifts"
+              class="absolute bottom-32 md:bottom-12 rounded-3xl object-cover h-[80%] md:h-[60%] w-[90%] shadow-lg" />
+            <!-- https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
+            <!-- https://plus.unsplash.com/premium_photo-1696863128359-6de6cf5f14a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIxfHxjaHJpc3RtYXMlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww -->
+            <!-- <img
+            src="https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="gifts" class="absolute inset-0 rounded-3xl overflow-hidden object-cover h-full w-full" /> -->
 
-            <img :src="tisTheSeason" alt="gifts"
-              class="absolute inset-0  rounded-3xl overflow-hidden object-fill h-full w-full" />
-
-            <div class="absolute bottom-8 md:bottom-16 left-8">
+            <div class="absolute bottom-8 md:bottom-16 left-10">
               <NuxtLink to="#Shop">
                 <button
-                  class="py-3 px-6 bg-white rounded-full uppercase font-semibold text-gray-800 hover:bg-gray-100 hover:text-gray-700 hover:shadow-lg hover:scale-105 transform duration-300 ease-in-out">
+                  class="py-3 px-6 bg-white rounded-full uppercase font-semibold text-gray-800 text-sm hover:bg-gray-100 hover:text-gray-700 hover:shadow-lg hover:scale-105 transform duration-300 ease-in-out">
                   Shop Now
                 </button>
               </NuxtLink>
@@ -233,13 +250,14 @@ const closeModal = () => {
         </h3>
         <div class="columns-1 md:columns-3 xl:columns-4 gap-8 space-y-8">
           <template v-for="(imgs, index) in images" :key="index">
-            <img :src="imgs" alt="" class="rounded-xl shadow-xl cursor-pointer" @click="loadCarousel = !loadCarousel" />
+            <img :src="imgs" alt="" class="rounded-xl shadow-xl cursor-pointer object-contain"
+              @click="loadCarousel = !loadCarousel" />
           </template>
         </div>
       </div>
 
       <div v-if="loadCarousel"
-        class="abolute inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center"
+        class=" inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center"
         @dblclick="loadCarousel = !loadCarousel">
         <!-- <template v-for="(image, index) in images" :key="index"> -->
         <!-- <ImageModal @closeModal="closeModal" :images="images" /> -->

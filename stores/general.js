@@ -1,6 +1,7 @@
 export const useGeneralStore = defineStore('general', {
   state: () => ({
     isOpen: false,
+    transactionData: false,
     newLinks: [
       { title: 'About', url: 'about-us' },
       { title: 'Bottles', url: '#Home' },

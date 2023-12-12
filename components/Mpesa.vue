@@ -1,9 +1,14 @@
 <script setup>
 import { useProductStore } from "@/stores/product";
 import { useToastStore } from '@/stores/toast'
+import { useGeneralStore } from "@/stores/general";
+import { storeToRefs } from "pinia";
 
 const productStore = useProductStore()
 const toast = useToastStore()
+let { transactionData } = storeToRefs(useGeneralStore())
+
+const isLoading = ref(false)
 
 const props = defineProps({
   amount: {
@@ -18,26 +23,120 @@ const props = defineProps({
 const phoneNumber = ref('')
 const transactionId = ref('')
 
-const stkPushToPhone = async () => {
-  const response = await useFetch('/payment/pushstk', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json'
-    },
-    body: {
-      amount: 1, //props.amount
-      phone: phoneNumber.value
+// Validate the transaction 
+const validateTransaction = (data) => {
+  let payload = data.value
+  console.log('FE PAYLOAD:', payload);
+  console.log('VALIDATE TRANSACTION')
+  const checkStatus = async () => {
+    try {
+
+      const data = await $fetch('/payment/validate', {
+        method: 'POST',
+        body: {
+          MerchantRequestID: payload.MerchantRequestID
+        }
+        // body: transactionId.value
+      })
+
+      console.log('VERIFICATION RESP:', data);
+      if (data) {
+        transactionData = true
+        const transaction = data
+        console.log('Transaction', transaction);
+
+        switch (transaction.ResultCode) {
+          case 0:
+            productStore.paymentResponse = transaction
+            productStore.paymentDetails = transaction
+            productStore.mpesaProcessComplete = true
+            // productStore.orderUserId = resp._id
+
+            toast.add({
+              type: 'success',
+              message: 'Your payment is well received. Your order is  cued for processing.'
+            })
+            break;
+          case 1032:
+            // console.log('Transaction cancelled by the user');
+            toast.add({
+              type: 'error',
+              message: 'You cancelled the transaction. Please, try again.'
+            })
+            break;
+          case 2001:
+            // console.log('The initiator info. is invalid');
+            toast.add({
+              type: 'error',
+              message: 'You entered a wrong PIN. Please try again.'
+            })
+            break;
+          default:
+            // console.log('Transaction failed')
+            toast.add({
+              type: 'error',
+              message: 'Payment is not complete. Please try again.'
+            })
+            await checkStatus()
+            break;
+        }
+      }
+      isLoading.value = false
     }
-  })
+    catch (error) {
+      // console.log('FETCH ERROR CATCH', error);
+      isLoading.value = false
+      toast.add({
+        type: 'error',
+        message: error.message
+      })
+    }
+  }
 
-  // console.log('RESPONSE MODAL', response);
-  productStore.paymentResponse = response
+  setTimeout(checkStatus, 10000);
+}
 
-  toast.add({
-    type: 'success',
-    message: 'Please check your phone, enter your PIN number to pay for your order.'
-  })
+const stkPushToPhone = async () => {
+  isLoading.value = true
+  try {
+    const response = await useFetch('/payment/pushstk', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: {
+        amount: 1, //props.amount
+        phone: phoneNumber.value
+      }
+    })
+
+    toast.add({
+      type: 'success',
+      message: 'Please check your phone, enter your PIN number to pay for your order.'
+    })
+
+    // console.log('RESPONSE MODAL', response);
+    // productStore.paymentResponse = response
+    if (response.data) {
+      // Watch for transactionData when it turns to true run this
+      // Transaction data will be true when there's any kind of callback response.
+      // watch(() => transactionData.value, async () => {
+
+      // if (transactionData.value) {
+      validateTransaction(response.data)
+      // }
+      // })
+
+    }
+
+  } catch (error) {
+    isLoading.value = false
+    toast.add({
+      type: 'error',
+      message: `Push STK error, ${error}`
+    })
+  }
 }
 
 
@@ -82,7 +181,6 @@ const confirmMpesaPayment = async () => {
 
 <template>
   <div class="overflow-hidden rounded-lg max-w-xl h-auto shadow-2xl pb-10 pt-0 px-7 z-50 bg-white">
-    <!-- Amount: {{ useCurrencyFormatter(amount) }} -->
     <div>
       <img :src="mpesaLogo" alt="Lipa Na M-PESA" class="mx-auto w-48 h-auto">
     </div>
@@ -98,11 +196,16 @@ const confirmMpesaPayment = async () => {
           useCurrencyFormatter(amount)
         }}</span></p>
         <button
-          class="bg-green-500 text-white hover:bg-green-600 hover:text-gray-100 hover:shadow-xl transform duration-500 ease-in-out w-full py-2 rounded-md shadow-lg "
-          @click.prevent="stkPushToPhone">Proceed</button>
+          class="bg-green-500 text-white hover:bg-green-600 hover:text-gray-100 hover:shadow-xl transform duration-500 ease-in-out w-full py-2 rounded-md shadow-lg"
+          :class="[isLoading ? 'bg-green-300 hover:bg-green-300 cursor-not-allowed ' : null]" :disabled="isLoading"
+          @click.prevent="stkPushToPhone">
+          <span v-if="isLoading">
+            <Icon name="gg:spinner-two-alt" class="w-6 h-6 fill-white animate-spin mr-3" />
+          </span><span>Proceed</span>
+        </button>
       </form>
     </div>
-    <div v-else class="space-y-5">
+    <!-- <div v-else class="space-y-5">
       <p class="text-sm text-green-500">Please check your phone, enter your PIN number to pay for your order.</p>
       <p class="text-sm text-rose-500">From your M-PESA payment confirmation message, please enter the Mpesa Transaction
         ID/Code e.g.
@@ -119,7 +222,7 @@ const confirmMpesaPayment = async () => {
           class="bg-green-500 text-white hover:bg-green-600 hover:text-gray-100 hover:shadow-xl transform duration-500 ease-in-out w-full py-2 rounded-md shadow-lg"
           @click.prevent="confirmMpesaPayment">Confirm Payment</button>
       </form>
-    </div>
+    </div> -->
   </div>
 </template>
 

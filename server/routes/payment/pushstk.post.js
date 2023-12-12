@@ -80,41 +80,38 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    // const response = await $fetch(url, {
     const response = await axios.post(url, data, {
-      // method: 'POST',
       headers: {
         'Authorization': auth,
-        // 'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      // body: {
-      //   BusinessShortCode: shortcode,
-      //   Password: password,
-      //   Timestamp: timestamp,
-      //   TransactionType: "CustomerPayBillOnline", // CustomerBuyGoodsOnline - Till number
-      //   Amount: amount,
-      //   PartyA: `254${phone}`,
-      //   PartyB: shortcode,
-      //   PhoneNumber: `254${phone}`,
-      //   CallBackURL: " https://268f-105-160-51-167.ngrok-free.app/payment/callback",
-      //   AccountReference: `254${phone}`, //`254${phone}`
-      //   TransactionDesc: "Mpesa Daraja API stk push test",
-      // }
-    },
-    )
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+    },)
 
-    // console.log('RESPONSE:', response.data)
+    console.log('RESPONSE.DATA', response.data)
 
-    // return response.data
+    const responseData = []
+    responseData.push(response.data)
+
+    if (response.data.ResponseCode == 0) {
+      const transaction = {
+        MerchantRequestID: response.data.MerchantRequestID,
+        CheckoutRequestID: response.data.CheckoutRequestID,
+        ResultCode: response.data.ResponseCode,
+        ResultDesc: response.data.ResponseDescription,
+      };
+    } else {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'An error occurred sending the PushSTK'
+      })
+    }
+
+    return response.data
   } catch (error) {
     console.log(error.response)
     throw createError({
       statusCode: 400,
-      // statusMessage: 'Something went wrong!'
+      statusMessage: 'An error occurred sending the PushSTK',
       statusMessage: error['response']['statusText']
     })
   }

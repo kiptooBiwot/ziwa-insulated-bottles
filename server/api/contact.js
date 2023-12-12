@@ -50,10 +50,10 @@ export default defineEventHandler(async (event) => {
                   Estate: ${body.order.deliveryLocation}</p>
                   <p style="font-weight: bold;">Cost to Deliver: KSH.${body.order.deliveryCost} for delivery</p>
             <h3>PAYMENT DETAILS</h3>
-                  <p style="font-weight: bold;">M-PESA Transaction ID: ${body.paymentDetails.transactionID}</p>
+                  <p style="font-weight: bold;">M-PESA Transaction ID: ${body.paymentDetails.MpesaReceiptNumber}</p>
                   <p style="font-weight: bold;">
-                  Phone Number: +${body.paymentDetails.phoneNumber}</p>
-                  <p style="font-weight: bold;">Amount Paid: KSH.${body.paymentDetails.amount} </p>
+                  Phone Number: +${body.paymentDetails.PhoneNumber}</p>
+                  <p style="font-weight: bold;">Amount Paid: KSH.${body.paymentDetails.Amount} </p>
                   
   `
 
