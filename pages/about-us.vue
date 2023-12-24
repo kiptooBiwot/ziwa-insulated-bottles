@@ -20,29 +20,24 @@ useHead({
         <div
           class="md:col-span-7 space-y-8 text-justify flex leading-relaxed flex-col justify-center order-last md:order-first">
           <p class="text-xl font-medium">
-            Our journey began with a passion for creating products that seamlessly blend style, functionality, and
-            sustainability. We wanted to provide a solution that would empower individuals to stay hydrated on their
-            daily adventures, whether it's conquering mountains, chasing dreams, or simply navigating the ups and downs
-            of life.
+            Imagine a world where every sip you take is not just for sustainance or for to quench your thirst. Picture a
+            Monday morning, you make your tea or coffee in a Ziwa Insulated Mug with your favourite quote engraved. You're
+            unable to finish your beverage and you take it with you to work. Hours later you need a pick me up and when
+            you open your mug your beverage is still hot. Just the way you like it.
           </p>
           <p>
-            Our flagship product, the Ziwa Insulated Water Bottle is thoughtfully designed with you in mind. From the
-            sleek and durable construction to the advanced insulation technology, we leave no detail overlooked. We
-            understand the importance of a bottle that keeps your drinks at the perfect temperature, so you can enjoy
-            that refreshing burst of coolness or the comforting warmth whenever you need it most.
+            That's the world that Ziwa is trying to create. From superior thermal retention capabilities, the leak proof
+            design and an aesthetically pleasing vessel that is personalised your own way. We offer superior quality
+            products for adults and kids in the sleeves of designs for the African Market.
           </p>
+
+          <h3 class="text-gray-900 font-medium text-[36px] md:text-[36px] tracking-tight">Our mission </h3>
           <p>
-            The Ziwa Insulated Water bottle is a testament to self-expression and personal style. We offer a range of
-            vibrant colors and patterns, allowing you to choose a bottle that reflects your unique personality. It's not
-            just a hydration tool; it's a statement, an accessory that accompanies you on your journey, turning heads
-            and sparking conversations along the way.
-          </p>
-          <p>
-            But it's not just about the bottle; it's about the stories and moments that our products become a part of.
-            We envision Ziwa as more than just a brand – it's a community of like-minded individuals who prioritize
-            their well-being and strive for a healthier, more sustainable world. We are united by our shared commitment
-            to staying hydrated and making conscious choices that positively impact both ourselves and the environment
-            we cherish. Join us to create a brighter greener future a sip at a time.
+            Ziwa's mission is to redefine the everyday beverage experience by crafting sustainable, stylish, and
+            personalized stainless steel drinkware. We are committed to empowering individuals to express their unique
+            identities through our products, fostering a culture of sustainability, innovation, and elevated enjoyment in
+            every sip. At Ziwa, we believe in transforming the ordinary into the extraordinary, one vessel at a time. One
+            sip at a time.
           </p>
         </div>
         <div class=" md:col-span-5 h-auto">
@@ -52,11 +47,10 @@ useHead({
             <img :src="about_img1" alt="" class="flex w-auto h-[350px] mx-auto object-cover rounded-lg">
 
           </div>
-        </div>
       </div>
     </div>
-  </section>
-</template>
+  </div>
+</section></template>
 
 
 <style scoped></style>
