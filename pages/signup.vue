@@ -11,9 +11,9 @@ definePageMeta({
 const signUp = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
-    const newUser = await account.create(uuidv4(), credentials.email, credentials.password, credentials.name)
+    // const newUser = await account.create(uuidv4(), credentials.email, credentials.password, credentials.name)
 
-    console.log('New User:', newUser)
+    // console.log('New User:', newUser)
     // Handle responses success and failure
   }
 }

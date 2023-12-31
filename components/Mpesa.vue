@@ -26,8 +26,8 @@ const transactionId = ref('')
 // Validate the transaction 
 const validateTransaction = (data) => {
   let payload = data.value
-  console.log('FE PAYLOAD:', payload);
-  console.log('VALIDATE TRANSACTION')
+  // console.log('FE PAYLOAD:', payload);
+  // console.log('VALIDATE TRANSACTION')
   const checkStatus = async () => {
     try {
 
@@ -39,11 +39,11 @@ const validateTransaction = (data) => {
         // body: transactionId.value
       })
 
-      console.log('VERIFICATION RESP:', data);
+      // console.log('VERIFICATION RESP:', data);
       if (data) {
         transactionData = true
         const transaction = data
-        console.log('Transaction', transaction);
+        // console.log('Transaction', transaction);
 
         switch (transaction.ResultCode) {
           case 0:
@@ -93,7 +93,7 @@ const validateTransaction = (data) => {
     }
   }
 
-  setTimeout(checkStatus, 10000);
+  setTimeout(checkStatus, 30000);
 }
 
 const stkPushToPhone = async () => {
@@ -106,7 +106,7 @@ const stkPushToPhone = async () => {
         'Content-type': 'application/json'
       },
       body: {
-        amount: 1, //props.amount
+        amount: props.amount, //1,
         phone: phoneNumber.value
       }
     })

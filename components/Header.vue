@@ -23,7 +23,8 @@ const handleLogout = async () => {
 
     router.push('/signin')
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    return error
   }
 }
 

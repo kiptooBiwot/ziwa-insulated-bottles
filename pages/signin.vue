@@ -37,7 +37,7 @@ const signIn = async () => {
         // userStore.authenticated = true
 
         const user = await account.get()
-        console.log('User:', user);
+        // console.log('User:', user);
 
         userStore.user = user
 
@@ -45,6 +45,7 @@ const signIn = async () => {
       }
     } catch (error) {
       console.log(error.$message);
+
     }
 
   }
@@ -136,7 +137,7 @@ const v$ = useVuelidate(rules, credentials)
 
             </form>
 
-            <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <NuxtLink to="/signup"
+            <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <NuxtLink to="/signin"
                 class="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up
               </NuxtLink>.</p>
           </div>

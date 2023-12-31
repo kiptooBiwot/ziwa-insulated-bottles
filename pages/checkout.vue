@@ -92,6 +92,8 @@ const totalPriceComputed = computed(() => {
     total = productPriceComputed.value + productStore.deliveryCost
   }
 
+  total = productPriceComputed.value
+
   return total
 })
 
