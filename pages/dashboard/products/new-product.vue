@@ -71,8 +71,11 @@ const onChange = async (e, index) => {
   })
 
   if (resp.message == 'success') {
-    product.images[index].imageUrl = `~/public/images/${image.name}`
-    product.images[index].url = `~/public/images/${image.name}`
+    // product.images[index].imageUrl = image.name
+    // product.images[index].url = image.name
+
+    product.images[index].imageUrl = `/images/${image.name}`
+    product.images[index].url = `/images/${image.name}`
 
     isUploadingImage.value = false
   }
@@ -123,16 +126,21 @@ const removeFeatures = (index) => {
 }
 
 const saveProduct = async (index) => {
-  isSavingProduct.value = true
-  if (product) {
+  try {
+    isSavingProduct.value = true
+    if (product) {
 
-    const response = await $fetch('/product/newProduct', {
-      method: 'POST',
-      body: product
-    })
+      const response = await $fetch('/product/newProduct', {
+        method: 'POST',
+        body: product
+      })
 
+      isSavingProduct.value = false
+      // console.log('REsPONSE', response)
+    }
+  } catch (error) {
     isSavingProduct.value = false
-    // console.log('REsPONSE', response)
+    console.log(error);
   }
 
 
@@ -226,8 +234,10 @@ const saveProduct = async (index) => {
               <div class="relative">
                 <Spinner v-if="isUploadingImage" class="absolute inset-0 flex justify-center items-center" />
                 <img :src="imageDetails.imageUrl" alt="" class="w-full h-auto rounded-lg object-cover overflow-hidden">
+                <!-- <img :src="`/images/${imageDetails.imageUrl}`" alt=""
+                  class="w-full h-auto rounded-lg object-cover overflow-hidden"> -->
                 <div
-                  class="absolute top-0 h-full w-full bg-black bg-opacity-25 overflow-hidden flex items-center justify-center">
+                  class="absolute top-0 h-full w-full bg-black bg-opacity-25 rounded-lg overflow-hidden flex items-center justify-center">
                   <button v-if="imageDetails.imageUrl"
                     class="text-white hover:bg-white rounded-full hover:bg-opacity-25 p-3 focus:outline-none transition duration-300 text-xs"
                     @click="removeImage(index)">

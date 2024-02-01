@@ -47,10 +47,11 @@ useHead({
             <img :src="about_img1" alt="" class="flex w-auto h-[350px] mx-auto object-cover rounded-lg">
 
           </div>
+        </div>
       </div>
     </div>
-  </div>
-</section></template>
+  </section>
+</template>
 
 
 <style scoped></style>

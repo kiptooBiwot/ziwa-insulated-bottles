@@ -18,11 +18,13 @@ export default defineEventHandler(async (event) => {
       ...body
     })
 
+    // console.log('PRODUCT', product);
+
     const savedProduct = await product.save()
 
     return { message: "Product saved", savedProduct }
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     throw createError({
       statusCode: 500,
       statusMessage: 'An error occurred - newProduct.post.js '

@@ -54,7 +54,11 @@ onClickOutside(target, () => {
 <template>
   <nav :class="{ 'scrolled': !atTopOfPage }" class="w-full fixed inset-x-0 top-0 z-10 py-0 md:pt-0 bg-white border-none">
     <div>
-      <FreeOrderStrip />
+      <!-- <FreeOrderStrip /> -->
+      <DiscountStrip />
+    </div>
+    <div>
+
     </div>
     <div class="max-w-6xl mx-auto flex items-center px-5 md:px-0">
 

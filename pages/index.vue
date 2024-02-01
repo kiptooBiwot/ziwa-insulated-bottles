@@ -222,13 +222,14 @@ const closeModal = () => {
                   <div class="relative text-white px-6 pb-6 mt-6">
                     <span class="block opacity-75 -mb-1 text-gray-600 text-xs">{{ img.color }} Water Bottle
                     </span>
-                    <div class="flex justify-between">
+                    <div class="flex items-end justify-between">
                       <!-- <NuxtLink :to="`/item/${product.slug}`" :image="img._id"> -->
 
                       <span
                         class="block font-medium text-lg text-gray-800 transform duration-500 ease-in-out hover:scale-105 hover:text-gray-700">View
                         Details</span>
-                      <span
+                      <DiscountComponent v-if="productStore.discountOffer" :price="img.price" />
+                      <span v-else
                         class="block bg-white rounded-full text-orange-500 text-[11px] font-bold px-1 py-2 leading-none items-center">
                         {{ useCurrencyFormatter(img.price) }}
                       </span>

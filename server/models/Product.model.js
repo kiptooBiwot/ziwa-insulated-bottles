@@ -40,6 +40,11 @@ const productSchema = new Schema({
       required: true,
       trim: true
     },
+    category: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     colorCode: {
       type: String,
     }

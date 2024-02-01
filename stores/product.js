@@ -19,6 +19,10 @@ export const useProductStore = defineStore('product', {
 
     selectedProduct: null,
 
+    // Edit this to add a discount and the amount
+    discountOffer: true,
+    discountAmount: 200,
+
     dbProducts: [],
     product: null,
     cart: [],
@@ -38,6 +42,22 @@ export const useProductStore = defineStore('product', {
   // },
   // could also be defined as
   // state: () => ({ count: 0 })
+  getters: {
+    discountedPrice: (state) => {
+
+      state.dbProducts.forEach((product) => {
+        const newPrice = product.images.map((item) => {
+
+          item.price -= state.discountAmount
+
+          return item.price
+        })
+
+        console.log('New Price', newPrice);
+      })
+
+    }
+  },
   actions: {
     async getAllProducts() {
       try {
@@ -47,9 +67,14 @@ export const useProductStore = defineStore('product', {
 
         if (response) {
           this.dbProducts = response
+
+          console.log('DISCOUNT ON?', this.discountOffer);
+          if (this.discountOffer && this.discountAmount > 0) {
+            this.discountedPrice
+          }
         }
       } catch (error) {
-        // console.log(error);
+        console.log('FETCHING PRODUCTS ERR', error);
         throw createError({
           statusCode: 500,
           statusMessage: 'Something went wrong while fetching all products'
