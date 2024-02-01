@@ -26,6 +26,7 @@ export const useProductStore = defineStore('product', {
     dbProducts: [],
     product: null,
     cart: [],
+    kidsProducts: null,
     // product detail page id to select product color & image
     imageId: '',
     // destination: {
@@ -46,14 +47,16 @@ export const useProductStore = defineStore('product', {
     discountedPrice: (state) => {
 
       state.dbProducts.forEach((product) => {
-        const newPrice = product.images.map((item) => {
+        if (product.category === 'big-bottle') {
+          const newPrice = product.images.map((item) => {
 
-          item.price -= state.discountAmount
+            item.price -= state.discountAmount
 
-          return item.price
-        })
+            return item.price
+          })
+          // console.log('New Price', newPrice);
+        }
 
-        console.log('New Price', newPrice);
       })
 
     }
@@ -68,13 +71,13 @@ export const useProductStore = defineStore('product', {
         if (response) {
           this.dbProducts = response
 
-          console.log('DISCOUNT ON?', this.discountOffer);
+          // console.log('DISCOUNT ON?', this.discountOffer);
           if (this.discountOffer && this.discountAmount > 0) {
             this.discountedPrice
           }
         }
       } catch (error) {
-        console.log('FETCHING PRODUCTS ERR', error);
+        // console.log('FETCHING PRODUCTS ERR', error);
         throw createError({
           statusCode: 500,
           statusMessage: 'Something went wrong while fetching all products'
@@ -89,6 +92,18 @@ export const useProductStore = defineStore('product', {
           this.product = product
         }
       })
+    },
+
+
+    async getKidsProducts() {
+
+      if (this.dbProducts.length > 0) {
+        const matchingProduct = this.dbProducts.find((item) => {
+          return item.category === 'kids-bottle'
+        })
+        this.kidsProducts = matchingProduct
+
+      }
     }
   },
 })

@@ -27,6 +27,7 @@ const selectedFont = ref('')
 const customName = ref('')
 
 const productImg = ref('')
+const productColors = ref([])
 // const v$ = useVuelidate(rules, { ctyRoute, ctyEstate })
 
 // const images = [
@@ -49,6 +50,7 @@ const bottleColor = [
   '#000013', //done
   '#A33806',
   '#8D596A',
+  '#E36D6E'
 ]
 
 onMounted(() => {
@@ -88,6 +90,23 @@ const priceComputed = computed(() => {
 })
 
 
+// Compare two arrays and display only the product colors available
+const availableColors = computed(() => {
+  productStore.product.images.map((bottleColor) => {
+    productColors.value.push(bottleColor.colorCode)
+  })
+  if (productColors.value) {
+    const prodColors = productColors.value.filter((color) => bottleColor.includes(color))
+
+    // const prodColors = bottleColor.filter((color) => {
+    //   productColors.value.includes(color)
+    // })
+
+    console.log('MATCHING COLORS', prodColors);
+    return prodColors
+  }
+})
+
 const showImageWithColor = (color) => {
   const productColors = productStore.product.images
 
@@ -124,7 +143,7 @@ const addToCart = () => {
   let total = 0
   total = productImg.value.price + productStore.customizationFee
 
-  console.log('TOTAL:', total);
+  // console.log('TOTAL:', total);
 
   selectedProduct.value = {
     title: productStore.product.title,
@@ -205,12 +224,17 @@ const isInCart = computed(() => {
             <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
             <div class="flex gap-2">
               <!-- <template v-for="product in productStore.product" :key="product._id"> -->
-              <div v-for="color in bottleColor" :key="color"
-                class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
-                :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
-                @click="showImageWithColor(color)">
-                <!-- {{ color }} -->
-              </div>
+              <template v-for="color in productColors" :key="color">
+
+
+                <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
+                <div
+                  class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                  :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
+                  @click="showImageWithColor(color)">
+                  <!-- {{ color }} -->
+                </div>
+              </template>
               <!-- </template> -->
             </div>
           </div>
