@@ -90,7 +90,7 @@ onMounted(async () => {
                       transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
                       opacity: 0.2;
                     "></div>
-                  <img class="relative w-auto h-[250px]" :src="img.url" alt="" />
+                  <img class="relative w-full h-[460px] object-none" :src="img.url" alt="" />
                 </div>
                 <div class="relative text-white px-6 pb-6 mt-6">
                   <span v-if="productStore.kidsProducts.category === 'big-bottle'"
