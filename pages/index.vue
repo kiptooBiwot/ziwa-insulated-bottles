@@ -217,7 +217,9 @@ const closeModal = () => {
                       transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
                       opacity: 0.2;
                     "></div>
-                    <img class="relative w-auto h-[250px]" :src="img.url" alt="" />
+                    <img v-if="product.category === 'big-bottle'" class="relative w-auto h-[250px]" :src="img.url"
+                      alt="" />
+                    <img v-else class="relative w-auto h-full  object-fill" :src="img.url" alt="">
                   </div>
                   <div class="relative text-white px-6 pb-6 mt-6">
                     <span v-if="product.category === 'big-bottle'" class="block opacity-75 -mb-1 text-gray-600 text-xs">{{

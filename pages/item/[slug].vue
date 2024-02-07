@@ -334,7 +334,8 @@ const isInCart = computed(() => {
                 productStore.selectedFont
               }}</span> </p>
             <hr v-if="productStore.customizedBottle">
-            <button v-if="productStore.product.category === 'big-bottle'" @click="customizeBottle = !customizeBottle"
+            <!-- v-if="productStore.product.category === 'big-bottle'" -->
+            <button @click="customizeBottle = !customizeBottle"
               class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600">Customize
               for Ksh.400</button>
             <button @click="addToCart"

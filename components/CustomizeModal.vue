@@ -25,11 +25,13 @@ const checkNameLength = computed(() => {
 
 const customizedBottle = ref('')
 const images = ref([])
+const cat = ref('')
 
 onMounted(() => {
   productStore.dbProducts.find((item) => {
     if (item.slug === props.slug) {
       images.value = item.images
+      cat.value = item.category
     }
   })
 
@@ -64,12 +66,24 @@ const addCustomization = () => {
 
 <template>
   <section class="overflow-hidden rounded-lg max-w-4xl h-auto shadow-2xl">
+
     <div class="md:grid md:grid-cols-3">
       <div class="bg-blue-300 px-20 py-10">
         <div class="relative">
-          <img :src="customizedBottle" alt="" class="h-[300px]">
-          <div class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex justify-center"
+          <img v-if="cat === 'big-bottle'" :src="customizedBottle" alt="" class="h-[300px]">
+          <img v-else :src="customizedBottle" alt="" class="h-[400px] object-none">
+          <div v-if="cat === 'big-bottle'"
+            class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex justify-center"
             :class="[textPosition === 'center' ? 'items-center' : '', textPosition === 'bottom' ? 'items-end' : '', textPosition === 'top' ? 'items-start' : '']">
+            <!-- -[#4F584E] #636e62 -->
+            <p class="font-medium text-[#4F584E] text-2xl vertical-text transform rotate-180"
+              :class="[selectedFont === 'Frunchy Sage' ? 'font-fontOne' : '', selectedFont === 'Antic Didone' ? 'font-fontTwo' : '', selectedFont === 'Alta' ? 'font-fontThree' : '', selectedFont === 'Retropix' ? 'font-fontFour' : '', selectedFont === 'One Little Font' ? 'font-fontFive' : '', selectedFont === 'Tomorrow' ? 'font-fontSix' : '', selectedFont === 'Charm' ? 'font-fontSeven' : '']">
+              {{ customName }}
+            </p>
+          </div>
+          <div v-else class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex justify-center"
+            :class="[textPosition === 'top' ? 'items-center' : '', textPosition === 'bottom' ? 'items-end' : '',]">
+            <!-- textPosition === 'top' ? 'items-start' : '' -->
             <!-- -[#4F584E] #636e62 -->
             <p class="font-medium text-[#4F584E] text-2xl vertical-text transform rotate-180"
               :class="[selectedFont === 'Frunchy Sage' ? 'font-fontOne' : '', selectedFont === 'Antic Didone' ? 'font-fontTwo' : '', selectedFont === 'Alta' ? 'font-fontThree' : '', selectedFont === 'Retropix' ? 'font-fontFour' : '', selectedFont === 'One Little Font' ? 'font-fontFive' : '', selectedFont === 'Tomorrow' ? 'font-fontSix' : '', selectedFont === 'Charm' ? 'font-fontSeven' : '']">
@@ -92,14 +106,6 @@ const addCustomization = () => {
         <h4 class="text-xs text-gray-800 mb-2">Your bottle of choice will be customised at an additional fee of <span
             class="text-green-500 font-semibold">KSH.400/=</span>
         </h4>
-        <div class="p-0">
-          <!-- <svg id="path" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="10" />
-            <textpath x-link:href="#path">
-              <span class="text-xs text-white">Victor Wahome</span>
-            </textpath>
-          </svg> -->
-        </div>
 
         <div class="space-y-3 border rounded-md p-4 h-3/4">
           <div>
@@ -121,7 +127,7 @@ const addCustomization = () => {
                 <input v-model="textPosition" type="radio" value="top" name="top" id="top">
                 <label for="top">Top</label>
               </div>
-              <div class="space-x-2 text-sm text-gray-500">
+              <div v-if="cat === 'big-bottle'" class="space-x-2 text-sm text-gray-500">
                 <input v-model="textPosition" type="radio" value="center" name="center" id="center">
                 <label for="center">Center</label>
               </div>
