@@ -115,7 +115,7 @@ onClickOutside(target, () => {
             <ul class="space-y-12 text-white">
               <!-- <li v-for="link in links" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
                 class="text-lg text-center font-medium "> -->
-              <li v-for="link in newLinks" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
+              <li v-for="link in generalStore.newLinks" :key="link.title" @click.prevent="isMenuOpen = !isMenuOpen"
                 class="text-lg text-center font-medium ">
                 <RouterLink :to="`/${link.url}`">
                   {{ link.title }}
