@@ -8,10 +8,17 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-icon',
     '@pinia-plugin-persistedstate/nuxt',
-    'nuxt-swiper'
+    'nuxt-swiper',
+    'nuxt3-meta-pixel'
   ],
   swiper: {
 
+  },
+  facebook: {
+    track: 'PageView',
+    pixelId: process.env.FACEBOOK_PIXEL_ID,
+    autoPageView: true,
+    disabled: false
   },
   pinia: {
     autoImports: [

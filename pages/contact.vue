@@ -5,6 +5,9 @@ import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
 import { useToastStore } from "@/stores/toast";
 
 const toast = useToastStore()
+const nuxtApp = useNuxtApp()
+
+nuxtApp.$fb.enable()
 
 const contactDetails = reactive({
   fullName: '',

@@ -7,6 +7,9 @@ const productStore = useProductStore()
 const deliveryStore = useDeliveryStore()
 const toast = useToastStore()
 const route = useRoute()
+const nuxtApp = useNuxtApp()
+
+nuxtApp.$fb.enable()
 
 const currentImage = ref(null)
 

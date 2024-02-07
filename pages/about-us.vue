@@ -7,6 +7,10 @@ useHead({
   title: 'Ziwa | About Us'
 })
 
+const nuxtApp = useNuxtApp()
+
+nuxtApp.$fb.enable()
+
 </script>
 
 <template>

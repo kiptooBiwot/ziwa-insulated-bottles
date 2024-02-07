@@ -1,5 +1,6 @@
 <script setup>
 import { useProductStore } from '@/stores/product'
+
 import bottle from '~/assets/images/products/bottle1-bg.png'
 import bottle1 from '~/assets/images/products/bottle2-bg.png'
 import bottle2 from '~/assets/images/products/bottle3-bg.png'
@@ -38,6 +39,10 @@ import bg_5 from '~/assets/images/hero/MOK_4886-removebg.png'
 import bg_6 from '~/assets/images/hero/MOK_4910-removebg.png'
 
 const productStore = useProductStore()
+const nuxtApp = useNuxtApp()
+
+// console.log('FACEBOOK PIXEL', nuxtApp.$fb);
+nuxtApp.$fb.enable()
 
 useHead({
   title: 'Ziwa | Home of Insulated Water bottles',

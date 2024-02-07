@@ -1,5 +1,8 @@
 <script setup>
 
+const nuxtApp = useNuxtApp()
+
+nuxtApp.$fb.enable()
 </script>
 
 <template>

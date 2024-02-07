@@ -9,6 +9,9 @@ import kids_5 from '@/assets/images/kids/kids_2.jpeg'
 import kids_6 from '@/assets/images/kids/red_kids.jpeg'
 
 const productStore = useProductStore()
+const nuxtApp = useNuxtApp()
+
+nuxtApp.$fb.enable()
 
 const kidsProducts = ref(null)
 
