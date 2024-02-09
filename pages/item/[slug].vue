@@ -218,16 +218,23 @@ const isInCart = computed(() => {
               <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
                 style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
               </div>
-              <img v-if="productImg.url"
-                class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
-                :src="productImg.url" alt="">
+              <template v-if="productStore.category === 'big-bottle'">
+                <img v-if="productImg.url"
+                  class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
+                  :src="productImg.url" alt="">
+              </template>
+              <template v-else>
+                <img v-if="productImg.url"
+                  class="relative rounded-lg object-none w-auto h-[450px] md:h-[450px] mx-auto transition duration-700 ease-in-out"
+                  :src="productImg.url" alt="">
+              </template>
             </div>
           </div>
           <div class="md:hidden">
             <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
             <div class="flex gap-2">
               <!-- <template v-for="product in productStore.product" :key="product._id"> -->
-              <template v-for="color in productColors" :key="color">
+              <template v-for="color in bottleColor" :key="color">
 
 
                 <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
