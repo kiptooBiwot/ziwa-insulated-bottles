@@ -82,7 +82,8 @@ const addCustomization = () => {
             </p>
           </div>
           <div v-else class="absolute inset-0 mt-16 mb-16 ml-[47px] mr-[102px] md:mr-6 flex justify-center"
-            :class="[textPosition === 'top' ? 'items-center' : '', textPosition === 'bottom' ? 'items-end' : '',]">
+            :class="[textPosition === 'bottom' ? 'items-end' : '',]">
+            <!-- textPosition === 'top' ? 'items-center' : '', -->
             <!-- textPosition === 'top' ? 'items-start' : '' -->
             <!-- -[#4F584E] #636e62 -->
             <p class="font-medium text-[#4F584E] text-2xl vertical-text transform rotate-180"
@@ -123,7 +124,7 @@ const addCustomization = () => {
           <div>
             <label for="" class="text-sm">Choose your name's position on the bottle:</label>
             <div class="flex space-x-10 pt-2">
-              <div class="space-x-2 text-sm text-gray-500">
+              <div v-if="cat === 'big-bottle'" class="space-x-2 text-sm text-gray-500">
                 <input v-model="textPosition" type="radio" value="top" name="top" id="top">
                 <label for="top">Top</label>
               </div>
@@ -132,7 +133,8 @@ const addCustomization = () => {
                 <label for="center">Center</label>
               </div>
               <div class="space-x-2 text-sm text-gray-500">
-                <input v-model="textPosition" type="radio" value="bottom" name="bottom" id="bottom">
+                <input v-model="textPosition" :checked="cat === 'kids-bottle' ? 'checked' : ''" type="radio"
+                  value="bottom" name="bottom" id="bottom">
                 <label for="bottom">Bottom</label>
               </div>
             </div>
@@ -143,13 +145,16 @@ const addCustomization = () => {
             <select v-model="selectedFont" name="" id=""
               class="py-2 px-4 border text-sm border-gray-300 w-full rounded-md placeholder:text-gray-500 placeholder:text-sm">
               <option value="" disabled>Please Select a font</option>
-              <option value="Frunchy Sage">Frunchy Sage</option>
-              <option value="Antic Didone" selected>Antic Didone</option>
-              <option value="Alta">Alta</option>
-              <option value="Retropix">Retropix</option>
-              <option value="One Little Font">One Little Font</option>
-              <option value="Tomorrow">Tomorrow</option>
-              <option value="Charm">Charm</option>
+              <option v-if="cat === 'kids-bottle'" value="Coco Gothic">Coco Gothic</option>
+              <template v-else>
+                <option value="Frunchy Sage">Frunchy Sage</option>
+                <option value="Antic Didone" selected>Antic Didone</option>
+                <option value="Alta">Alta</option>
+                <option value="Retropix">Retropix</option>
+                <option value="One Little Font">One Little Font</option>
+                <option value="Tomorrow">Tomorrow</option>
+                <option value="Charm">Charm</option>
+              </template>
             </select>
           </div>
           <div class="">

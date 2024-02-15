@@ -56,6 +56,28 @@ const bottleColor = [
   '#E36D6E'
 ]
 
+const bottleColorFiltered = reactive([])
+
+// Compare two arrays and display only the product colors available
+const availableColors = () => {
+  productStore.product.images.map((bottleColor) => {
+    productColors.value.push(bottleColor.colorCode)
+  })
+
+  if (productColors.value) {
+    const prodColors = productColors.value.filter((color) => bottleColor.includes(color))
+
+    // const prodColors = bottleColor.filter((color) => {
+    //   productColors.value.includes(color)
+    // })
+
+    // console.log('MATCHING COLORS', prodColors);
+    bottleColorFiltered.push(prodColors)
+    return prodColors
+  }
+}
+
+
 onMounted(() => {
   productStore.getSingleProduct(route.params.slug)
 
@@ -81,6 +103,8 @@ onMounted(() => {
     // currentPrice.value = img[0].price
     // currentCapacity.value = img[0].capacity
   }
+
+  console.log('AVAILABLE COLORS:', availableColors());
 })
 // changeImage
 
@@ -92,23 +116,6 @@ const priceComputed = computed(() => {
   return 0.00
 })
 
-
-// Compare two arrays and display only the product colors available
-const availableColors = computed(() => {
-  productStore.product.images.map((bottleColor) => {
-    productColors.value.push(bottleColor.colorCode)
-  })
-  if (productColors.value) {
-    const prodColors = productColors.value.filter((color) => bottleColor.includes(color))
-
-    // const prodColors = bottleColor.filter((color) => {
-    //   productColors.value.includes(color)
-    // })
-
-    console.log('MATCHING COLORS', prodColors);
-    return prodColors
-  }
-})
 
 const showImageWithColor = (color) => {
   const productColors = productStore.product.images
@@ -231,10 +238,10 @@ const isInCart = computed(() => {
             </div>
           </div>
           <div class="md:hidden">
-            <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
+            <h3 class="text-lg text-gray-800 py-3">Choose the Bottle's Color</h3>
             <div class="flex gap-2">
               <!-- <template v-for="product in productStore.product" :key="product._id"> -->
-              <template v-for="color in bottleColor" :key="color">
+              <template v-for="color in bottleColorFiltered[0]" :key="color">
 
 
                 <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
@@ -244,6 +251,8 @@ const isInCart = computed(() => {
                   @click="showImageWithColor(color)">
                   <!-- {{ color }} -->
                 </div>
+
+                <!-- COLOR: {{ color }} -->
               </template>
               <!-- </template> -->
             </div>
@@ -270,7 +279,7 @@ const isInCart = computed(() => {
           <div class="hidden md:block">
             <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
             <div class="flex gap-2">
-              <div v-for="color in bottleColor" :key="color"
+              <div v-for="color in bottleColorFiltered[0]" :key="color"
                 class="w-10 h-10 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
                 :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
                 @click="showImageWithColor(color)">
@@ -374,7 +383,7 @@ const isInCart = computed(() => {
         </div>
       </div>
       <div v-if="customizeBottle"
-        class="absoute inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
+        class=" inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
         <CustomizeModal @closeModal="closeModal" :bottle="productImg.color" :slug="route.params.slug" />
       </div>
       <div v-if="customizeBottle" class="opacity-25 fixed inset-0 z-40 bg-black"></div>

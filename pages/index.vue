@@ -106,69 +106,10 @@ const closeModal = () => {
       <SwiperHero />
     </section>
 
-    <!-- <section>
-      <div class="max-w-6xl mx-auto py-10 px-5 md:px-0 min-h-screen">
-        <div class="grid grid-cols-1 gap-6 md:gap-0 lg:grid-cols-2"> -->
-    <!-- bg-[#0B3624] -->
-    <!--<div
-            class="rounded-3xl h-[550px] flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]  text-white relative">
-            <div class="absolute top-10 left-5 md:left-10 space-y-3">
-              <h2 class="text-5xl md:text-5xl font-bold text-red-400 font-script"> -->
-    <!-- Give the Season -->
-    <!-- Celebrate the Season
-              </h2>
-              <p class="text-base text-red-100 md:text-xl">
-                Gift ideas for all seasons
-              </p>
-            </div>
-            <img :src="image_16" alt="gifts"
-              class="absolute bottom-32 md:bottom-12 rounded-3xl object-cover h-[80%] md:h-[60%] w-[90%] shadow-lg" /> -->
-    <!-- https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
-    <!-- https://plus.unsplash.com/premium_photo-1696863128359-6de6cf5f14a7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIxfHxjaHJpc3RtYXMlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww -->
-    <!-- <img
-            src="https://images.unsplash.com/photo-1576072446580-32468f1b5439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="gifts" class="absolute inset-0 rounded-3xl overflow-hidden object-cover h-full w-full" /> -->
-
-    <!-- <div class="absolute bottom-8 md:bottom-16 left-10">
-              <NuxtLink to="#Shop">
-                <button
-                  class="py-3 px-6 bg-white rounded-full uppercase font-semibold text-gray-800 text-sm hover:bg-gray-100 hover:text-gray-700 hover:shadow-lg hover:scale-105 transform duration-300 ease-in-out">
-                  Shop Now
-                </button>
-              </NuxtLink>
-            </div>
-          </div>
-          <div class="md:-ml-[50px] md:pt-20">
-            <Swiper :modules="[
-              SwiperAutoplay,
-              SwiperEffectCreative,
-              SwiperPagination,
-              SwiperNavigation,
-            ]" :slides-per-view="2" :loop="true" :effect="'creative'" :pagination="true" :navigation="false" :autoplay="{
-  delay: 8000,
-  disableOnInteraction: true,
-}" :creative-effect="{
-  prev: {
-    shadow: false,
-    translate: ['-100%', 0, -1],
-  },
-  next: {
-    translate: ['100%', 0, 0],
-  },
-}"> -->
-    <!-- <SwiperSlide v-for="(gift, index) in giftItems" :key="index" class="gap-5"> -->
-    <!-- <div class=" flex items-center"> -->
-    <!-- <GiftSwiper :gift="gift" class="shrink-0" /> -->
-    <!-- </div> -->
-    <!-- </SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- bg-[#e8efff] -->
-    <!-- bg-[#39519f] bg-opacity-5 -->
+    <!-- About US -->
+    <section>
+      <AboutUs />
+    </section>
 
     <!-- BEST Sellers -->
     <section>
