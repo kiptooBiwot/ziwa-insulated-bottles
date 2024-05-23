@@ -53,7 +53,7 @@ const bottleColor = [
   '#000013', //done
   '#A33806',
   '#8D596A',
-  '#E36D6E'
+  '#E36D6E',
 ]
 
 const bottleColorFiltered = reactive([])
@@ -65,7 +65,9 @@ const availableColors = () => {
   })
 
   if (productColors.value) {
-    const prodColors = productColors.value.filter((color) => bottleColor.includes(color))
+    const prodColors = productColors.value.filter((color) =>
+      bottleColor.includes(color)
+    )
 
     // const prodColors = bottleColor.filter((color) => {
     //   productColors.value.includes(color)
@@ -76,7 +78,6 @@ const availableColors = () => {
     return prodColors
   }
 }
-
 
 onMounted(() => {
   productStore.getSingleProduct(route.params.slug)
@@ -104,18 +105,16 @@ onMounted(() => {
     // currentCapacity.value = img[0].capacity
   }
 
-  console.log('AVAILABLE COLORS:', availableColors());
+  console.log('AVAILABLE COLORS:', availableColors())
 })
 // changeImage
-
 
 const priceComputed = computed(() => {
   if (productImg.value.price) {
     return productImg.value.price
   }
-  return 0.00
+  return 0.0
 })
-
 
 const showImageWithColor = (color) => {
   const productColors = productStore.product.images
@@ -133,11 +132,8 @@ const showImageWithColor = (color) => {
   })
 }
 
-
-
-
 const closeModal = () => {
-  return customizeBottle.value = !customizeBottle.value
+  return (customizeBottle.value = !customizeBottle.value)
 }
 
 const selectedProduct = ref({})
@@ -169,7 +165,7 @@ const addToCart = () => {
     textPosition: productStore.textPosition,
     customizationFee: productStore.customizationFee,
     productId: productStore.product._id,
-    cumulativeCost: total
+    cumulativeCost: total,
   }
 
   productStore.cart.push(selectedProduct)
@@ -177,7 +173,7 @@ const addToCart = () => {
   toast.add({
     type: 'success',
     message: 'Good choice. The product was added to the cart.',
-    timeout: 5000
+    timeout: 5000,
   })
 
   // Reset customization
@@ -193,204 +189,280 @@ const addToCart = () => {
 
 const isInCart = computed(() => {
   let res = false
-  productStore.cart.forEach(prod => {
+  productStore.cart.forEach((prod) => {
     if (prod.productId === selectedProduct.productId) {
       res = true
     }
   })
   return res
 })
-
 </script>
 
 <template>
-  <div class="relative py-36 md:py-25">
-    <div class="max-w-6xl mx-auto px-5 xl:px-0">
-      <h2 class="text-gray-900 font-semibold text-3xl md:text-4xl pb-2">Product Details
-      </h2>
-      <!-- <hr class="md:w-[280px] border-1 border-gray-300"> -->
-      <div v-if="productStore.product" class="md:flex gap-10 justify-between mx-auto w-full">
-        <div class="md:w-[40%] mb-7 md:mb-0">
-
-          <div
-            class="flex-shrink-0 md:m-6 relative overflow-hidden bg-blue-200 rounded-xl max-w-sm shadow-lg w-full pb-10">
-            <!-- [#89CFF0] bg-[#89CFF0] -->
-            <!-- :class="`bg-${product.bgColor}`" -->
-            <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
-              style="transform: scale(1.5); opacity: 0.1;">
-              <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
-              <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
-            </svg>
-            <div class="relative pt-10 px-10 flex items-center justify-center">
-              <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
-              </div>
-              <template v-if="productStore.category === 'big-bottle'">
-                <img v-if="productImg.url"
-                  class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
-                  :src="productImg.url" alt="">
-              </template>
-              <template v-else>
-                <img v-if="productImg.url"
-                  class="relative rounded-lg object-none w-auto h-[450px] md:h-[450px] mx-auto transition duration-700 ease-in-out"
-                  :src="productImg.url" alt="">
-              </template>
-            </div>
-          </div>
-          <div class="md:hidden">
-            <h3 class="text-lg text-gray-800 py-3">Choose the Bottle's Color</h3>
-            <div class="flex gap-2">
-              <!-- <template v-for="product in productStore.product" :key="product._id"> -->
-              <template v-for="color in bottleColorFiltered[0]" :key="color">
-
-
-                <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
+  <div class="relative">
+    <div class="bg-[#BFDBFE] py-10">
+      <div class="max-w-6xl mx-auto px-5 xl:px-0">
+        <h2 class="text-gray-900 font-semibold text-3xl md:text-4xl pb-2">
+          Product Details
+        </h2>
+        <!-- <hr class="md:w-[280px] border-1 border-gray-300"> -->
+        <div
+          v-if="productStore.product"
+          class="md:flex gap-10 justify-between mx-auto w-full"
+        >
+          <div class="md:w-[40%] mb-7 md:mb-0">
+            <div
+              class="flex-shrink-0 md:m-6 relative overflow-hidden bg-blue-200 rounded-xl max-w-sm shadow-lg w-full pb-10"
+            >
+              <!-- [#89CFF0] bg-[#89CFF0] -->
+              <!-- :class="`bg-${product.bgColor}`" -->
+              <svg
+                class="absolute bottom-0 left-0 mb-8"
+                viewBox="0 0 375 283"
+                fill="none"
+                style="transform: scale(1.5); opacity: 0.1"
+              >
+                <rect
+                  x="159.52"
+                  y="175"
+                  width="152"
+                  height="152"
+                  rx="8"
+                  transform="rotate(-45 159.52 175)"
+                  fill="white"
+                />
+                <rect
+                  y="107.48"
+                  width="152"
+                  height="152"
+                  rx="8"
+                  transform="rotate(-45 0 107.48)"
+                  fill="white"
+                />
+              </svg>
+              <div
+                class="relative pt-10 px-10 flex items-center justify-center"
+              >
                 <div
-                  class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
-                  :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
-                  @click="showImageWithColor(color)">
-                  <!-- {{ color }} -->
+                  class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                  style="
+                    background: radial-gradient(black, transparent 60%);
+                    transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1);
+                    opacity: 0.2;
+                  "
+                ></div>
+                <template v-if="productStore.category === 'big-bottle'">
+                  <img
+                    v-if="productImg.url"
+                    class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
+                    :src="productImg.url"
+                    alt=""
+                  />
+                </template>
+                <template v-else>
+                  <img
+                    v-if="productImg.url"
+                    class="relative rounded-lg object-none w-auto h-[450px] md:h-[450px] mx-auto transition duration-700 ease-in-out"
+                    :src="productImg.url"
+                    alt=""
+                  />
+                </template>
+              </div>
+            </div>
+            <div class="md:hidden">
+              <h3 class="text-lg text-gray-800 py-3">
+                Choose the Bottle's Color
+              </h3>
+              <div class="flex gap-2">
+                <!-- <template v-for="product in productStore.product" :key="product._id"> -->
+                <template v-for="color in bottleColorFiltered[0]" :key="color">
+                  <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
+                  <div
+                    class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                    :style="{ backgroundColor: color }"
+                    @mouseover="showImageWithColor(color)"
+                    @click="showImageWithColor(color)"
+                  >
+                    <!-- {{ color }} -->
+                  </div>
+                  <!-- COLOR: {{ color }} -->
+                </template>
+                <!-- </template> -->
+              </div>
+            </div>
+          </div>
+          <div class="md:w-[60%] space-y-2 text-sm">
+            <!-- <template v-for="image in productStore.product" :key="image._id"> -->
+            <h2 class="text-gray-900 text-3xl font-semibold">
+              {{ productImg.color }} [{{ productImg.capacity }} ml] Water Bottle
+            </h2>
+            <hr class="" />
+            <div
+              v-html="productStore.product.description"
+              class="space-y-3"
+            ></div>
+            <div v-if="productStore.product" class="space-y-1">
+              <h2 class="text-xl">Features</h2>
+              <ul
+                v-for="feature in productStore.product.features"
+                :key="feature"
+                class="pl-10 text-sm"
+              >
+                <div class="flex items-center gap-4 space-y-3">
+                  <Icon :name="feature.icon" color="" class="w-6 h-6" />
+                  <li class="flex items-center">{{ feature.description }}</li>
                 </div>
-
-                <!-- COLOR: {{ color }} -->
-              </template>
-              <!-- </template> -->
+              </ul>
+            </div>
+            <!-- <div v-html="productStore.product.productDesc"></div> -->
+            <hr />
+            <div class="hidden md:block">
+              <h3 class="text-lg text-gray-800 py-3">
+                Choose the Bottle Color
+              </h3>
+              <div class="flex gap-2">
+                <div
+                  v-for="color in bottleColorFiltered[0]"
+                  :key="color"
+                  class="w-10 h-10 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                  :style="{ backgroundColor: color }"
+                  @mouseover="showImageWithColor(color)"
+                  @click="showImageWithColor(color)"
+                ></div>
+              </div>
+            </div>
+            <hr class="hidden md:block" />
+            <div class="space-y-3">
+              <div class="flex items-center justify-start gap-2 my-2">
+                <h2 class="text-xs text-gray-800">Price:</h2>
+                <div class="text-2xl font-semibold text-gray-800">
+                  {{ useCurrencyFormatter(priceComputed) }}
+                </div>
+                <!-- <span class="bg-[#f5f5f5] border text-[#c08562] text-[9px] font-semibold px-1.5 rounded-sm">On Offer</span> -->
+              </div>
+              <hr />
+              <!-- <h3 class=" font-medium text-lg text-gray-800 ">
+                Delivery Fees Calculator
+              </h3>
+              <div class="block space-y-5 md:space-y-0 md:flex border rounded-sm w-full gap-5 p-4">
+                <div class="flex flex-col gap-2 w-full">
+                  <label>Select your Route</label>
+                  <select v-model="ctyRoute" @change="getEstate(ctyRoute)" name="" id=""
+                    class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
+                      'border-red-500 focus:border-red-500': v$.ctyRoute.$error,
+                      'border-[#42d392] ': !v$.ctyRoute.$invalid,
+                    }">
+                    <option value="" disabled selected>Select your delivery route</option>
+                    <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name
+                    }}
+                    </option>
+                  </select>
+                  <div>
+                    <span class="text-xs text-red-500" v-if="v$.ctyRoute.$error">
+                      {{ v$.ctyRoute.$errors[0].$message }}
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2 w-full">
+                  <label for="">Select your estate</label>
+                  <select v-model="ctyEstate" name="" id="" class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
+                    'border-red-500 focus:border-red-500': v$.ctyEstate.$error,
+                    'border-[#42d392] ': !v$.ctyEstate.$invalid,
+                  }" @change="setDeliveryFees(ctyEstate)">
+                    <option value="" disabled selected>Select your estate</option>
+                    <option :value="estate.estateName" v-for="(estate, i) in cityRoute.estate" :key="i">
+                      {{ estate.estateName }}
+                    </option>
+                  </select>
+                  <div>
+                    <span class="text-xs text-red-500" v-if="v$.ctyEstate.$error">
+                      {{ v$.ctyEstate.$errors[0].$message }}
+                    </span>
+                  </div>
+                </div>
+              </div> -->
+              <!-- <p v-if="ctyRoute && ctyEstate" class="font-medium">The delivery fees to {{ ctyRoute }} - {{ ctyEstate }} is
+                <span class="text-lg text-red-500">{{
+                  useCurrencyFormatter(deliveryCost) }}</span>
+              </p> -->
+              <!-- <p class="text-[#009a66] text-xs font-semibold pt-1">
+                Free shipping
+              </p> -->
+              <!-- <hr> -->
+              <h3
+                v-if="productStore.customizedBottle"
+                class="font-medium text-lg text-gray-800"
+              >
+                Your Bottle Customization
+              </h3>
+              <p v-if="productStore.customizedBottle">
+                The name to be printed will be
+                <span class="text-lg font-medium">{{
+                  productStore.customName
+                }}</span>
+                and the Font selected:
+                <span class="text-lg font-medium">{{
+                  productStore.selectedFont
+                }}</span>
+              </p>
+              <hr v-if="productStore.customizedBottle" />
+              <!-- v-if="productStore.product.category === 'big-bottle'" -->
+              <button
+                @click="customizeBottle = !customizeBottle"
+                class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
+              >
+                Customize for Ksh.400
+              </button>
+              <button
+                @click="addToCart"
+                class="px-6 w-full py-3 text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500"
+              >
+                <div v-if="isInCart">Add Another Bottle to Cart</div>
+                <div v-else>Add to Cart</div>
+              </button>
+            </div>
+            <!-- </template> -->
+          </div>
+        </div>
+        <div v-else class="w-full">
+          <div class="flex items-center justify-center w-full h-full">
+            <div
+              class="flex justify-center items-center space-x-1 text-xl text-[#39519f]"
+            >
+              <svg
+                fill="none"
+                class="w-8 h-8 text-[#39519f] animate-spin"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              <div>Loading ...</div>
             </div>
           </div>
         </div>
-        <div class="md:w-[60%] space-y-2 text-sm">
-          <!-- <template v-for="image in productStore.product" :key="image._id"> -->
-          <h2 class="text-gray-900 text-3xl font-semibold">{{ productImg.color }} [{{ productImg.capacity }} ml]
-            Water Bottle</h2>
-          <hr class="">
-          <div v-html="productStore.product.description" class="space-y-3">
-          </div>
-          <div v-if="productStore.product" class="space-y-1">
-            <h2 class="text-xl">Features</h2>
-            <ul v-for="feature in productStore.product.features" :key="feature" class="pl-10 text-sm ">
-              <div class="flex items-center gap-4 space-y-3">
-                <Icon :name="feature.icon" color="" class="w-6 h-6" />
-                <li class="flex items-center">{{ feature.description }}</li>
-              </div>
-            </ul>
-          </div>
-          <!-- <div v-html="productStore.product.productDesc"></div> -->
-          <hr>
-          <div class="hidden md:block">
-            <h3 class="text-lg text-gray-800 py-3">Choose the Bottle Color</h3>
-            <div class="flex gap-2">
-              <div v-for="color in bottleColorFiltered[0]" :key="color"
-                class="w-10 h-10 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
-                :style="{ 'backgroundColor': color }" @mouseover="showImageWithColor(color)"
-                @click="showImageWithColor(color)">
-              </div>
-            </div>
-          </div>
-          <hr class="hidden md:block">
-          <div class="space-y-3">
-            <div class="flex items-center justify-start gap-2 my-2">
-              <h2 class="text-xs text-gray-800">Price:</h2>
-              <div class="text-2xl font-semibold text-gray-800">
-                {{ useCurrencyFormatter(priceComputed) }}
-              </div>
-              <!-- <span class="bg-[#f5f5f5] border text-[#c08562] text-[9px] font-semibold px-1.5 rounded-sm">On Offer</span> -->
-            </div>
-            <hr>
-            <!-- <h3 class=" font-medium text-lg text-gray-800 ">
-              Delivery Fees Calculator
-            </h3>
-            <div class="block space-y-5 md:space-y-0 md:flex border rounded-sm w-full gap-5 p-4">
-              <div class="flex flex-col gap-2 w-full">
-                <label>Select your Route</label>
-                <select v-model="ctyRoute" @change="getEstate(ctyRoute)" name="" id=""
-                  class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
-                    'border-red-500 focus:border-red-500': v$.ctyRoute.$error,
-                    'border-[#42d392] ': !v$.ctyRoute.$invalid,
-                  }">
-                  <option value="" disabled selected>Select your delivery route</option>
-                  <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name
-                  }}
-                  </option>
-                </select>
-                <div>
-                  <span class="text-xs text-red-500" v-if="v$.ctyRoute.$error">
-                    {{ v$.ctyRoute.$errors[0].$message }}
-                  </span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-2 w-full">
-                <label for="">Select your estate</label>
-                <select v-model="ctyEstate" name="" id="" class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
-                  'border-red-500 focus:border-red-500': v$.ctyEstate.$error,
-                  'border-[#42d392] ': !v$.ctyEstate.$invalid,
-                }" @change="setDeliveryFees(ctyEstate)">
-                  <option value="" disabled selected>Select your estate</option>
-                  <option :value="estate.estateName" v-for="(estate, i) in cityRoute.estate" :key="i">
-                    {{ estate.estateName }}
-                  </option>
-                </select>
-                <div>
-                  <span class="text-xs text-red-500" v-if="v$.ctyEstate.$error">
-                    {{ v$.ctyEstate.$errors[0].$message }}
-                  </span>
-                </div>
-              </div>
-            </div> -->
-            <!-- <p v-if="ctyRoute && ctyEstate" class="font-medium">The delivery fees to {{ ctyRoute }} - {{ ctyEstate }} is
-              <span class="text-lg text-red-500">{{
-                useCurrencyFormatter(deliveryCost) }}</span>
-            </p> -->
-            <!-- <p class="text-[#009a66] text-xs font-semibold pt-1">
-              Free shipping
-            </p> -->
-            <!-- <hr> -->
-            <h3 v-if="productStore.customizedBottle" class=" font-medium text-lg text-gray-800 ">
-              Your Bottle Customization
-            </h3>
-            <p v-if="productStore.customizedBottle">The name to be printed will be <span class="text-lg font-medium">{{
-              productStore.customName }}</span> and the
-              Font selected: <span class="text-lg font-medium">{{
-                productStore.selectedFont
-              }}</span> </p>
-            <hr v-if="productStore.customizedBottle">
-            <!-- v-if="productStore.product.category === 'big-bottle'" -->
-            <button @click="customizeBottle = !customizeBottle"
-              class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600">Customize
-              for Ksh.400</button>
-            <button @click="addToCart"
-              class="px-6 w-full py-3  text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500">
-              <div v-if="isInCart">Add Another Bottle to Cart</div>
-              <div v-else>Add to Cart</div>
-            </button>
-          </div>
-          <!-- </template> -->
+        <div
+          v-if="customizeBottle"
+          class="inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center"
+        >
+          <CustomizeModal
+            @closeModal="closeModal"
+            :bottle="productImg.color"
+            :slug="route.params.slug"
+          />
         </div>
+        <div
+          v-if="customizeBottle"
+          class="opacity-25 fixed inset-0 z-40 bg-black"
+        ></div>
       </div>
-      <div v-else class="w-full">
-        <div class="flex items-center justify-center w-full h-full">
-          <div class="flex justify-center items-center space-x-1 text-xl text-[#39519f]">
-
-            <svg fill='none' class="w-8 h-8 text-[#39519f] animate-spin" viewBox="0 0 32 32"
-              xmlns='http://www.w3.org/2000/svg'>
-              <path clip-rule='evenodd'
-                d='M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z'
-                fill='currentColor' fill-rule='evenodd' />
-            </svg>
-
-
-            <div>Loading ...</div>
-          </div>
-        </div>
-      </div>
-      <div v-if="customizeBottle"
-        class=" inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center">
-        <CustomizeModal @closeModal="closeModal" :bottle="productImg.color" :slug="route.params.slug" />
-      </div>
-      <div v-if="customizeBottle" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </div>
-
   </div>
 </template>
-
 
 <style scoped></style>

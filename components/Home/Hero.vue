@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="mt-[0px] h-[500px] bg-[#3A8CD6] flex items-center">
+  <div class="mt-[0px] h-[350px] md:h-[500px] bg-[#3A8CD6] flex items-center">
     <div class="space-y-7">
       <h1 class="text-white font-bold text-6xl w-1/2 mx-auto mb-5">
         Hydaration Meets Insulation
