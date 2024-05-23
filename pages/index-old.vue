@@ -123,40 +123,44 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div>
-    <!-- bg-[#E8E8E9] -->
-    <div class="">
-      <!-- <HomeHero /> -->
-      <HomeHeroOne />
-    </div>
+  <div class="">
+    <section id="Home" class="">
+      <SwiperHero />
+    </section>
 
-    <div>
-      <HomeBestSellers />
-    </div>
+    <!-- About US -->
+    <section>
+      <AboutUs />
+    </section>
 
-    <div class="w-full py-20">
-      <div class="max-w-2xl lg:mx-auto mx-5 space-y-10">
-        <h2 class="font-bold text-5xl text-center">
-          Premium Drinkware products to ensure you get to take us with you on
-          any adventure life takes you on
-        </h2>
-        <div class="">
-          <p class="text-[18px] leading-7 text-center">
-            Every Ziwa vessel is ingeniously created with you in mind. Whether
-            you’re an avid water drinker or a true tea enthusiast, Ziwa products
-            integrate seamlessly in your life, proving to be the trusty sidekick
-            you never knew you needed.
-          </p>
-          <div class="flex justify-center pt-10">
-            <NuxtLink
-              to="/about-us"
-              class="py-3 px-6 bg-yellow-400 text-white uppercase rounded-full"
-              >Read More</NuxtLink
+    <!-- BEST Sellers -->
+    <section>
+      <div class="w-full bg-[#39519f] bg-opacity-90 py-10">
+        <div class="max-w-4xl mx-auto">
+          <h3 class="text-white font-medium text-2xl tracking-tight mb-4">
+            Best Sellers
+          </h3>
+          <div class="w-full flex justify-between">
+            <div
+              v-for="(bestSeller, index) in bestSellers"
+              :key="index"
+              class="bg-white group bg-opacity-80 relative rounded-md h-56 w-48 shadow-md flex justify-center items-center hover:bg-opacity-100 transition duration-500 ease-in-out"
             >
+              <img
+                :src="bestSeller.image"
+                alt="best sellers"
+                class="object-cover absolute h-[80%] transition duration-500 ease-in-out"
+              />
+              <h5
+                class="text-sm z-20 absolute bottom-1 font-semibold group-hover:text-gray-900"
+              >
+                {{ bestSeller.title }}
+              </h5>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Shop section -->
     <section
@@ -284,6 +288,42 @@ const closeModal = () => {
             </template>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="" class="py-20 bg-white relative">
+      <div class="max-w-6xl mx-auto px-5 xl:px-0">
+        <h3 class="text-[#39519f] font-semibold">Stylish</h3>
+        <h3 class="text-3xl font-medium text-gray-800 pb-5">
+          Take us with you
+        </h3>
+        <p class="mb-5">
+          We fully understand that great things can happen literally anywhere.
+          That is why we have crafted these vessels to ensure that they fit in
+          to your daily life with ease so that wherever life takes you, You get
+          to take us with you!
+        </p>
+        <div class="columns-1 md:columns-3 xl:columns-4 gap-8 space-y-8">
+          <template v-for="(imgs, index) in images" :key="index">
+            <img
+              :src="imgs"
+              alt=""
+              class="rounded-xl shadow-xl cursor-pointer object-contain"
+              @click="loadCarousel = !loadCarousel"
+            />
+          </template>
+        </div>
+      </div>
+
+      <div
+        v-if="loadCarousel"
+        class="inset-0 overflow-y-auto overflow-x-hidden fixed z-50 flex w-full h-screen items-center justify-center"
+        @dblclick="loadCarousel = !loadCarousel"
+      >
+        <!-- <template v-for="(image, index) in images" :key="index"> -->
+        <!-- <ImageModal @closeModal="closeModal" :images="images" /> -->
+        <ImageSlider @closeModal="closeModal" :images="images" />
+        <!-- </template> -->
       </div>
     </section>
   </div>

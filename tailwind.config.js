@@ -14,14 +14,18 @@ module.exports = {
         body: ['Mona Sans'],
         script: ['Kaushan Script'],
         display: ['Mona Sans'],
-        fontOne: ['Frunchy Sage'],
-        fontTwo: ['Antic Didone'],
+        // body: ['Gilroy'],
+        // script: ['Gilroy'],
+        title: ['Gilroy'],
+        // display: ['Gilroy'],
+        fontOne: ['"Frunchy Sage"'],
+        fontTwo: ['"Antic Didone"'],
         fontThree: ['Alta'],
         fontFour: ['Retropix'],
-        fontFive: ['One Little Font'],
+        fontFive: ['"One Little Font"'],
         fontSix: ['Tomorrow'],
         fontSeven: ['Charm'],
-        logoFont: ['Coco Gothic']
+        logoFont: ['"Coco Gothic"']
       }
     },
   },

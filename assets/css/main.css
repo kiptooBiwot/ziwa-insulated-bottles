@@ -6,11 +6,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,500;0,600;0,800;1,500;1,600;1,700&display=swap');
+/* @import url(../fonts/Gilroy/stylesheet.css); */
+/* @import url('@/assets/fonts/Gilroy/stylesheet.css');
+ */
+@import url('../fonts/Gilroy/stylesheet.css');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* @font-face {
+  font-family: 'Gilroy';
+  src: url('~/assets/fonts/Gilroy/Gilroy-Regular.woff');
+} */
 @font-face {
   font-family: 'Coco Gothic';
   src: url('~/assets/fonts/CocoGothic/CocoGothic.woff');
@@ -43,7 +51,8 @@
 
 @layer base {
   body {
-    @apply text-[#525252] font-body scroll-smooth antialiased;
+    /* text-[#525252] */
+    @apply text-[#4b4c4e] font-body scroll-smooth antialiased;
   }
 
   h1,

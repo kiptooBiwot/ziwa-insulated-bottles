@@ -124,7 +124,7 @@ export default defineEventHandler(async (event) => {
     if (mail.rejected.length > 0) {
       throw createError({
         statusCode: 400,
-        statusMessage: 'Your order was not registered sucessfully. Please try again.'
+        statusMessage: 'Your order was not registered successfully. Please try again.'
       })
     }
 
