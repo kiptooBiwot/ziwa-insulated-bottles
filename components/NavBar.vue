@@ -1,15 +1,28 @@
 <script setup>
 import { useGeneralStore } from '@/stores/general'
 import { useProductStore } from '~/stores/product'
-import { onClickOutside } from '@vueuse/core'
+// import { onClickOutside } from '@vueuse/core'
+// import { useRoute } from '.nuxt/vue-router'
 
 const generalStore = useGeneralStore()
 const productStore = useProductStore()
+// const router = useRoute()
 
 const isMobileMenuOpen = ref(false)
 
 const showMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const openPage = (id) => {
+  // console.log('WE ARE HERE ALREADY!', myObject)
+  // console.log('ID:', myObject.id)
+
+  productStore.imageId = id
+  isMobileMenuOpen.value = false
+  // navigateTo(myObject.url)
+  // router.push(`/${submenu.url}`)
+  // console.log('THEN AT THE END!')
 }
 
 // onClickOutside(target, () => {
@@ -73,7 +86,7 @@ const showMobileMenu = () => {
                       :key="index"
                       class="flex flex-col space-y-4 p-2 text-xs text-gray-400 hover:bg-blue-100 border-b border-gray-200 cursor-pointer"
                     >
-                      <NuxtLink :to="submenu.url">
+                      <NuxtLink :to="submenu.url" @click="openPage(submenu.id)">
                         <div
                           class="flex items-center justify-between text-[#4b4c4e] text-[20px] font-bold"
                         >
@@ -102,12 +115,14 @@ const showMobileMenu = () => {
           </li>
         </ul>
 
+        <!-- Mobile Menu -->
         <div class="block lg:hidden">
           <Icon
             @click="showMobileMenu"
             name="heroicons:bars-3-20-solid"
             class="relative w-6 h-6"
           />
+
           <div ref="target" v-if="isMobileMenuOpen" class="md:hidden">
             <div
               class="absolute top-0 right-0 block w-full bg-[#39519f] bg-opacity-90 px-5 py-7 min-h-screen rounded-b z-20 space-y-8 transform duration-700 ease-in-out"
@@ -183,7 +198,11 @@ const showMobileMenu = () => {
                             :key="index"
                             class="flex flex-col space-y-4 p-2 text-xs text-white border-b border-gray-200 cursor-pointer"
                           >
-                            <NuxtLink :to="submenu.url">
+                            <!-- :to="submenu.url" -->
+                            <NuxtLink
+                              :to="submenu.url"
+                              @click="openPage(submenu.id)"
+                            >
                               <div
                                 class="flex items-center justify-between text-white text-[20px] font-bold"
                               >

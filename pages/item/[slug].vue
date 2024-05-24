@@ -8,6 +8,7 @@ const deliveryStore = useDeliveryStore()
 const toast = useToastStore()
 const route = useRoute()
 const nuxtApp = useNuxtApp()
+const router = useRouter()
 
 nuxtApp.$fb.enable()
 
@@ -79,7 +80,10 @@ const availableColors = () => {
   }
 }
 
+// nextTick(() => router.go())
+
 onMounted(() => {
+  console.log(route.params.slug)
   productStore.getSingleProduct(route.params.slug)
 
   if (productStore.imageId) {
@@ -252,6 +256,14 @@ const isInCart = computed(() => {
                   "
                 ></div>
                 <template v-if="productStore.category === 'big-bottle'">
+                  <img
+                    v-if="productImg.url"
+                    class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
+                    :src="productImg.url"
+                    alt=""
+                  />
+                </template>
+                <template v-else-if="productStore.category === 'tumblers'">
                   <img
                     v-if="productImg.url"
                     class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"

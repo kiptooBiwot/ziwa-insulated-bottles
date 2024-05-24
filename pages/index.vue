@@ -240,6 +240,12 @@ const closeModal = () => {
                       alt=""
                     />
                     <img
+                      v-else-if="product.category === 'tumblers'"
+                      class="relative w-auto h-[250px]"
+                      :src="img.url"
+                      alt=""
+                    />
+                    <img
                       v-else
                       class="relative w-full h-[460px] object-none"
                       :src="img.url"
@@ -251,6 +257,13 @@ const closeModal = () => {
                       v-if="product.category === 'big-bottle'"
                       class="block opacity-75 -mb-1 text-gray-600 text-xs"
                       >{{ img.color }} Water Bottle
+                    </span>
+                    <span
+                      v-else-if="product.category === 'tumblers'"
+                      class="block opacity-75 -mb-1 text-gray-600 text-xs"
+                      >{{ img.color }} Tumbler
+                      <span v-if="img.capacity === 1183">(40 Oz)</span>
+                      <span v-else>(30 Oz)</span>
                     </span>
                     <span
                       v-else
