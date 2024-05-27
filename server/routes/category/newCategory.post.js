@@ -1,11 +1,11 @@
-import Product from "@/server/models/Product.model"
+import Category from '@/server/models/Category.model'
+
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
 
-
-    // console.log('BODY: ', body);
+    console.log('REQ.BODY:', body);
 
     if (!body) {
       throw createError({
@@ -14,17 +14,16 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const product = new Product({
-      ...body
+    const category = new Category({
+      title: body.category
     })
 
-    // console.log('PRODUCT', product);
+    console.log('CATEGORY:', category);
 
-    const savedProduct = await product.save()
+    const savedCategory = await category.save()
 
-    return { message: "Product saved", savedProduct }
+    return { message: 'CategorySaved', savedCategory }
   } catch (error) {
-    // console.log(error);
     throw createError({
       statusCode: 500,
       statusMessage: 'An error occurred - newProduct.post.js '

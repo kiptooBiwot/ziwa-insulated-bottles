@@ -1,51 +1,41 @@
 <script setup>
-import logo from "/assets/images/logo/ziwa_logo1.png";
-import { useGeneralStore } from "~/stores/general"
+import logo from '/assets/images/logo/ziwa_logo1.png'
+import { useGeneralStore } from '~/stores/general'
 
 const generalStore = useGeneralStore()
 // const { isOpen } = useSidebar();
 const activeClass = ref(
-  "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
-);
+  'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100'
+)
 const inactiveClass = ref(
-  "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
-);
+  'border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'
+)
 const showDropdown = ref(false)
 // TODO: Take isOpen to state level soon
 // const isOpen = generalStore.isOpen
 </script>
 
-
 <template>
   <div class="flex">
     <!-- Backdrop -->
-    <div :class="generalStore.isOpen ? 'block' : 'hidden'" @click="generalStore.isOpen = false" class="
-        fixed
-        inset-0
-        z-20
-        transition-opacity
-        bg-black
-        opacity-50
-        lg:hidden
-      "></div>
+    <div
+      :class="generalStore.isOpen ? 'block' : 'hidden'"
+      @click="generalStore.isOpen = false"
+      class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"
+    ></div>
     <!-- End Backdrop -->
 
-    <div :class="generalStore.isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="
-        fixed
-        inset-y-0
-        left-0
-        z-30
-        w-64
-        overflow-y-auto
-        transition
-        duration-300
-        transform
-        bg-gray-900
-        lg:translate-x-0 lg:static lg:inset-0
-      ">
+    <div
+      :class="
+        generalStore.isOpen
+          ? 'translate-x-0 ease-out'
+          : '-translate-x-full ease-in'
+      "
+      class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0"
+    >
       <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
-          <img :src=logo alt="Ziwa Logo" class="w-12">
+          <img :src="logo" alt="Ziwa Logo" class="w-12" />
 
           <!-- <span class="mx-2 text-2xl font-semibold text-white">Ziwa</span> -->
         </div>
@@ -53,8 +43,11 @@ const showDropdown = ref(false)
 
       <nav class="mt-10">
         <p class="pl-4 text-xs font-semibold mb-4 text-gray-400">GENERAL</p>
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]" to="/dashboard">
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
+          to="/dashboard"
+        >
           <Icon name="ic:round-dashboard" class="w-5 h-5" />
           <span class="mx-4">Dashboard</span>
         </router-link>
@@ -62,43 +55,79 @@ const showDropdown = ref(false)
           Manage Application
         </p>
 
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]" to="/ui-elements">
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
+          to="/ui-elements"
+        >
           <Icon name="ic:sharp-view-list" class="w-5 h-5" />
           <span class="mx-4">Orders</span>
         </router-link>
 
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Tables' ? activeClass : inactiveClass]" to="/tables">
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Tables' ? activeClass : inactiveClass]"
+          to="/tables"
+        >
           <Icon name="ic:twotone-create-new-folder" class="w-5 h-5" />
 
           <span class="mx-4">Manage Products</span>
         </router-link>
 
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Forms' ? activeClass : inactiveClass]" to="/forms">
-          <Icon name="ic:baseline-supervisor-account" class="w-6 h-6" /> <span class="mx-4">Users</span>
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
+          to="/forms"
+        >
+          <Icon name="ic:baseline-supervisor-account" class="w-6 h-6" />
+          <span class="mx-4">Users</span>
         </router-link>
 
-        <div class="relative first-line:flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Forms' ? activeClass : inactiveClass]" to="">
-          <button type="button" class="flex items-center" @click="showDropdown = !showDropdown">
+        <div
+          class="relative first-line:flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
+          to=""
+        >
+          <button
+            type="button"
+            class="flex items-center"
+            @click="showDropdown = !showDropdown"
+          >
             <Icon name="ic:twotone-create-new-folder" class="w-5 h-5" />
-            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Manage Products</span>
+            <span
+              class="flex-1 ml-3 text-left whitespace-nowrap"
+              sidebar-toggle-item
+              >Manage Products</span
+            >
             <Icon name="ic:baseline-keyboard-arrow-down" class="w-6 h-6" />
           </button>
-          <div id="dropdown-example"
+          <div
+            id="dropdown-example"
             class="absolute right-0 ml-10 pl-8 pr-4 w-full text-xs py-2 space-y-2 transform transition duration-500 ease-in-out"
-            :class="[showDropdown ? 'translate-y-0 ease-out block transition duration-300' : '-translate-y-full hidden ease-in transition duration-300']">
+            :class="[
+              showDropdown
+                ? 'translate-y-0 ease-out block transition duration-300'
+                : '-translate-y-full hidden ease-in transition duration-300',
+            ]"
+          >
             <!-- {{ showDropdown }} -->
-            <NuxtLink to="/dashboard/products/all-products"
-              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
-              List
-              All Products
+            <NuxtLink
+              to="/dashboard/products/all-products"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+            >
+              List All Products
             </NuxtLink>
-            <NuxtLink to="/dashboard/products/new-product"
-              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">
+            <NuxtLink
+              to="/dashboard/products/new-product"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+            >
               Add New Product
+            </NuxtLink>
+            <NuxtLink
+              to="/dashboard/products/add-category"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+            >
+              Add New Category
             </NuxtLink>
             <!-- <NuxtLink to="">
               <a href="#"
@@ -162,5 +191,3 @@ const showDropdown = ref(false)
     </div>
   </div>
 </template>
-
-

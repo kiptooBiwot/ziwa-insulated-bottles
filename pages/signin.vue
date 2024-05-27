@@ -45,6 +45,7 @@ const signIn = async () => {
         router.push('/dashboard/')
       }
     } catch (error) {
+      console.log(error)
       console.log(error.$message)
     }
   }

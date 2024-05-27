@@ -86,7 +86,8 @@ const openPage = (id) => {
                       :key="index"
                       class="flex flex-col space-y-4 p-2 text-xs text-gray-400 hover:bg-blue-100 border-b border-gray-200 cursor-pointer"
                     >
-                      <NuxtLink :to="submenu.url" @click="openPage(submenu.id)">
+                      <!-- :to="submenu.url" @click="openPage(submenu.id)" -->
+                      <NuxtLink :to="`/shop/${submenu.category}`">
                         <div
                           class="flex items-center justify-between text-[#4b4c4e] text-[20px] font-bold"
                         >
@@ -199,10 +200,8 @@ const openPage = (id) => {
                             class="flex flex-col space-y-4 p-2 text-xs text-white border-b border-gray-200 cursor-pointer"
                           >
                             <!-- :to="submenu.url" -->
-                            <NuxtLink
-                              :to="submenu.url"
-                              @click="openPage(submenu.id)"
-                            >
+                            <!-- @click="openPage(submenu.id)" -->
+                            <NuxtLink :to="`/shop/${submenu.category}`">
                               <div
                                 class="flex items-center justify-between text-white text-[20px] font-bold"
                               >

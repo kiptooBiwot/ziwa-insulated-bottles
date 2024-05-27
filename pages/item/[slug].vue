@@ -62,6 +62,7 @@ const bottleColorFiltered = reactive([])
 // Compare two arrays and display only the product colors available
 const availableColors = () => {
   productStore.product.images.map((bottleColor) => {
+    // console.log('BOTTLE COLOR', bottleColor.colorCode)
     productColors.value.push(bottleColor.colorCode)
   })
 
@@ -83,7 +84,6 @@ const availableColors = () => {
 // nextTick(() => router.go())
 
 onMounted(() => {
-  console.log(route.params.slug)
   productStore.getSingleProduct(route.params.slug)
 
   if (productStore.imageId) {
@@ -92,7 +92,7 @@ onMounted(() => {
 
     productStore.product.images.filter((image) => {
       if (image._id === id) {
-        // console.log('IMAGE:', image);
+        // console.log('IMAGE:', image)
         productStore.selectedProduct = image
 
         productImg.value = productStore.selectedProduct
@@ -321,8 +321,15 @@ const isInCart = computed(() => {
                 class="pl-10 text-sm"
               >
                 <div class="flex items-center gap-4 space-y-3">
-                  <Icon :name="feature.icon" color="" class="w-6 h-6" />
-                  <li class="flex items-center">{{ feature.description }}</li>
+                  <!-- <Icon
+                    v-if="feature.icon"
+                    :name="feature.icon"
+                    color=""
+                    class="w-6 h-6"
+                  /> -->
+                  <ul class="list-disc">
+                    <li class="flex items-center">{{ feature.description }}</li>
+                  </ul>
                 </div>
               </ul>
             </div>

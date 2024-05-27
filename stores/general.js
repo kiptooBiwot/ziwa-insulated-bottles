@@ -18,9 +18,9 @@ export const useGeneralStore = defineStore('general', {
         type: 'dropdown',
         isOpen: false,
         children: [
-          { title: 'Ziwa Bottle', url: '/item/ziwa-insulated-bottle', imageUrl: '/images/hero_2.png', id: '6554e7f1ed069baf070d7694' },
-          { title: 'Msafiri Tumbler', url: '/item/msafiri-tumbler-the-hydration-dynamo', imageUrl: '/images/tumbler_1.png', id: '65ba57cdf8f16cdd0fbbcf94' },
-          { title: 'Little Ziwa', url: '/item/kids-bottle', imageUrl: '/images/kids_navy.png', id: '664fb9cc4ffbdd783af1a648' },
+          { title: 'Ziwa Bottle', category: 'big-bottle', url: '/item/ziwa-insulated-bottle', imageUrl: '/images/hero_2.png', id: '6554e7f1ed069baf070d7694' },
+          { title: 'Msafiri Tumbler', category: 'tumblers', url: '/item/msafiri-tumbler-the-hydration-dynamo', imageUrl: '/images/tumbler_1.png', id: '65ba57cdf8f16cdd0fbbcf94' },
+          { title: 'Little Ziwa', category: 'kids-bottle', url: '/item/kids-bottle', imageUrl: '/images/kids_navy.png', id: '664fb9cc4ffbdd783af1a648' },
         ]
 
       },
@@ -39,12 +39,35 @@ export const useGeneralStore = defineStore('general', {
       { title: 'Ziwa Bottle', image: '/images/hero_2.png' },
       { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png' },
       { title: 'Little Ziwa', image: '/images/kids_navy.png' },
-    ]
+    ],
+
+    // All Categories
+    categories: null
 
   }),
   actions: {
     toggleSidebar() {
       this.isOpen = !this.isOpen
+    },
+
+
+    async getAllCategories() {
+      try {
+        // const categories = await $fetch('/category/getAllCategories', {
+        //   method: 'GET'
+        // })
+
+        const categories = await $fetch('/category/getAllCategories', {
+          method: 'GET'
+        })
+
+        console.log('CATEGORIES:', categories);
+        if (categories) {
+          this.categories = categories
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 })
