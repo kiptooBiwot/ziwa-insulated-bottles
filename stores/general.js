@@ -29,9 +29,9 @@ export const useGeneralStore = defineStore('general', {
     ],
 
     rightLinks: [
-      { title: 'Blog', url: '/blog' },
+      // { title: 'Blog', url: '/blog' },
       { title: 'Contact', url: '/contact' },
-      { title: 'Account', url: '/account' },
+      { title: 'Account', url: '/signin' },
       // { title: '', url: '' },
     ],
 
