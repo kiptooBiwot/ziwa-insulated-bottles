@@ -482,6 +482,43 @@ const isInCart = computed(() => {
         ></div>
       </div>
     </div>
+    <div class="max-w-6xl mx-5 lg:mx-auto">
+      <h2 class="text-center my-10 font-display font-bold text-3xl">
+        Frequently bought together
+      </h2>
+      <div class="max-w-5xl mx-5 lg:mx-auto">
+        <div
+          class="w-3/4 mx-auto bg-slate-100 pl-10 pt-10 pb-5 rounded-md shadow-sm mb-10"
+        >
+          <div class="flex items-center justify-between">
+            <img
+              src="/images/bottle1-bg.png"
+              alt=""
+              class="object-cover w-[100px] h-auto"
+            />
+            <div class="text-xl font-bold">+</div>
+            <img
+              src="/images/jungle-green-40.png"
+              alt=""
+              class="object-cover w-[150px] h-auto"
+            />
+            <div class="text-xl font-bold">+</div>
+            <img
+              src="/images/kids-navy.png"
+              alt=""
+              class="object-cover w-[200px] h-auto"
+            />
+          </div>
+          <div class="flex items-center justify-center mt-10">
+            <button
+              class="py-2 px-6 text-xs font-bold rounded-full bg-gray-600 text-white shadow-lg"
+            >
+              Total Price: KSH. 5,100/=
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -25,7 +25,7 @@ export const useGeneralStore = defineStore('general', {
 
       },
       // { title: 'Accessories', url: '/accessories', type: 'dropdown' },
-      { title: 'Bulk Custom', url: '#', type: 'link' },
+      { title: 'Bulk Custom', url: '/bulk-orders', type: 'link' },
     ],
 
     rightLinks: [

@@ -188,7 +188,6 @@ const submit = async () => {
                 subject: '',
                 message: '',
               }
-
               ;(productStore.customName = ''),
                 (productStore.selectedFont = ''),
                 (productStore.textPosition = ''),
@@ -286,7 +285,7 @@ const submit = async () => {
           <hr />
           <div class="md:flex w-full space-y-2 md:gap-5">
             <div class="w-full space-y-2">
-              <label for="firstName" class="text-xs">Frist Name</label>
+              <label for="firstName" class="text-xs">First Name</label>
               <input
                 v-model="formData.firstName"
                 id="firstName"
