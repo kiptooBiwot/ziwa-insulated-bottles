@@ -74,63 +74,61 @@ const submit = async () => {
     v$.value.$validate()
 
     if (!v$.value.$error) {
+      // After order is saved, send and email to the admin of the order
+      if (!v$.value.$error) {
+        const result = await $fetch('/api/contac', {
+          method: 'POST',
+          body: {
+            formData: formData.value,
+            order: resp,
+            paymentDetails: productStore.paymentDetails,
+          },
+        })
 
-            // After order is saved, send and email to the admin of the order
-            if (!v$.value.$error) {
-              const result = await $fetch('/api/contac', {
-                method: 'POST',
-                body: {
-                  formData: formData.value,
-                  order: resp,
-                  paymentDetails: productStore.paymentDetails,
-                },
-              })
+        toast.add({
+          type: 'success',
+          message: 'Your order is being processed.',
+        })
 
-              toast.add({
-              type: 'success',
-              message: 'Your order is being processed.',
-            })
+        // if (pending) {
+        //   waiting.value = true
+        // }
+        // console.log('RESULT:', result);
 
-              // if (pending) {
-              //   waiting.value = true
-              // }
-              // console.log('RESULT:', result);
+        // if (result) {
+        errors.value = false
+        success.value = true
+        waiting.value = false
+        formData.value = {
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        }
+        ;(productStore.customName = ''),
+          (productStore.selectedFont = ''),
+          (productStore.textPosition = ''),
+          (productStore.customizationFee = 0),
+          (productStore.customizedBottle = false),
+          (productStore.selectedProduct = null),
+          (productStore.dbProducts = []),
+          (productStore.product = null),
+          (productStore.cart = []),
+          // product detail page id to select product color & image
+          (productStore.imageId = ''),
+          // destination: {
+          (productStore.deliveryRoute = []),
+          (productStore.deliveryLocation = ''),
+          (productStore.deliveryCost = 0),
+          (productStore.orderUserId = ''),
+          (productStore.mpesaProcessComplete = false),
+          (productStore.paymentResponse = null),
+          (productStore.paymentDetails = null)
 
-              // if (result) {
-              errors.value = false
-              success.value = true
-              waiting.value = false
-              formData.value = {
-                name: '',
-                email: '',
-                subject: '',
-                message: '',
-              }
-              ;(productStore.customName = ''),
-                (productStore.selectedFont = ''),
-                (productStore.textPosition = ''),
-                (productStore.customizationFee = 0),
-                (productStore.customizedBottle = false),
-                (productStore.selectedProduct = null),
-                (productStore.dbProducts = []),
-                (productStore.product = null),
-                (productStore.cart = []),
-                // product detail page id to select product color & image
-                (productStore.imageId = ''),
-                // destination: {
-                (productStore.deliveryRoute = []),
-                (productStore.deliveryLocation = ''),
-                (productStore.deliveryCost = 0),
-                (productStore.orderUserId = ''),
-                (productStore.mpesaProcessComplete = false),
-                (productStore.paymentResponse = null),
-                (productStore.paymentDetails = null)
-
-              // }
-            }
-          }
+        // }
+      }
     }
-   catch (error) {
+  } catch (error) {
     // console.log(error);
     toast.add({
       type: 'error',
@@ -233,8 +231,13 @@ const submit = async () => {
 
       <p class="leading-7">
         Ready to Start? Fill out the form below or contact us directly at
-        [email@example.com] or [phone number]. We can't wait to help you create
-        something amazing!
+        <span class="text-blue-800 text-lg font-bold font-display"
+          >sales@ziwa.co.ke</span
+        >
+        or
+        <span class="text-blue-800 text-lg font-bold font-display"
+          >0701939883</span
+        >. We can't wait to help you create something amazing!
       </p>
 
       <div class="">

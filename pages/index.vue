@@ -158,8 +158,12 @@ const closeModal = () => {
       </div>
     </div>
 
+    <section>
+      <HomeTakeUsWithU />
+    </section>
+
     <!-- Shop section -->
-    <section
+    <!-- <section
       id="Shop"
       class="py-20 min-h-screen md:bg-[#39519f] md:bg-opacity-5"
     >
@@ -189,16 +193,16 @@ const closeModal = () => {
                 :key="img._id"
                 class="flex-shrink-0 m-6 md:m-2 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg"
               >
-                <!-- [#89CFF0] -->
-                <NuxtLink
+                 [#89CFF0] -->
+    <!-- <NuxtLink
                   :to="{
                     name: 'item-slug',
                     params: { slug: product.slug },
                   }"
                   @click="sendId(img._id)"
-                >
-                  <!-- :class="`bg-${product.bgColor}`" -->
-                  <svg
+                > -->
+    <!--:class="`bg-${product.bgColor}`" -->
+    <!-- <svg
                     class="absolute bottom-0 left-0 mb-8"
                     viewBox="0 0 375 283"
                     fill="none"
@@ -244,10 +248,10 @@ const closeModal = () => {
                       class="relative w-auto h-[250px]"
                       :src="img.url"
                       alt=""
-                    />
+                    /> -->
 
-                    <!-- h-[450px] no object-cover-->
-                    <img
+    <!-- h-[450px] no object-cover-->
+    <!-- <img
                       v-else
                       class="relative w-full h-[250px] object-cover"
                       :src="img.url"
@@ -273,10 +277,10 @@ const closeModal = () => {
                       class="block opacity-75 -mb-1 text-gray-600 text-xs"
                       >Little Ziwa in {{ img.color }}</span
                     >
-                    <div class="flex items-end justify-between">
-                      <!-- <NuxtLink :to="`/item/${product.slug}`" :image="img._id"> -->
+                    <div class="flex items-end justify-between"> -->
+    <!-- <NuxtLink :to="`/item/${product.slug}`" :image="img._id"> -->
 
-                      <span
+    <!-- <span
                         class="block font-medium text-lg text-gray-800 transform duration-500 ease-in-out hover:scale-105 hover:text-gray-700"
                         >View Details</span
                       >
@@ -301,6 +305,6 @@ const closeModal = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
