@@ -25,6 +25,7 @@ module.exports = {
         fontFive: ['"One Little Font"'],
         fontSix: ['Tomorrow'],
         fontSeven: ['Charm'],
+        fontEight: ['Denira Signature Demo'],
         logoFont: ['"Coco Gothic"']
       }
     },

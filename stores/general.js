@@ -36,9 +36,9 @@ export const useGeneralStore = defineStore('general', {
     ],
 
     bestSellers: [
-      { title: 'Ziwa Bottle', image: '/images/hero_2.png' },
-      { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png' },
-      { title: 'Little Ziwa', image: '/images/kids_navy.png' },
+      { title: 'Ziwa Bottle', image: '/images/hero_2.png', category: 'big-bottle' },
+      { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png', category: 'tumblers' },
+      { title: 'Little Ziwa', image: '/images/kids_navy.png', category: 'kids-bottle' },
     ],
 
     // All Categories

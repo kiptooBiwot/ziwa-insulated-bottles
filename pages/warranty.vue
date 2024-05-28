@@ -1,12 +1,91 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div class="w-full py-24">
-    <div class="max-w-3xl mx-auto px-5 lg:px-0 py-10 space-y-5 leading-7 text-justify">
-      <h2 class="text-2xl font-bold text-center text-[#395A9F]">Ziwa Sips Warranty</h2>
+  <div class="w-full pb-20 bg-blue-50">
+    <div
+      class="max-w-2xl mx-auto px-5 lg:px-0 py-10 space-y-5 leading-8 text-justify"
+    >
+      <h2 class="text-2xl font-bold text-center text-[#395A9F]">
+        Ziwa Limited Warranty
+      </h2>
+
+      <p>Welcome to the Ziwa Squad!</p>
+
       <p>
+        We’re thrilled that you’ve chosen Ziwa to be a part of your everyday
+        adventures! We take pride in our products and are committed to ensuring
+        you have the best experience possible. That’s why we’re excited to offer
+        you our friendly Ziwa Limited Warranty.
+      </p>
+
+      <p class="text-lg font-bold text-center">What’s Covered?</p>
+
+      <p>
+        We’ve got you covered! Our limited warranty covers any defects in
+        materials or workmanship under normal use for one full year from the
+        date of purchase. If you encounter any issues with your Ziwa bottle or
+        tumbler during this period, we promise to make it right.
+      </p>
+
+      <p class="text-lg font-bold text-center">What’s Not Covered?</p>
+
+      <p>
+        While we love to support our customers, there are a few things our
+        warranty doesn’t cover:
+      </p>
+
+      <ul class="ml-10 list-disc">
+        <li>Normal wear and tear from everyday use.</li>
+        <li>Damage caused by misuse, accidents, or alterations.</li>
+        <li>
+          Cosmetic issues that do not affect the performance of the product.
+        </li>
+      </ul>
+
+      <p class="text-lg font-bold text-center">How to Make a Warranty Claim</p>
+
+      <p>
+        It’s easy! If you experience any problems with your Ziwa product, just
+        follow these simple steps:
+      </p>
+
+      <ol class="list-decimal ml-10">
+        <li>
+          <span class="font-display font-bold">Reach Out to Us:</span> Contact
+          our friendly customer service team via whatsapp on 0701939883 with
+          your order details and a description of the issue. Attach any pictures
+          too to support your claim
+        </li>
+        <li>
+          <span class="font-display font-bold">Send It Back:</span> If
+          necessary, we’ll ask you to send the product back to us for
+          inspection.
+        </li>
+        <li>
+          <span class="font-display font-bold">We’ve Got You:</span> Once we’ve
+          reviewed your claim, we’ll repair or replace your item, or provide a
+          refund if a replacement isn’t available.
+        </li>
+      </ol>
+
+      <p class="text-lg font-bold text-center">Our Commitment to You</p>
+      <p>
+        At Ziwa, we’re dedicated to ensuring you’re completely satisfied with
+        your purchase. Our products are designed with love and care, and we’re
+        here to support you every step of the way. Thank you for choosing Ziwa,
+        and cheers to many more adventures together!
+      </p>
+      <p>
+        If you have any questions or need assistance, don’t hesitate to reach
+        out. We’re always here to help!
+      </p>
+
+      <p>
+        Warmest wishes, <br />
+        The Ziwa Team
+      </p>
+
+      <!-- <p>
         We stand behind the quality and craftsmanship of our products. Every Ziwa product is made to the highest quality
         and we take our vessel performance very seriously. Which is why, this warranty covers defects in materials and
         workmanship for a period of [5 years] from the date of purchase.</p>
@@ -89,7 +168,7 @@
       <p>
         Ziwa is committed to providing quality products, and this warranty reflects our confidence in the durability and
         performance of Ziwa vessels.
-      </p>
+      </p> -->
     </div>
   </div>
 </template>

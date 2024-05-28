@@ -255,7 +255,7 @@ const isInCart = computed(() => {
                     opacity: 0.2;
                   "
                 ></div>
-                <template v-if="productStore.category === 'big-bottle'">
+                <template v-if="productStore.product.category === 'big-bottle'">
                   <img
                     v-if="productImg.url"
                     class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
@@ -263,7 +263,9 @@ const isInCart = computed(() => {
                     alt=""
                   />
                 </template>
-                <template v-else-if="productStore.category === 'tumblers'">
+                <template
+                  v-else-if="productStore.product.category === 'tumblers'"
+                >
                   <img
                     v-if="productImg.url"
                     class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
@@ -307,12 +309,12 @@ const isInCart = computed(() => {
             <!-- <template v-for="image in productStore.product" :key="image._id"> -->
             <h2 class="text-gray-900 text-3xl font-semibold">
               <!-- {{ productImg.color }} [{{ productImg.capacity }} ml] Water Bottle -->
-              {{ productStore.product.title }}
+              {{ productImg.color }} {{ productStore.product.title }}
             </h2>
             <hr class="" />
             <div
               v-html="productStore.product.description"
-              class="space-y-3"
+              class="space-y-3 leading-6"
             ></div>
             <div v-if="productStore.product" class="space-y-1">
               <h2 class="text-xl">Features</h2>
@@ -321,15 +323,9 @@ const isInCart = computed(() => {
                 :key="feature"
                 class="pl-10 text-sm"
               >
-                <div class="flex items-center gap-4 space-y-3">
-                  <!-- <Icon
-                    v-if="feature.icon"
-                    :name="feature.icon"
-                    color=""
-                    class="w-6 h-6"
-                  /> -->
+                <div class="space-y-3">
                   <ul class="list-disc">
-                    <li class="flex items-center">{{ feature.description }}</li>
+                    <li class="">{{ feature.description }}</li>
                   </ul>
                 </div>
               </ul>
@@ -351,7 +347,18 @@ const isInCart = computed(() => {
                 ></div>
               </div>
             </div>
+
             <hr class="hidden md:block" />
+            <div class="flex py-5">
+              <p>
+                <span
+                  class="uppercase font-display text-sm font-bold mr-10 lg:mr-20"
+                  >Material</span
+                >
+                304 Stainless Steel
+              </p>
+            </div>
+            <!-- <hr class="hidden md:block" /> -->
             <div class="space-y-3">
               <div class="flex items-center justify-start gap-2 my-2">
                 <h2 class="text-xs text-gray-800">Price:</h2>

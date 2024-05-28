@@ -45,6 +45,11 @@
 }
 
 @font-face {
+  font-family: 'Denira Signature Demo';
+  src: url('~/assets/fonts/Denira-Signature/Denira Signature demo.otf');
+}
+
+@font-face {
   font-family: 'Retropix';
   src: url('~/assets/fonts/retropix.otf/retropix.otf');
 }
