@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="relative w-full h-auto lg:h-[500px]">
+  <div class="w-full h-auto lg:h-[500px]">
     <!-- <div class="absolute inset-0 max-w-7xl mx-auto">
       <h2 class="absolute top-10 text-white font-bold text-6xl text-center">
         Hydration Meets Insulation

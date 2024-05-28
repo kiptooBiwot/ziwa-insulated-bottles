@@ -267,7 +267,7 @@ const submit = async () => {
 
 <template>
   <div class="bg-slate-50">
-    <div class="max-w-6xl mx-auto pt-40 pb-20 h-auto px-5 xl:px-0">
+    <div class="max-w-6xl mx-auto pt-10 pb-20 h-auto px-5 xl:px-0">
       <h1 v-if="!success" class="text-2xl font-medium">Checkout</h1>
 
       <div

@@ -30,8 +30,6 @@ const deliveryCost = ref(0)
 const selectedFont = ref('')
 const customName = ref('')
 
-const productImg = ref('')
-const productColors = ref([])
 // const v$ = useVuelidate(rules, { ctyRoute, ctyEstate })
 
 // const images = [
@@ -45,6 +43,8 @@ const productColors = ref([])
 //   bottle8
 // ]
 
+// ADD any new colors here.
+// TODO: To change this logic and make it dynamic
 const bottleColor = [
   '#1D4D4B',
   '#435A76',
@@ -54,21 +54,37 @@ const bottleColor = [
   '#000013', //done
   '#A33806',
   '#8D596A',
+  '#FFC702',
   '#E36D6E',
+  '#0C383B',
+  '#E6CEE8',
+  '#F48760',
+  '#F9E3E6',
+  '#AEACB1',
+  '#050716',
+  '#D5E9F0',
+  '#F0E7E2',
 ]
 
+const productImg = ref('')
+const productColors = reactive([])
 const bottleColorFiltered = reactive([])
 
 // Compare two arrays and display only the product colors available
 const availableColors = () => {
-  productStore.product.images.map((bottleColor) => {
-    // console.log('BOTTLE COLOR', bottleColor.colorCode)
-    productColors.value.push(bottleColor.colorCode)
+  // const bottiColors = productStore.product.images.map((bottleColor) => {
+  //   // console.log('BOTTLE COLOR', bottleColor.colorCode)
+  //   productColors.value.push(bottleColor.colorCode)
+  // })
+
+  productStore.product.images.map((colors) => {
+    productColors.push(colors.colorCode)
   })
 
-  if (productColors.value) {
-    const prodColors = productColors.value.filter((color) =>
-      bottleColor.includes(color)
+  if (productColors) {
+    const prodColors = productColors.filter(
+      (color) => bottleColor.includes(color)
+      // console.log('WHAT IS COLOR?', color)
     )
 
     // const prodColors = bottleColor.filter((color) => {
@@ -109,7 +125,9 @@ onMounted(() => {
     // currentCapacity.value = img[0].capacity
   }
 
-  console.log('AVAILABLE COLORS:', availableColors())
+  availableColors()
+
+  // console.log('AVAILABLE COLORS:', availableColors())
 })
 // changeImage
 
@@ -330,7 +348,6 @@ const isInCart = computed(() => {
                 </div>
               </ul>
             </div>
-            <!-- <div v-html="productStore.product.productDesc"></div> -->
             <hr />
             <div class="hidden md:block">
               <h3 class="text-lg text-gray-800 py-3">
@@ -340,7 +357,7 @@ const isInCart = computed(() => {
                 <div
                   v-for="color in bottleColorFiltered[0]"
                   :key="color"
-                  class="w-10 h-10 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                  class="w-10 h-10 flex-shrink-0 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
                   :style="{ backgroundColor: color }"
                   @mouseover="showImageWithColor(color)"
                   @click="showImageWithColor(color)"
@@ -495,25 +512,25 @@ const isInCart = computed(() => {
       </h2>
       <div class="max-w-5xl mx-5 lg:mx-auto">
         <div
-          class="w-3/4 mx-auto bg-slate-100 pl-10 pt-10 pb-5 rounded-md shadow-sm mb-10"
+          class="w-full lg:w-3/4 mx-auto bg-slate-100 md:pl-10 pt-10 pb-5 rounded-md shadow-sm mb-10"
         >
           <div class="flex items-center justify-between">
             <img
               src="/images/bottle1-bg.png"
               alt=""
-              class="object-cover w-[100px] h-auto"
+              class="object-cover w-[80px] md:w-[100px] h-auto"
             />
             <div class="text-xl font-bold">+</div>
             <img
               src="/images/jungle-green-40.png"
               alt=""
-              class="object-cover w-[150px] h-auto"
+              class="object-cover w-[120px] md:w-[150px] h-auto"
             />
             <div class="text-xl font-bold">+</div>
             <img
               src="/images/kids-navy.png"
               alt=""
-              class="object-cover w-[200px] h-auto"
+              class="object-cover w-[180px] md:w-[200px] h-auto"
             />
           </div>
           <div class="flex items-center justify-center mt-10">
