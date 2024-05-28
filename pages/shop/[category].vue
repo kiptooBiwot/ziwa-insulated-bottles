@@ -131,7 +131,7 @@ const sendId = (id) => {
                       <span
                         v-if="product.category === 'big-bottle'"
                         class="block opacity-75 -mb-1 text-gray-600 text-xs"
-                        >{{ img.color }} Water Bottle
+                        >{{ img.capacity }} ml {{ img.color }} Water Bottle
                       </span>
                       <span
                         v-else-if="product.category === 'tumblers'"
