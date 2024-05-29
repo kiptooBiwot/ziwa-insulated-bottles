@@ -64,6 +64,8 @@ const bottleColor = [
   '#050716',
   '#D5E9F0',
   '#F0E7E2',
+  '#D8C7BF',
+  '#FA01A5',
 ]
 
 const productImg = ref('')
@@ -91,7 +93,7 @@ const availableColors = () => {
     //   productColors.value.includes(color)
     // })
 
-    // console.log('MATCHING COLORS', prodColors);
+    console.log('MATCHING COLORS', prodColors)
     bottleColorFiltered.push(prodColors)
     return prodColors
   }
