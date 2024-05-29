@@ -329,7 +329,8 @@ const isInCart = computed(() => {
             <!-- <template v-for="image in productStore.product" :key="image._id"> -->
             <h2 class="text-gray-900 text-3xl font-semibold">
               <!-- {{ productImg.color }} [{{ productImg.capacity }} ml] Water Bottle -->
-              {{ productImg.color }} {{ productStore.product.title }}
+              {{ productImg.color }} <br />
+              {{ productStore.product.title }}
             </h2>
             <hr class="" />
             <div
