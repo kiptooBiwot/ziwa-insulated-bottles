@@ -105,7 +105,7 @@ const addCustomization = () => {
                 // selectedFont === 'One Little Font' ? 'font-fontFive' : '',
                 // selectedFont === 'Tomorrow' ? 'font-fontSix' : '',
                 selectedFont === 'Charm' ? 'font-fontSeven' : '',
-                selectedFont === 'Coco Gothic' ? 'logoFont' : '',
+                selectedFont === 'Coco Gothic' ? 'font-logoFont' : '',
               ]"
             >
               {{ customName }}

@@ -312,7 +312,7 @@ const isInCart = computed(() => {
                 <template v-for="color in bottleColorFiltered[0]" :key="color">
                   <!-- :style="[availableColors.includes(color) ? { backgroundColor: color } : 'null']" -->
                   <div
-                    class="w-9 h-9 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                    class="w-6 h-6 rounded-full border-[1px] cursor-pointer flex-shrink-0 flex-wrap transition duration-300 ease-in-out hover:border-[#39519f]"
                     :style="{ backgroundColor: color }"
                     @mouseover="showImageWithColor(color)"
                     @click="showImageWithColor(color)"
