@@ -25,15 +25,9 @@ const openPage = (id) => {
   // console.log('THEN AT THE END!')
 }
 
-// onClickOutside(target, () => {
-//   isMenuOpen.value = false
-// })
-
-// const isSubMenuOpen = ref(false)
-
-// const toggleSubMenu = (index) => {
-//   console.log(isSubMenuOpen.value)
-//   isSubMenuOpen.value = !isSubMenuOpen.value
+// const goToBulk = (url) => {
+//   navigateTo(url)
+//   isMobileMenuOpen.value = false
 // }
 </script>
 
@@ -45,6 +39,8 @@ const openPage = (id) => {
         <ul class="gap-5 hidden lg:flex">
           <li v-for="(link, index) in generalStore.leftLinks" :key="index">
             <template v-if="link.type === 'link'">
+              <!-- :to="link.url" -->
+              <!-- @click="goToBulk(link.url)" -->
               <NuxtLink :to="link.url" class="cursor-pointer">
                 {{ link.title }}
               </NuxtLink>
@@ -158,7 +154,12 @@ const openPage = (id) => {
                   :key="index"
                 >
                   <template v-if="link.type === 'link'">
-                    <NuxtLink :to="link.url" class="cursor-pointer">
+                    <!-- :to="link.url" -->
+                    <NuxtLink
+                      @click="showMobileMenu"
+                      :to="link.url"
+                      class="cursor-pointer"
+                    >
                       {{ link.title }}
                     </NuxtLink>
                   </template>
@@ -201,7 +202,10 @@ const openPage = (id) => {
                           >
                             <!-- :to="submenu.url" -->
                             <!-- @click="openPage(submenu.id)" -->
-                            <NuxtLink :to="`/shop/${submenu.category}`">
+                            <NuxtLink
+                              @click="showMobileMenu"
+                              :to="`/shop/${submenu.category}`"
+                            >
                               <div
                                 class="flex items-center justify-between text-white text-[20px] font-bold"
                               >
@@ -240,7 +244,7 @@ const openPage = (id) => {
                     @click.prevent="showMobileMenu"
                     class=""
                   >
-                    <NuxtLink :to="`/${link.url}`">
+                    <NuxtLink :to="link.url">
                       {{ link.title }}
                     </NuxtLink>
                   </li>

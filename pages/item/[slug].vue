@@ -54,6 +54,7 @@ const bottleColor = [
   '#000013', //done
   '#A33806',
   '#8D596A',
+  '#F1C7EB',
   '#FFC702',
   '#E36D6E',
   '#0C383B',
@@ -471,7 +472,7 @@ const isInCart = computed(() => {
             <!-- </template> -->
           </div>
         </div>
-        <div v-else class="w-full">
+        <div v-else class="w-full min-h-screen">
           <div class="flex items-center justify-center w-full h-full">
             <div
               class="flex justify-center items-center space-x-1 text-xl text-[#39519f]"

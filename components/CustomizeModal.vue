@@ -94,7 +94,7 @@ const addCustomization = () => {
               textPosition === 'top' ? 'items-start' : '',
             ]"
           >
-            <!-- -[#4F584E] #636e62 -->
+            <!-- -[#4F584E] #636e62 #F1C7EB #E6CEE8-->
             <p
               class="font-medium text-[#4F584E] text-2xl vertical-text transform rotate-180"
               :class="[
