@@ -7,7 +7,7 @@ export const useGeneralStore = defineStore('general', {
       { title: 'Bottles', url: '#Home' },
       { title: 'Tumblers', url: 'tumblers' },
       { title: 'Kids', url: 'kids' },
-      { title: 'Bulk Custom', url: 'contact' },
+      { title: 'Bulk Orders', url: 'bulk-orders' },
       { title: 'Shop', url: '#Shop' },
       { title: 'Contact', url: 'contact' },
     ],
