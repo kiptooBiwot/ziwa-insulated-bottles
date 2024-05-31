@@ -6,6 +6,7 @@ export const useDeliveryStore = defineStore('delivery', {
       {
         name: 'Thika Road Route',
         estate: [
+          { estateName: 'CBD', cost: 100 },
           { estateName: 'Ngara', cost: 150 },
           { estateName: 'Pangani', cost: 150 },
           { estateName: 'Eastleigh', cost: 250 },
@@ -31,6 +32,15 @@ export const useDeliveryStore = defineStore('delivery', {
           { estateName: 'Kararani Area - Sunton', cost: 400 },
           { estateName: 'Kararani Area - Hunters', cost: 400 },
           { estateName: 'Kararani Area - Mwiki', cost: 500 },
+        ]
+      },
+      {
+        name: 'CBD',
+        estate: [
+          {
+            estateName: 'Around CBD',
+            cost: 100
+          }
         ]
       },
       {
