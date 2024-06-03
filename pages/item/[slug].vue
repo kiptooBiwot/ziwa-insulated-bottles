@@ -459,7 +459,12 @@ const isInCart = computed(() => {
                 @click="customizeBottle = !customizeBottle"
                 class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
               >
-                <span v-if="productStore.product.category === 'big-bottle' || 'kids-bottle'"
+                <span
+                  v-if="
+                    productStore.product.category === 'big-bottle' ||
+                    'kids-bottle' ||
+                    'tumblers'
+                  "
                   >Customize for Free</span
                 >
                 <span v-else>Customize for Ksh.400</span>

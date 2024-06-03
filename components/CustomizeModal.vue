@@ -51,7 +51,11 @@ const addCustomization = () => {
   productStore.customName = customName.value
   productStore.selectedFont = selectedFont.value
 
-  if (props.productDetails.category === 'big-bottle' || 'kids-bottle') {
+  if (
+    props.productDetails.category === 'big-bottle' ||
+    'kids-bottle' ||
+    'tumblers'
+  ) {
     productStore.customizationFee = 0
   } else {
     productStore.customizationFee = 400
@@ -189,7 +193,11 @@ const addCustomization = () => {
           </div>
         </div>
         <h4
-          v-if="productDetails.category === 'big-bottle' || 'kids-bottle'"
+          v-if="
+            productDetails.category === 'big-bottle' ||
+            'kids-bottle' ||
+            'tumblers'
+          "
           class="text-xs text-gray-800 mb-2"
         >
           Your bottle of choice will be customized for
