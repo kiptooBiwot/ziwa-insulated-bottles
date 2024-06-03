@@ -10,7 +10,7 @@
     <img
       src="/images/ziwa_hero.jpeg"
       alt=""
-      class="h-[250px] lg:h-[500px] w-full object-cover"
+      class="h-[250px] lg:h-[500px] w-full object-cover object-bottom"
     />
   </div>
 </template>

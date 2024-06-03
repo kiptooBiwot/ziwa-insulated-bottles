@@ -4,7 +4,7 @@ import { useToastStore } from '@/stores/toast'
 import { storeToRefs } from 'pinia'
 // import bottle from '~/assets/images/products/bottle1-bg.png'
 
-const props = defineProps(['bottle', 'slug'])
+const props = defineProps(['productDetails', 'bottle', 'slug'])
 const productStore = useProductStore()
 const toast = useToastStore()
 const emits = defineEmits('closeModal')
@@ -50,7 +50,12 @@ const addCustomization = () => {
   }
   productStore.customName = customName.value
   productStore.selectedFont = selectedFont.value
-  productStore.customizationFee = 400
+
+  if (props.productDetails.category === 'big-bottle') {
+    productStore.customizationFee = 0
+  } else {
+    productStore.customizationFee = 400
+  }
   emits('closeModal')
 
   toast.add({
@@ -183,9 +188,16 @@ const addCustomization = () => {
             </svg>
           </div>
         </div>
-        <h4 class="text-xs text-gray-800 mb-2">
-          Your bottle of choice will be customised at an additional fee of
+        <h4
+          v-if="productDetails.category !== 'big-bottle'"
+          class="text-xs text-gray-800 mb-2"
+        >
+          Your bottle of choice will be customized at an additional fee of
           <span class="text-green-500 font-semibold">KSH.400/=</span>
+        </h4>
+        <h4 v-else class="text-xs text-gray-800 mb-2">
+          Your bottle of choice will be customized for
+          <span class="text-green-500 font-semibold">FREE</span>
         </h4>
 
         <div class="space-y-3 border rounded-md p-4 h-3/4">

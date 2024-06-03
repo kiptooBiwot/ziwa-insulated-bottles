@@ -459,7 +459,10 @@ const isInCart = computed(() => {
                 @click="customizeBottle = !customizeBottle"
                 class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
               >
-                Customize for Ksh.400
+                <span v-if="productStore.product.category === 'big-bottle'"
+                  >Customize for Free</span
+                >
+                <span v-else>Customize for Ksh.400</span>
               </button>
               <button
                 @click="addToCart"
@@ -500,6 +503,7 @@ const isInCart = computed(() => {
         >
           <CustomizeModal
             @closeModal="closeModal"
+            :productDetails="productStore?.product"
             :bottle="productImg.color"
             :slug="route.params.slug"
           />
