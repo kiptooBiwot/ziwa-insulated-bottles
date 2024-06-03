@@ -189,15 +189,15 @@ const addCustomization = () => {
           </div>
         </div>
         <h4
-          v-if="productDetails.category !== 'big-bottle' || 'kids-bottle'"
+          v-if="productDetails.category === 'big-bottle' || 'kids-bottle'"
           class="text-xs text-gray-800 mb-2"
         >
-          Your bottle of choice will be customized at an additional fee of
-          <span class="text-green-500 font-semibold">KSH.400/=</span>
-        </h4>
-        <h4 v-else class="text-xs text-gray-800 mb-2">
           Your bottle of choice will be customized for
           <span class="text-green-500 font-semibold">FREE</span>
+        </h4>
+        <h4 v-else class="text-xs text-gray-800 mb-2">
+          Your bottle of choice will be customized at an additional fee of
+          <span class="text-green-500 font-semibold">KSH.400/=</span>
         </h4>
 
         <div class="space-y-3 border rounded-md p-4 h-3/4">
