@@ -58,7 +58,16 @@ export const useProductStore = defineStore('product', {
         }
 
       })
-
+    },
+    originalPrice: (state) => {
+      state.dbProducts.forEach((product) => {
+        if (product.category === 'big-bottle' || product.category === 'tumblers' || product.category === 'kids-bottle') {
+          const originalPrice = product.images.map((item) => {
+            // console.log('ORIGINAL PRICE', item.price);
+            return item.price
+          })
+        }
+      })
     }
   },
   actions: {

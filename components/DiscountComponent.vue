@@ -7,8 +7,6 @@ const productStore = useProductStore()
 const originalPrice = computed(() => {
   return (props.price += productStore.discountAmount)
 })
-
-console.log('ORIGINAL PRICE:', originalPrice)
 </script>
 
 <template>
@@ -16,12 +14,11 @@ console.log('ORIGINAL PRICE:', originalPrice)
     <span
       class="text-red-500 text-[11px] font-bold px-1 py-2 leading-none items-center"
     >
-      {{ useCurrencyFormatter(price) }}
+      {{ useCurrencyFormatter(props.price) }}
     </span>
     <span
       class="block bg-white rounded-full text-orange-500 text-[11px] font-bold px-1 py-2 leading-none items-center line-through"
     >
-      <!-- <div v-if=""></div> -->
       {{ useCurrencyFormatter(originalPrice) }}
     </span>
   </div>
