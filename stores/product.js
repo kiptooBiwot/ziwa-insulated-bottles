@@ -20,8 +20,8 @@ export const useProductStore = defineStore('product', {
     selectedProduct: null,
 
     // Edit this to add a discount and the amount
-    discountOffer: false,
-    discountAmount: 0,
+    discountOffer: true,
+    discountAmount: 200,
 
     dbProducts: [],
     product: null,
@@ -47,7 +47,7 @@ export const useProductStore = defineStore('product', {
     discountedPrice: (state) => {
 
       state.dbProducts.forEach((product) => {
-        if (product.category === 'big-bottle') {
+        if (product.category === 'big-bottle' || product.category === 'tumblers' || product.category === 'kids-bottle') {
           const newPrice = product.images.map((item) => {
 
             item.price -= state.discountAmount

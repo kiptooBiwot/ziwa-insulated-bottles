@@ -154,11 +154,16 @@ const sendId = (id) => {
                         >
                         <DiscountComponent
                           v-if="
-                            productStore.discountOffer &&
-                            product.category === 'big-bottle'
+                            (productStore.discountOffer &&
+                              product.category === 'big-bottle') ||
+                            (productStore.discountOffer &&
+                              product.category === 'tumblers') ||
+                            (productStore.discountOffer &&
+                              product.category === 'kids-bottle')
                           "
                           :price="img.price"
                         />
+
                         <span
                           v-else
                           class="block bg-white rounded-full text-orange-500 text-[11px] font-bold px-1 py-2 leading-none items-center"
