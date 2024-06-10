@@ -2,14 +2,19 @@
 import { useProductStore } from '@/stores/product.js'
 const props = defineProps(['price'])
 
-console.log('PRICE PROP', props.price)
+// console.log('PRICE PROP', props.price)
 
 const productStore = useProductStore()
 
 const originalPrice = computed(() => {
-  const originalP = (props.price += productStore.discountAmount)
+  let propPrice = props.price
+  const originalP = (propPrice += productStore.discountAmount)
   return originalP
 })
+// const discountedPrice = computed(() => {
+//   const discounted = (props.price -= productStore.discountAmount)
+//   return discounted
+// })
 </script>
 
 <template>
