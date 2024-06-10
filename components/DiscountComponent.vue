@@ -2,10 +2,13 @@
 import { useProductStore } from '@/stores/product.js'
 const props = defineProps(['price'])
 
+console.log('PRICE PROP', props.price)
+
 const productStore = useProductStore()
 
 const originalPrice = computed(() => {
-  return (props.price += productStore.discountAmount)
+  const originalP = (props.price += productStore.discountAmount)
+  return originalP
 })
 </script>
 
@@ -14,7 +17,7 @@ const originalPrice = computed(() => {
     <span
       class="text-red-500 text-[11px] font-bold px-1 py-2 leading-none items-center"
     >
-      {{ useCurrencyFormatter(props.price) }}
+      {{ useCurrencyFormatter(price) }}
     </span>
     <span
       class="block bg-white rounded-full text-orange-500 text-[11px] font-bold px-1 py-2 leading-none items-center line-through"

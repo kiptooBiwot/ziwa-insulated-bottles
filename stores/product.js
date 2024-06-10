@@ -54,6 +54,8 @@ export const useProductStore = defineStore('product', {
 
             return item.price
           })
+
+          // return newPrice
           // console.log('New Price', newPrice);
         }
 
