@@ -45,6 +45,11 @@ const productSchema = new Schema({
       required: false,
       trim: true,
     },
+    inStock: {
+      type: Boolean,
+      default: true,
+      required: true,
+    },
     colorCode: {
       type: String,
     }

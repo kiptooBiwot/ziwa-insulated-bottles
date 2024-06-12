@@ -241,6 +241,12 @@ const isInCart = computed(() => {
             >
               <!-- [#89CFF0] bg-[#89CFF0] -->
               <!-- :class="`bg-${product.bgColor}`" -->
+              <div
+                v-if="!productImg.inStock"
+                class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
+              >
+                Sold Out
+              </div>
               <svg
                 class="absolute bottom-0 left-0 mb-8"
                 viewBox="0 0 375 283"
@@ -458,6 +464,7 @@ const isInCart = computed(() => {
               <button
                 @click="customizeBottle = !customizeBottle"
                 class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
+                :disabled="!productImg.inStock"
               >
                 <span
                   v-if="
@@ -472,6 +479,7 @@ const isInCart = computed(() => {
               <button
                 @click="addToCart"
                 class="px-6 w-full py-3 text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500"
+                :disabled="!productImg.inStock"
               >
                 <div v-if="isInCart">Add Another Bottle to Cart</div>
                 <div v-else>Add to Cart</div>

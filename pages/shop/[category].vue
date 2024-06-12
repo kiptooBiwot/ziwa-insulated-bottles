@@ -64,6 +64,12 @@ const sendId = (id) => {
                   :key="img._id"
                   class="flex-shrink-0 m-6 md:m-2 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg"
                 >
+                  <div
+                    v-if="!img.inStock"
+                    class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
+                  >
+                    Sold Out
+                  </div>
                   <!-- [#89CFF0] -->
                   <NuxtLink
                     :to="{
