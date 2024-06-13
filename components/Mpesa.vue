@@ -60,8 +60,8 @@ const validateTransaction = (data) => {
             })
             break
           case 1032:
-            processStore.mpesaProcessComplete = false
-            processStore.mpesaProcessCancelled = true
+            productStore.mpesaProcessComplete = false
+            productStore.mpesaProcessCancelled = true
             // console.log('Transaction cancelled by the user');
             toast.add({
               type: 'error',
@@ -69,8 +69,8 @@ const validateTransaction = (data) => {
             })
             break
           case 2001:
-            processStore.mpesaProcessComplete = false
-            processStore.mpesaProcessCancelled = true
+            productStore.mpesaProcessComplete = false
+            productStore.mpesaProcessCancelled = true
             // console.log('The initiator info. is invalid');
             toast.add({
               type: 'error',
@@ -78,8 +78,8 @@ const validateTransaction = (data) => {
             })
             break
           default:
-            processStore.mpesaProcessComplete = false
-            processStore.mpesaProcessCancelled = true
+            productStore.mpesaProcessComplete = false
+            productStore.mpesaProcessCancelled = true
             // console.log('Transaction failed')
             toast.add({
               type: 'error',
