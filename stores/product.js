@@ -35,6 +35,7 @@ export const useProductStore = defineStore('product', {
     deliveryCost: 0,
     orderUserId: '',
     mpesaProcessComplete: false,
+    mpesaProcessCancelled: false,
     paymentResponse: null,
     paymentDetails: null
   }),

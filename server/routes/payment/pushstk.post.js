@@ -68,13 +68,14 @@ export default defineEventHandler(async (event) => {
     Timestamp: timestamp,
     TransactionType: "CustomerBuyGoodsOnline",
     //"CustomerPayBillOnline", // CustomerBuyGoodsOnline - Till number
-    Amount: amount,
+    // Amount: amount,
+    Amount: 1,
     PartyA: `254${phone}`,
     // Party B Should be the Till Number not shortcode
     PartyB: tillNumber,
     PhoneNumber: `254${phone}`,
     CallBackURL: `${process.env.MPESA_CALLBACK}/payment/callback`,
-    // CallBackURL: ''
+    // CallBackURL: 'https://536d-102-216-154-61.ngrok-free.app/payment/callback',
     AccountReference: `254${phone}`, //`254${phone}`
     TransactionDesc: "Payment for goods",
   }
@@ -87,7 +88,7 @@ export default defineEventHandler(async (event) => {
       },
     },)
 
-    console.log('RESPONSE.DATA', response.data)
+    // console.log('STK RESPONSE.DATA', response.data)
 
     const responseData = []
     responseData.push(response.data)
@@ -108,7 +109,7 @@ export default defineEventHandler(async (event) => {
 
     return response.data
   } catch (error) {
-    console.log(error.response)
+    // console.log(error.response)
     throw createError({
       statusCode: 400,
       statusMessage: 'An error occurred sending the PushSTK',

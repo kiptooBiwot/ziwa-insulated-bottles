@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   //   return 'OK'
   // }
 
-  console.log('CALLBACK RESPONSE', callbackData);
+  // console.log('CALLBACK RESPONSE', callbackData);
 
   // const response = callbackData.Body.stkCallback.CallbackMetadata
   const response = callbackData.Body.stkCallback

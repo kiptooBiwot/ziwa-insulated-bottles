@@ -8,7 +8,8 @@ import mpesa from '@/assets/images/lipa-na-mpesa.png'
 
 const productStore = useProductStore()
 const toast = useToastStore()
-const { mpesaProcessComplete, orderUserId } = storeToRefs(productStore)
+const { mpesaProcessComplete, mpesaProcessCancelled, orderUserId } =
+  storeToRefs(productStore)
 
 const formData = ref({
   firstName: '',
@@ -208,8 +209,48 @@ const submit = async () => {
                 (productStore.paymentResponse = null),
                 (productStore.paymentDetails = null)
 
+              productStore.mpesaProcessComplete = false
+
               // }
             }
+          } else if (mpesaProcessCancelled.value) {
+            showMpesaModal.value = false
+
+            toast.add({
+              type: 'error',
+              message: 'Your payment was not successful. Please try again.',
+            })
+
+            errors.value = true
+            success.value = false
+            waiting.value = false
+            formData.value = {
+              name: '',
+              email: '',
+              subject: '',
+              message: '',
+            }
+            ;(productStore.customName = ''),
+              (productStore.selectedFont = ''),
+              (productStore.textPosition = ''),
+              (productStore.customizationFee = 0),
+              (productStore.customizedBottle = false),
+              (productStore.selectedProduct = null),
+              (productStore.dbProducts = []),
+              (productStore.product = null),
+              (productStore.cart = []),
+              // product detail page id to select product color & image
+              (productStore.imageId = ''),
+              // destination: {
+              (productStore.deliveryRoute = []),
+              (productStore.deliveryLocation = ''),
+              (productStore.deliveryCost = 0),
+              (productStore.orderUserId = ''),
+              (productStore.mpesaProcessComplete = false),
+              (productStore.paymentResponse = null),
+              (productStore.paymentDetails = null)
+
+            productStore.mpesaProcessCancelled = false
           }
         }
       )
