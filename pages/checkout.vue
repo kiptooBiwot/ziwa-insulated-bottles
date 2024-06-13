@@ -210,6 +210,7 @@ const submit = async () => {
                 (productStore.paymentDetails = null)
 
               productStore.mpesaProcessComplete = false
+              productStore.mpesaProcessCancelled = false
 
               // }
             }

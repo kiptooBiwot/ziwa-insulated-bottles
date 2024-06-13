@@ -26,7 +26,7 @@ const transactionId = ref('')
 // Validate the transaction
 const validateTransaction = (data) => {
   let payload = data.value
-  console.log('FE PAYLOAD:', payload.MerchantRequestID)
+  // console.log('FE PAYLOAD:', payload.MerchantRequestID)
   // console.log('VALIDATE TRANSACTION')
   const checkStatus = async () => {
     try {
@@ -39,7 +39,7 @@ const validateTransaction = (data) => {
         // body: transactionId.value
       })
 
-      console.log('VERIFICATION RESP:', data)
+      // console.log('VERIFICATION RESP:', data)
 
       if (data) {
         transactionData = true
@@ -88,8 +88,6 @@ const validateTransaction = (data) => {
             await checkStatus()
             break
         }
-      } else {
-        console.log('DATA IN ELSE STATEMENT:', data)
       }
       isLoading.value = false
     } catch (error) {
