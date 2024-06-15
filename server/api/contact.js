@@ -418,9 +418,11 @@ span.MsoHyperlinkFollowed {
     html: emailFormat,
   }
 
+  const companyName = "Ziwa Limited"
+  const fromEmail = "orders@ziwa.co.ke"
 
   const customerOptions = {
-    from: 'sales@ziwa.co.ke',
+    from: `"${companyName}" <${fromEmail}>`,
     to: `${body.formData.email}`,
     subject: 'Order Confirmation',
     html: customerEmail,
