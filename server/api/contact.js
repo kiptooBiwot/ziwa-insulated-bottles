@@ -441,9 +441,9 @@ span.MsoHyperlinkFollowed {
     // console.log('Message sent: %s', mail.messageId);
     // console.log('Mail: %s', mail.accepted);
 
-    console.log('Customer Email sent:', customerEmail.accepted)
+    console.log('Customer Email sent:', customerMail.accepted)
 
-    if (mail.accepted.length > 0 && customerEmail.length > 0) {
+    if (mail.accepted.length > 0 && customerMail.length > 0) {
       setResponseStatus(event, 200)
       return { statusCode: 200 }
     }
