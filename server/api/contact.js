@@ -14,10 +14,10 @@ export default defineEventHandler(async (event) => {
       user: config.MAILUSER,
       pass: config.MAILPASSWORD,
     },
-    tls: {
-      rejectUnauthorized: false,
-      ignoreTLS: true,
-    }
+    // tls: {
+    //   rejectUnauthorized: false,
+    //   ignoreTLS: true,
+    // }
   });
 
 
