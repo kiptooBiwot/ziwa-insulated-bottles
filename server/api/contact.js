@@ -20,6 +20,8 @@ export default defineEventHandler(async (event) => {
     }
   });
 
+  console.log('TRANSPORTER:', transporter);
+
   let date = new Date().toLocaleString('en-GB').split(",")
   let orderDate = date[0]
 
@@ -456,7 +458,7 @@ span.MsoHyperlinkFollowed {
 
     // return Promise.resolve()
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     return Promise.reject()
   }
 
