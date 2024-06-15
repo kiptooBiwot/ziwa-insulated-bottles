@@ -418,28 +418,28 @@ span.MsoHyperlinkFollowed {
     html: emailFormat,
   }
 
-  const companyName = "Ziwa Limited"
-  const fromEmail = "orders@ziwa.co.ke"
+  // const companyName = "Ziwa Limited"
+  // const fromEmail = "orders@ziwa.co.ke"
 
-  const customerOptions = {
-    from: `"${companyName}" <${fromEmail}>`,
-    to: `${body.formData.email}`,
-    subject: 'Order Confirmation',
-    html: customerEmail,
-  }
+  // const customerOptions = {
+  //   from: `"${companyName}" <${fromEmail}>`,
+  //   to: `${body.formData.email}`,
+  //   subject: 'Order Confirmation',
+  //   html: customerEmail,
+  // }
 
   try {
     // isValid(body)
     //   .then(async (body) => {
     const mail = await transporter.sendMail(mailOptions)
 
-    const customerMail = await transporter.sendMail(customerOptions)
+    // const customerMail = await transporter.sendMail(customerOptions)
     // })
 
     // console.log('Message sent: %s', mail.messageId);
     // console.log('Mail: %s', mail.accepted);
 
-    console.log('Customer Email sent:', customerEmail.accepted)
+    // console.log('Customer Email sent:', customerEmail.accepted)
 
     if (mail.accepted.length > 0) {
       setResponseStatus(event, 200)
