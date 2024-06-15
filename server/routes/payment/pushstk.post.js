@@ -68,8 +68,8 @@ export default defineEventHandler(async (event) => {
     Timestamp: timestamp,
     TransactionType: "CustomerBuyGoodsOnline",
     //"CustomerPayBillOnline", // CustomerBuyGoodsOnline - Till number
-    // Amount: amount,
-    Amount: 1,
+    Amount: amount,
+    // Amount: 1,
     PartyA: `254${phone}`,
     // Party B Should be the Till Number not shortcode
     PartyB: tillNumber,
