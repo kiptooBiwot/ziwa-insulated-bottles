@@ -68,13 +68,15 @@ export default defineEventHandler(async (event) => {
     Timestamp: timestamp,
     TransactionType: "CustomerBuyGoodsOnline",
     //"CustomerPayBillOnline", // CustomerBuyGoodsOnline - Till number
-    Amount: amount,
+    // Amount: amount,
+    Amount: 1,
     PartyA: `254${phone}`,
     // Party B Should be the Till Number not shortcode
     PartyB: tillNumber,
     PhoneNumber: `254${phone}`,
     CallBackURL: `${process.env.MPESA_CALLBACK}/payment/callback`,
     // CallBackURL: 'https://536d-102-216-154-61.ngrok-free.app/payment/callback',
+    // CallBackURL: 'https://prdd8gtt-3000.euw.devtunnels.ms/payment/callback',
     AccountReference: `254${phone}`, //`254${phone}`
     TransactionDesc: "Payment for goods",
   }
