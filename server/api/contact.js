@@ -6,30 +6,10 @@ const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   // ziwa.co.ke MAIL SERVER TRANSPORTER
-  const transporter = nodemailer.createTransport({
-    host: config.MAILHOST,
-    port: config.MAILPORT,
-    secure: true,
-    auth: {
-      user: config.MAILUSER,
-      pass: config.MAILPASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: false,
-      ignoreTLS: true,
-    }
-  });
-
-  console.log('TRANSPORTER:', transporter);
-
-  let date = new Date().toLocaleString('en-GB').split(",")
-  let orderDate = date[0]
-
-  // GMAIL TRANSPORTER
   // const transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   // host: config.MAILHOST,
-  //   // port: config.MAILPORT,
+  //   host: config.MAILHOST,
+  //   port: config.MAILPORT,
+  //   secure: true,
   //   auth: {
   //     user: config.MAILUSER,
   //     pass: config.MAILPASSWORD,
@@ -39,6 +19,26 @@ export default defineEventHandler(async (event) => {
   //     ignoreTLS: true,
   //   }
   // });
+
+  // console.log('TRANSPORTER:', transporter);
+
+  let date = new Date().toLocaleString('en-GB').split(",")
+  let orderDate = date[0]
+
+  // GMAIL TRANSPORTER
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    // host: config.MAILHOST,
+    // port: config.MAILPORT,
+    auth: {
+      user: config.MAILUSER,
+      pass: config.MAILPASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+      ignoreTLS: true,
+    }
+  });
   // try {
   const body = await readBody(event);
   // const bodyContentValid = await isValid(body)
