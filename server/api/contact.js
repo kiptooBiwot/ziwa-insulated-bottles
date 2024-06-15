@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   const transporter = nodemailer.createTransport({
     host: config.MAILHOST,
     port: config.MAILPORT,
+    secure: true,
     auth: {
       user: config.MAILUSER,
       pass: config.MAILPASSWORD,
