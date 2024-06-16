@@ -29,6 +29,7 @@ export default defineEventHandler(async (event) => {
     // console.log('TRANSACTION VERIFIED', transaction);
     return transaction
   } catch (error) {
+    // console.log('VALIDATE ERROR:', error);
     throw createError({
       statusCode: 400,
       statusMessage: error

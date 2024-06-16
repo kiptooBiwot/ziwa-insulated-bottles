@@ -39,7 +39,7 @@ const validateTransaction = (data) => {
         // body: transactionId.value
       })
 
-      // console.log('VERIFICATION RESP:', data)
+      console.log('VERIFICATION RESP:', data)
 
       if (data) {
         transactionData = true
@@ -91,7 +91,7 @@ const validateTransaction = (data) => {
       }
       isLoading.value = false
     } catch (error) {
-      // console.log('FETCH ERROR CATCH', error);
+      console.log('FETCH ERROR CATCH', error)
       isLoading.value = false
       toast.add({
         type: 'error',
@@ -151,7 +151,7 @@ const confirmMpesaPayment = async () => {
       method: 'GET',
       // body: transactionId.value
     })
-    console.log('FE RESPONSE', resp)
+    // console.log('FE RESPONSE', resp)
     if (resp) {
       productStore.paymentDetails = resp
       productStore.mpesaProcessComplete = true
@@ -226,8 +226,10 @@ const confirmMpesaPayment = async () => {
             <Icon
               name="gg:spinner-two-alt"
               class="w-6 h-6 fill-white animate-spin mr-3"
-            /> </span
-          ><span>Proceed</span>
+            />
+          </span>
+          <span v-if="isLoading">Processing...</span>
+          <span v-else>Proceed</span>
         </button>
       </form>
     </div>

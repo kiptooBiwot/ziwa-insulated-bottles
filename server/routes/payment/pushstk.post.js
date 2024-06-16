@@ -15,7 +15,6 @@ const getAccessToken = async () => {
     "Basic " +
     new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64")
 
-  // console.log('AUTH:', auth);
   try {
 
     const response = await axios.get(authUrl, {
@@ -33,34 +32,20 @@ const getAccessToken = async () => {
 
 export default defineEventHandler(async (event) => {
 
-  // console.log('WE ARE REACHING THIS STK ROUTE!');
-
   const token = await getAccessToken()
 
   let { amount, phone } = await readBody(event)
 
-  // console.log('TOKEN:', token.data.access_token);
-  // const amount = body.amount
   phone = phone.substring(1)
   let accessToken = token.data.access_token
-
-  // console.log('AMOUNT:', amount)
-  // console.log('PHONE:', phone)
 
   const url = process.env.MPESA_URL
   const auth = `Bearer ${accessToken}`
   const passkey = process.env.MPESA_PASSKEY
-  // const shortcode = process.env.MPESA_SHORTCODE
   const shortcode = process.env.MPESA_SHORTCODE
   const tillNumber = process.env.MPESA_TILLNUMBER
   const timestamp = moment().format("YYYYMMDDHHmmss")
   const password = new Buffer.from(shortcode + passkey + timestamp).toString("base64")
-
-  // console.log('AUTH', auth);
-  // console.log('Timestamp', timestamp);
-  // console.log('Password', password);
-  // console.log('URL', url);
-  // console.log('SHORTCODE', shortcode);
 
   const data = {
     BusinessShortCode: shortcode,
@@ -68,15 +53,13 @@ export default defineEventHandler(async (event) => {
     Timestamp: timestamp,
     TransactionType: "CustomerBuyGoodsOnline",
     //"CustomerPayBillOnline", // CustomerBuyGoodsOnline - Till number
-    Amount: amount,
-    // Amount: 1,
+    // Amount: amount,
+    Amount: 1,
     PartyA: `254${phone}`,
     // Party B Should be the Till Number not shortcode
     PartyB: tillNumber,
     PhoneNumber: `254${phone}`,
     CallBackURL: `${process.env.MPESA_CALLBACK}/payment/callback`,
-    // CallBackURL: 'https://1237-105-160-52-243.ngrok-free.app/payment/callback',
-    // CallBackURL: 'https://prdd8gtt-3000.euw.devtunnels.ms/payment/callback',
     AccountReference: `254${phone}`, //`254${phone}`
     TransactionDesc: "Payment for goods",
   }
@@ -88,8 +71,6 @@ export default defineEventHandler(async (event) => {
         'Content-Type': 'application/json'
       },
     },)
-
-    // console.log('STK RESPONSE.DATA', response.data)
 
     const responseData = []
     responseData.push(response.data)

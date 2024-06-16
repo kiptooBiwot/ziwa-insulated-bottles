@@ -4,16 +4,7 @@ export default defineEventHandler(async (event) => {
 
   const callbackData = await readBody(event)
 
-  // if (!callbackData.Body.stkCallback.CallbackMetadata) {
-  //   return 'OK'
-  // }
-
-  // console.log('CALLBACK RESPONSE', callbackData);
-
-  // const response = callbackData.Body.stkCallback.CallbackMetadata
   const response = callbackData.Body.stkCallback
-
-  console.log('CALLBACK RESPONSE', response);
 
   const transaction = {
     MerchantRequestID: response.MerchantRequestID,
@@ -27,21 +18,16 @@ export default defineEventHandler(async (event) => {
     PhoneNumber: response.CallbackMetadata?.Item[4].Value,
   };
 
-  // const phoneNumber = response.Item[4].Value
-  // const transactionID = response.Item[1].Value
-  // const amount = response.Item[0].Value
-  // const transactionTime = response.Item[3].Value
-
-  // console.log('PHONE:', phoneNumber);
-  // console.log('TRANSACTION ID:', transactionID);
-  // console.log('AMOUNT:', amount);
-  // console.log('TRANSACTION TIME:', transactionTime);
+  // console.log('TRANSACTION:', transaction);
 
   const payment = new Payment({
     ...transaction
   })
 
+  // console.log('PAYMENT TO BE SAVED:', payment);
+
   await payment.save()
+  // console.log('SAVED PAYMENT:', savedPayment);
 
   return 'success'
 })
