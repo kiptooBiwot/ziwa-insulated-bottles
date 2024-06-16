@@ -4,11 +4,11 @@ export const useGeneralStore = defineStore('general', {
     transactionData: false,
     newLinks: [
       { title: 'About', url: 'about-us' },
-      { title: 'Bottles', url: '#Home' },
-      { title: 'Tumblers', url: 'tumblers' },
+      { title: 'Bottles', url: '#best-sellers' },
+      { title: 'Tumblers', url: '#best-sellers' },
       { title: 'Kids', url: 'kids' },
       { title: 'Bulk Orders', url: 'bulk-orders' },
-      { title: 'Shop', url: '#Shop' },
+      // { title: 'Shop', url: '#Shop' },
       { title: 'Contact', url: 'contact' },
     ],
     leftLinks: [

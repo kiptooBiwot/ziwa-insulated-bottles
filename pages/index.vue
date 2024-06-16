@@ -130,7 +130,7 @@ const closeModal = () => {
       <HomeHeroOne />
     </div>
 
-    <div>
+    <div id="best-sellers">
       <HomeBestSellers />
     </div>
 

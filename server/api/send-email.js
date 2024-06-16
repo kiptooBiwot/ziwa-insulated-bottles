@@ -3,7 +3,7 @@ import { Resend } from 'resend'
 import validator from 'validator'
 const config = useRuntimeConfig()
 
-const resend = new Resend()
+const resend = new Resend(config.RESEND_API)
 
 export default defineEventHandler(async (event) => {
   // const transporter = nodemailer.createTransport({
@@ -53,27 +53,37 @@ export default defineEventHandler(async (event) => {
       </body>
     `
 
-  const mailOptions = {
-    from: `"${body.fullName}" <${body.fullName}`,
-    to: config.CONTACTMAIL,
-    subject: 'An Email from the Ziwa Contact Form',
-    html: emailDetails
-  }
+  // const mailOptions = {
+  //   from: `"${body.fullName}" <${body.fullName}`,
+  //   to: config.CONTACTMAIL,
+  //   subject: 'An Email from the Ziwa Contact Form',
+  //   html: emailDetails
+  // }
 
   try {
-    const mail = await transporter.sendMail(mailOptions)
+    // const mail = await transporter.sendMail(mailOptions)
 
-    if (mail.accepted.length > 0) {
-      setResponseStatus(event, 200)
-      return { statusCode: 200 }
-    }
+    const emailSent = await resend.emails.send({
+      from: `"${body.fullName}" <${body.fullName}>`,
+      to: config.CONTACTMAIL,
+      subject: 'An Email from the Ziwa Contact Form',
+      html: emailDetails
+    })
 
-    if (mail.rejected.length > 0) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Your message was not received. Please try again.'
-      })
-    }
+    setResponseStatus(event, 200)
+    return { statusCode: 200 }
+
+    // if (mail.accepted.length > 0) {
+    //   setResponseStatus(event, 200)
+    //   return { statusCode: 200 }
+    // }
+
+    // if (mail.rejected.length > 0) {
+    //   throw createError({
+    //     statusCode: 400,
+    //     statusMessage: 'Your message was not received. Please try again.'
+    //   })
+    // }
 
 
   } catch (error) {
