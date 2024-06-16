@@ -1,24 +1,26 @@
-import nodemailer from 'nodemailer';
-import validator from 'validator';
-const config = useRuntimeConfig();
+import { Resend } from 'resend'
+// import nodemailer from 'nodemailer'
+import validator from 'validator'
+const config = useRuntimeConfig()
 
+const resend = new Resend(config.RESEND_API)
 
 
 export default defineEventHandler(async (event) => {
   // ziwa.co.ke MAIL SERVER TRANSPORTER
-  const transporter = nodemailer.createTransport({
-    host: config.MAILHOST,
-    port: config.MAILPORT,
-    secure: true,
-    auth: {
-      user: config.MAILUSER,
-      pass: config.MAILPASSWORD,
-    },
-    // tls: {
-    //   rejectUnauthorized: false,
-    //   ignoreTLS: true,
-    // }
-  });
+  // const transporter = nodemailer.createTransport({
+  //   host: config.MAILHOST,
+  //   port: config.MAILPORT,
+  //   secure: true,
+  //   auth: {
+  //     user: config.MAILUSER,
+  //     pass: config.MAILPASSWORD,
+  //   },
+  //   // tls: {
+  //   //   rejectUnauthorized: false,
+  //   //   ignoreTLS: true,
+  //   // }
+  // });
 
 
   let date = new Date().toLocaleString('en-GB').split(",")
@@ -40,9 +42,7 @@ export default defineEventHandler(async (event) => {
   // });
   // try {
   const body = await readBody(event);
-  // const bodyContentValid = await isValid(body)
 
-  // console.log('BODY TOP', body);
   const fullName = body.formData.firstName + ' ' + body.formData.lastName
   let template = '<div>'
 
@@ -412,13 +412,13 @@ span.MsoHyperlinkFollowed {
     `
 
 
-  const mailOptions = {
-    from: `"${fullName}" <${body.formData.email}>`,
-    to: config.CONTACTMAIL,
-    subject: body.formData.subject,
-    // text: data.message,
-    html: emailFormat,
-  }
+  // const mailOptions = {
+  //   from: `"${fullName}" <${body.formData.email}>`,
+  //   to: config.CONTACTMAIL,
+  //   subject: body.formData.subject,
+  //   // text: data.message,
+  //   html: emailFormat,
+  // }
 
   // const companyName = "Ziwa Limited"
   // const fromEmail = "orders@ziwa.co.ke"
@@ -430,10 +430,33 @@ span.MsoHyperlinkFollowed {
   //   html: customerEmail,
   // }
 
+
   try {
+    const companyName = "Ziwa Orders"
+    const fromEmail = "orders@ziwa.co.ke"
+
+    const sendOrder = await resend.emails.send({
+      from: `"${fullName}" <${body.formData.email}>`,
+      to: config.CONTACTMAIL,
+      subject: body.formData.subject,
+      html: emailFormat
+    })
+
+    const orderConfirmation = await resend.emails.send({
+      from: `"${companyName}" <${fromEmail}>`,
+      to: `${body.formData.email}`,
+      subject: 'Order Confirmation',
+      html: customerEmail
+    })
+
+
+    setResponseStatus(event, 200)
+    return { statusCode: 200 }
+
+
     // isValid(body)
     //   .then(async (body) => {
-    const mail = await transporter.sendMail(mailOptions)
+    // const mail = await transporter.sendMail(mailOptions)
 
     // const customerMail = await transporter.sendMail(customerOptions)
     // })
@@ -441,17 +464,17 @@ span.MsoHyperlinkFollowed {
     // console.log('Message sent: %s', mail.messageId);
     // console.log('Mail: %s', mail.accepted);
 
-    if (mail.accepted.length > 0) {
-      setResponseStatus(event, 200)
-      return { statusCode: 200 }
-    }
+    // if (mail.accepted.length > 0) {
+    //   setResponseStatus(event, 200)
+    //   return { statusCode: 200 }
+    // }
 
-    if (mail.rejected.length > 0) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Your order was not registered successfully. Please try again.'
-      })
-    }
+    // if (mail.rejected.length > 0) {
+    //   throw createError({
+    //     statusCode: 400,
+    //     statusMessage: 'Your order was not registered successfully. Please try again.'
+    //   })
+    // }
 
     // return Promise.resolve()
   } catch (error) {

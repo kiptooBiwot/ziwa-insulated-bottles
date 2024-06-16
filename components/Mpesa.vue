@@ -39,8 +39,6 @@ const validateTransaction = (data) => {
         // body: transactionId.value
       })
 
-      console.log('VERIFICATION RESP:', data)
-
       if (data) {
         transactionData = true
         const transaction = data

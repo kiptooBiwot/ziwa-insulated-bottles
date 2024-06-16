@@ -1,20 +1,23 @@
-import nodemailer from 'nodemailer';
-import validator from 'validator';
-const config = useRuntimeConfig();
+// import nodemailer from 'nodemailer';
+import { Resend } from 'resend'
+import validator from 'validator'
+const config = useRuntimeConfig()
+
+const resend = new Resend()
 
 export default defineEventHandler(async (event) => {
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    // secure: true,
-    auth: {
-      user: config.MAILUSER,
-      pass: config.MAILPASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: false,
-      ignoreTLS: true,
-    }
-  })
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   // secure: true,
+  //   auth: {
+  //     user: config.MAILUSER,
+  //     pass: config.MAILPASSWORD,
+  //   },
+  //   tls: {
+  //     rejectUnauthorized: false,
+  //     ignoreTLS: true,
+  //   }
+  // })
 
 
   const body = await readBody(event)

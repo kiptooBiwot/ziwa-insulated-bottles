@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     // mailerSmtpTls: '',
     // mailerFromAddress: '',
     // mailerToAddress: '',
+    RESEND_API: '',
     MAILHOST: '',
     MAILPORT: '',
     MAILUSER: '',
