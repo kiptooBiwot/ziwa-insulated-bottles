@@ -7,40 +7,12 @@ const resend = new Resend(config.RESEND_API)
 
 
 export default defineEventHandler(async (event) => {
-  // ziwa.co.ke MAIL SERVER TRANSPORTER
-  // const transporter = nodemailer.createTransport({
-  //   host: config.MAILHOST,
-  //   port: config.MAILPORT,
-  //   secure: true,
-  //   auth: {
-  //     user: config.MAILUSER,
-  //     pass: config.MAILPASSWORD,
-  //   },
-  //   // tls: {
-  //   //   rejectUnauthorized: false,
-  //   //   ignoreTLS: true,
-  //   // }
-  // });
 
 
   let date = new Date().toLocaleString('en-GB').split(",")
   let orderDate = date[0]
 
-  // GMAIL TRANSPORTER
-  // const transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   // host: config.MAILHOST,
-  //   // port: config.MAILPORT,
-  //   auth: {
-  //     user: config.MAILUSER,
-  //     pass: config.MAILPASSWORD,
-  //   },
-  //   tls: {
-  //     rejectUnauthorized: false,
-  //     ignoreTLS: true,
-  //   }
-  // });
-  // try {
+
   const body = await readBody(event);
 
   const fullName = body.formData.firstName + ' ' + body.formData.lastName
@@ -122,38 +94,10 @@ export default defineEventHandler(async (event) => {
   let products = '<div>'
   body.order.products.forEach(item => {
     products += `
-        <td align="left" bgcolor="#cfe2f3" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px;background-color:#cfe2f3;border-radius:11px">
-               <table cellpadding="0" cellspacing="0" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                 <tr>
-                  <td align="left" style="padding:0;Margin:0;width:560px">
-                   <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                     <tr>
-                      <td align="left" class="es-text-5149" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"></p>
-                       <table cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" class="es-table" role="presentation">
-                         <tr>
-                          <td style="padding:0;Margin:0;background-color:#cfe2f3;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Product</strong></h6></td>
-                          <td style="padding:0;Margin:0;border-color:#efefef;background-color:#cfe2f3;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Quantity</strong></h6></td>
-                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Price</strong></h6></td>
-                         </tr>
-                         <tr>
-                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333"><span class="es-text-mobile-size-14" style="font-size:14px;line-height:21px">${item._value.title} ${item._value.capacity}</span><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">${item._value.currentBottleColor} ${item}</p></td>
+        
+                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333"><span class="es-text-mobile-size-14" style="font-size:14px;line-height:21px">${item._value.title} ${item._value.capacity} ml</span><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">${item._value.currentBottleColor}</p></td>
                           <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">1</td>
-                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">${item._value.cumulativeCost}</td>
-                         </tr>
-                       </table><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"></p></td>
-                     </tr>
-                     <tr>
-                      <td align="center" style="padding:20px;Margin:0;font-size:0">
-                       <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" class="es-spacer" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                         <tr>
-                          <td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td>
-                         </tr>
-                       </table></td>
-                     </tr>
-                   </table></td>
-                 </tr>
-               </table></td>
-             </tr>
+                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">KSH.${item._value.cumulativeCost}</td>
       `
   })
   products += '</div>'
@@ -360,7 +304,17 @@ span.MsoHyperlinkFollowed {
                </table></td>
              </tr>
              <tr>
-              ${products}
+             <td align="left" class="es-text-5149" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"></p>
+                       <table cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%" class="es-table" role="presentation">
+                         <tr>
+                          <td style="padding:0;Margin:0;background-color:#cfe2f3;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Product</strong></h6></td>
+                          <td style="padding:0;Margin:0;border-color:#efefef;background-color:#cfe2f3;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Quantity</strong></h6></td>
+                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#0b5394"><h6 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:16px;font-style:normal;font-weight:normal;line-height:19px;color:#333333"><strong>Price</strong></h6></td>
+                         </tr>
+                         <tr>
+                          ${products}
+                         </tr>
+                </table><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"></p></td>
              <tr>
               <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px"><!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:270px" valign="top"><![endif]-->
                <table cellpadding="0" cellspacing="0" class="es-left" align="left" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -368,7 +322,7 @@ span.MsoHyperlinkFollowed {
                   <td align="left" style="padding:0;Margin:0;width:270px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">​MPesa Receipt Code:</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Bottle Price:</p>
+                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">​MPesa Receipt Code:</p>
                       
                       <p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Delivery Fees to ${body.order.deliveryRoute} - ${body.order.deliveryLocation}:</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><strong>TOTAL</strong></p></td>
                      </tr>
@@ -380,9 +334,9 @@ span.MsoHyperlinkFollowed {
                   <td align="left" style="padding:0;Margin:0;width:270px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.paymentDetails.MpesaReceiptNumber}</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.paymentDetails.Amount}</p>
+                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.paymentDetails.MpesaReceiptNumber}</p>
                       
-                      <p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.order.deliveryCost}</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.paymentDetails.Amount}</p></td>
+                      <p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH.${body.order.deliveryCost}</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH.${body.paymentDetails.Amount}</p></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -395,7 +349,7 @@ span.MsoHyperlinkFollowed {
                   <td align="left" style="padding:0;Margin:0;width:560px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Kind Regards,</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Ziwa</p></td>
+                      <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Hydration. Wherever you are. Whenever you want</p></td>
                      </tr>
                    </table></td>
                  </tr>
@@ -432,15 +386,18 @@ span.MsoHyperlinkFollowed {
 
 
   try {
-    const companyName = "Ziwa Orders"
-    const fromEmail = "orders@ziwa.co.ke"
-
     const sendOrder = await resend.emails.send({
       from: `"${fullName}" <${body.formData.email}>`,
       to: config.CONTACTMAIL,
       subject: body.formData.subject,
       html: emailFormat
     })
+
+
+    const companyName = "Ziwa Orders"
+    const fromEmail = "orders@ziwa.co.ke"
+
+
 
     const orderConfirmation = await resend.emails.send({
       from: `"${companyName}" <${fromEmail}>`,
