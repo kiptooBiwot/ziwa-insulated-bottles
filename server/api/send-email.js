@@ -62,9 +62,9 @@ export default defineEventHandler(async (event) => {
 
   try {
     // const mail = await transporter.sendMail(mailOptions)
-
+    const fromEmail = "orders@ziwa.co.ke"
     const emailSent = await resend.emails.send({
-      from: `"${body.fullName}" <${body.fullName}>`,
+      from: `"${body.fullName}" <${fromEmail}>`,
       to: config.CONTACTMAIL,
       subject: 'An Email from the Ziwa Contact Form',
       html: emailDetails

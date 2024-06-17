@@ -322,10 +322,6 @@ span.MsoHyperlinkFollowed {
                           <td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td>
                          </tr>
                        </table></td>
-                     </tr>
-                   </table></td>
-                 </tr>
-               </table></td>
              </tr>
              <tr>
               <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px"><!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:270px" valign="top"><![endif]-->
@@ -367,6 +363,8 @@ span.MsoHyperlinkFollowed {
                  </tr>
                </table></td>
              </tr>
+             <br />
+             <br />
            </table></td>
          </tr>
        </table></td>
