@@ -1,8 +1,8 @@
 import { Resend } from 'resend'
 // import nodemailer from 'nodemailer'
 import validator from 'validator'
-const config = useRuntimeConfig()
 
+const config = useRuntimeConfig()
 const resend = new Resend(config.RESEND_API)
 
 
