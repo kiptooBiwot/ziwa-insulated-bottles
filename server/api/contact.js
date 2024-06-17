@@ -386,6 +386,17 @@ span.MsoHyperlinkFollowed {
 
 
   try {
+    const companyName = "Ziwa Water"
+    const fromEmail = "orders@ziwa.co.ke"
+
+    const orderConfirmation = await resend.emails.send({
+      from: `"${companyName}" <${fromEmail}>`,
+      to: `${body.formData.email}`,
+      subject: 'Order Confirmation',
+      html: customerEmail
+    })
+
+
     const sendOrder = await resend.emails.send({
       from: `"${fullName}" <${body.formData.email}>`,
       to: config.CONTACTMAIL,
@@ -394,17 +405,7 @@ span.MsoHyperlinkFollowed {
     })
 
 
-    const companyName = "Ziwa Orders"
-    const fromEmail = "orders@ziwa.co.ke"
 
-
-
-    const orderConfirmation = await resend.emails.send({
-      from: `"${companyName}" <${fromEmail}>`,
-      to: `${body.formData.email}`,
-      subject: 'Order Confirmation',
-      html: customerEmail
-    })
 
 
     setResponseStatus(event, 200)
