@@ -40,12 +40,12 @@ export default defineEventHandler(async (event) => {
                   <p style="font-weight: bold;">Delivery to Route: ${body.order.deliveryRoute}</p>
                   <p style="font-weight: bold;">
                   Estate: ${body.order.deliveryLocation}</p>
-                  <p style="font-weight: bold;">Cost to Deliver: KSH.${body.order.deliveryCost} for delivery</p>
+                  <p style="font-weight: bold;">Cost to Deliver: KSH. ${body.order.deliveryCost} for delivery</p>
             <h3>PAYMENT DETAILS</h3>
                   <p style="font-weight: bold;">M-PESA Transaction ID: ${body.paymentDetails.MpesaReceiptNumber}</p>
                   <p style="font-weight: bold;">
                   Phone Number: +${body.paymentDetails.PhoneNumber}</p>
-                  <p style="font-weight: bold;">Amount Paid: KSH.${body.paymentDetails.Amount} </p>
+                  <p style="font-weight: bold;">Amount Paid: KSH. ${body.paymentDetails.Amount} </p>
                   
   `
 
@@ -97,7 +97,7 @@ export default defineEventHandler(async (event) => {
         
                           <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333"><span class="es-text-mobile-size-14" style="font-size:14px;line-height:21px">${item._value.title} ${item._value.capacity} ml</span><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">${item._value.currentBottleColor}</p></td>
                           <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">1</td>
-                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">KSH.${item._value.cumulativeCost}</td>
+                          <td style="padding:0;Margin:0;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;color:#333333;font-size:14px;line-height:21px" class="es-text-mobile-size-14">KSH. ${item._value.cumulativeCost}</td>
       `
   })
   products += '</div>'
@@ -344,7 +344,7 @@ span.MsoHyperlinkFollowed {
                      <tr>
                       <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">${body.paymentDetails.MpesaReceiptNumber}</p>
                       
-                      <p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH.${body.order.deliveryCost}</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH.${body.paymentDetails.Amount}</p></td>
+                      <p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH. ${body.order.deliveryCost}</p><p style="Margin:0;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px" align="right">KSH. ${body.paymentDetails.Amount}</p></td>
                      </tr>
                    </table></td>
                  </tr>
