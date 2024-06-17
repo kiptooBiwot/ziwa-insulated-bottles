@@ -315,6 +315,18 @@ span.MsoHyperlinkFollowed {
                           ${products}
                          </tr>
                 </table><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"></p></td>
+                <tr>
+                      <td align="center" style="padding:20px;Margin:0;font-size:0">
+                       <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" class="es-spacer" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                         <tr>
+                          <td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td>
+                         </tr>
+                       </table></td>
+                     </tr>
+                   </table></td>
+                 </tr>
+               </table></td>
+             </tr>
              <tr>
               <td align="left" style="padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:20px"><!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:270px" valign="top"><![endif]-->
                <table cellpadding="0" cellspacing="0" class="es-left" align="left" role="none" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -398,7 +410,7 @@ span.MsoHyperlinkFollowed {
 
 
     const sendOrder = await resend.emails.send({
-      from: `"${fullName}" <${body.formData.email}>`,
+      from: `"${fullName}" <${fromEmail}>`,
       to: config.CONTACTMAIL,
       subject: body.formData.subject,
       html: emailFormat
