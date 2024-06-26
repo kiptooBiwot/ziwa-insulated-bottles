@@ -9,15 +9,15 @@
       </h2>
     </div> -->
     <!-- src="/images/ziwa_hero.jpeg" -->
-    <!-- <img
+    <img
       src="/images/ziwa_hero.jpeg"
       alt=""
       class="h-[250px] lg:h-[500px] w-full object-contain object-bottom"
-    /> -->
-    <img
+    />
+    <!-- <img
       src="/images/fathers-day-discount.jpeg"
       alt=""
       class="h-[350px] lg:h-[500px] w-full object-contain lg:absolute"
-    />
+    /> -->
   </div>
 </template>
