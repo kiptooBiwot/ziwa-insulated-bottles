@@ -20,8 +20,8 @@ export const useProductStore = defineStore('product', {
     selectedProduct: null,
 
     // Edit this to add a discount and the amount
-    discountOffer: false,
-    discountAmount: 0,
+    discountOffer: true,
+    discountAmount: 200,
 
     dbProducts: [],
     product: null,
