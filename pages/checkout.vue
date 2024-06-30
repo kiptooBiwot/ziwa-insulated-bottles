@@ -124,6 +124,24 @@ const submit = async () => {
 
       productStore.orderUserId = response._id
 
+      // Get User Id and append it to an order
+      const cartProduct = {
+        deliveryRoute: productStore.deliveryRoute.name,
+        deliveryLocation: productStore.deliveryLocation,
+        deliveryCost: productStore.deliveryCost,
+        // isPaidFor: fal,
+        products: formData.value.cartItems,
+        orderedBy: productStore.orderUserId,
+        // payment: productStore.paymentDetails._id,
+      }
+
+      const cartResponse = await $fetch('/cart/newCartItem', {
+        method: 'POST',
+        body: cartProduct,
+      })
+
+      console.log('CART RESPONSE:', cartResponse)
+
       // Initiate M-PESA PAYMENT
       const loadMpesaModal = () => {
         showMpesaModal.value = true
