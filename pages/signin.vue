@@ -5,6 +5,7 @@ import { required, email, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { client, account } from '~/utils/utils'
 import { useUserStore } from '~/stores/user'
+// import { sd } from 'appwrite'
 
 definePageMeta({
   layout: 'auth',
@@ -24,6 +25,8 @@ const signIn = async () => {
 
   if (!v$.value.$error) {
     try {
+      // await account.deleteSession('current')
+
       const response = await account.createEmailSession(
         credentials.email,
         credentials.password
@@ -32,10 +35,11 @@ const signIn = async () => {
       if (response) {
         // Set the user id as a token to manage authentication
         const token = useCookie('token')
+
         token.value = response?.userId
 
         // set a flag in user store to indicate authentication
-        // userStore.authenticated = true
+        userStore.authenticated = true
 
         const user = await account.get()
         // console.log('User:', user);
@@ -45,8 +49,8 @@ const signIn = async () => {
         router.push('/dashboard/')
       }
     } catch (error) {
-      console.log(error)
-      console.log(error.$message)
+      console.log('ERROR!', error)
+      // console.log(error.$message)
     }
   }
 }

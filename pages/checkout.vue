@@ -140,8 +140,6 @@ const submit = async () => {
         body: cartProduct,
       })
 
-      console.log('CART RESPONSE:', cartResponse)
-
       // Initiate M-PESA PAYMENT
       const loadMpesaModal = () => {
         showMpesaModal.value = true

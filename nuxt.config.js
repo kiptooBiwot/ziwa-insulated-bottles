@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   debug: true,
   css: ['~/assets/css/main.css'],
+  buildModules: [
+    '@nuxtjs/date-fns',
+  ],
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
