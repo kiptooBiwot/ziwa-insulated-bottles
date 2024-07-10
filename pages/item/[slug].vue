@@ -182,6 +182,7 @@ const addToCart = () => {
     capacity: productImg.value.capacity,
     currentImage: productImg.value.url,
     currentBottleColor: productImg.value.color,
+    inStock: productImg.value.inStock,
     // ctyRoute: ctyRoute.value,
     // ctyEstate: ctyEstate.value,x
     // deliveryCost: deliveryCost.value,
@@ -395,54 +396,17 @@ const isInCart = computed(() => {
                 <!-- <span class="bg-[#f5f5f5] border text-[#c08562] text-[9px] font-semibold px-1.5 rounded-sm">On Offer</span> -->
               </div>
               <hr />
-              <!-- <h3 class=" font-medium text-lg text-gray-800 ">
-                Delivery Fees Calculator
-              </h3>
-              <div class="block space-y-5 md:space-y-0 md:flex border rounded-sm w-full gap-5 p-4">
-                <div class="flex flex-col gap-2 w-full">
-                  <label>Select your Route</label>
-                  <select v-model="ctyRoute" @change="getEstate(ctyRoute)" name="" id=""
-                    class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
-                      'border-red-500 focus:border-red-500': v$.ctyRoute.$error,
-                      'border-[#42d392] ': !v$.ctyRoute.$invalid,
-                    }">
-                    <option value="" disabled selected>Select your delivery route</option>
-                    <option :value="route.name" v-for="(route, index) in deliveryStore.route" :key="index">{{ route.name
-                    }}
-                    </option>
-                  </select>
-                  <div>
-                    <span class="text-xs text-red-500" v-if="v$.ctyRoute.$error">
-                      {{ v$.ctyRoute.$errors[0].$message }}
-                    </span>
-                  </div>
-                </div>
-                <div class="flex flex-col gap-2 w-full">
-                  <label for="">Select your estate</label>
-                  <select v-model="ctyEstate" name="" id="" class="py-3 px-4 border placeholder:text-sm  rounded-md" :class="{
-                    'border-red-500 focus:border-red-500': v$.ctyEstate.$error,
-                    'border-[#42d392] ': !v$.ctyEstate.$invalid,
-                  }" @change="setDeliveryFees(ctyEstate)">
-                    <option value="" disabled selected>Select your estate</option>
-                    <option :value="estate.estateName" v-for="(estate, i) in cityRoute.estate" :key="i">
-                      {{ estate.estateName }}
-                    </option>
-                  </select>
-                  <div>
-                    <span class="text-xs text-red-500" v-if="v$.ctyEstate.$error">
-                      {{ v$.ctyEstate.$errors[0].$message }}
-                    </span>
-                  </div>
-                </div>
-              </div> -->
-              <!-- <p v-if="ctyRoute && ctyEstate" class="font-medium">The delivery fees to {{ ctyRoute }} - {{ ctyEstate }} is
-                <span class="text-lg text-red-500">{{
-                  useCurrencyFormatter(deliveryCost) }}</span>
-              </p> -->
-              <!-- <p class="text-[#009a66] text-xs font-semibold pt-1">
-                Free shipping
-              </p> -->
-              <!-- <hr> -->
+              <div v-if="!productImg.inStock" class="text-rose-500">
+                <h3 class="font-display font-bold text-rose-500">
+                  Product Out of Stock (Pre-order)
+                </h3>
+                <p>*Perks of pre-ordering</p>
+                <ul class="list-disc ml-5">
+                  <li>Free name engraving (Customization)</li>
+                  <li>Extra Straws and straw covers</li>
+                </ul>
+              </div>
+              <hr v-if="!productImg.inStock" />
               <h3
                 v-if="productStore.customizedBottle"
                 class="font-medium text-lg text-gray-800"
@@ -461,10 +425,10 @@ const isInCart = computed(() => {
               </p>
               <hr v-if="productStore.customizedBottle" />
               <!-- v-if="productStore.product.category === 'big-bottle'" -->
+              <!-- :disabled="!productImg.inStock" -->
               <button
                 @click="customizeBottle = !customizeBottle"
                 class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
-                :disabled="!productImg.inStock"
               >
                 <span
                   v-if="
@@ -479,10 +443,17 @@ const isInCart = computed(() => {
               <button
                 @click="addToCart"
                 class="px-6 w-full py-3 text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500"
-                :disabled="!productImg.inStock"
               >
-                <div v-if="isInCart">Add Another Bottle to Cart</div>
-                <div v-else>Add to Cart</div>
+                <div v-if="isInCart">
+                  <span v-if="productImg.inStock"
+                    >Add Another Bottle to Cart</span
+                  >
+                  <span v-else>Pre-Order this Product</span>
+                </div>
+                <div v-else>
+                  <span v-if="productImg.inStock">Add to Cart</span>
+                  <span v-else>Pre-order this Product</span>
+                </div>
               </button>
             </div>
             <!-- </template> -->

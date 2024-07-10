@@ -11,11 +11,15 @@ const toast = useToastStore()
 const { mpesaProcessComplete, mpesaProcessCancelled, orderUserId } =
   storeToRefs(productStore)
 
+console.log('PRODUCT STORE', productStore)
+
 const formData = ref({
   firstName: '',
   lastName: '',
   // fullName: '',
-  subject: 'You have a new product ORDER',
+  subject: `You have a new product ${
+    productStore.cart[0].inStock ? 'ORDER' : 'PRE-ORDER'
+  }`,
   phoneNumber: '',
   email: '',
   address: '',
@@ -285,42 +289,6 @@ const submit = async () => {
     // })
   }
 }
-
-// v$.value.$validate()
-// if (!v$.value.$error && productStore.cart.length > 0) {
-//   try {
-
-//     const { pending, data, refresh } = await useFetch('/api/contact', {
-//       method: 'POST',
-//       body: formData
-//     })
-
-//     if (pending) {
-//       waiting.value = true
-//     }
-
-//     if (data.value.statusCode === 200) {
-//       errors.value = false
-//       success.value = true
-//       waiting.value = false
-//       formData.value = {
-//         name: '',
-//         email: '',
-//         subject: '',
-//         message: ''
-//       }
-
-//       productStore.cart = []
-//     }
-//   } catch (error) {
-//     // console.log('ERROR', error)
-//     errors.value = true
-//     success.value = false
-//     waiting.value = false
-//   }
-// }
-
-// }
 </script>
 
 <template>

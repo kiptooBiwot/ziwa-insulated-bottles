@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   }
 
 
-  const body = await readBody(event);
+  const body = await readBody(event)
 
   const fullName = body.formData.firstName + ' ' + body.formData.lastName
   let template = '<div>'
