@@ -255,6 +255,12 @@ const isInCart = computed(() => {
               >
                 Sold Out
               </div>
+              <div
+                v-if="productImg.isNew"
+                class="absolute top-2 left-2 bg-orange-500 text-white text-sm px-3 py-1 font-bold rounded"
+              >
+                New Arrival
+              </div>
               <svg
                 class="absolute bottom-0 left-0 mb-8"
                 viewBox="0 0 375 283"
@@ -366,6 +372,15 @@ const isInCart = computed(() => {
                 </div>
               </ul>
             </div>
+            <div>
+              <h3 class="text-xl">Terms</h3>
+              <ul class="list-disc pl-10">
+                <li>
+                  If for whatever reason we fail to deliver on our promise
+                  (quality product) then we will issue a full refund
+                </li>
+              </ul>
+            </div>
             <hr />
             <div class="hidden md:block">
               <h3 class="text-lg text-gray-800 py-3">
@@ -384,7 +399,7 @@ const isInCart = computed(() => {
             </div>
 
             <hr class="hidden md:block" />
-            <div class="flex py-5">
+            <div class="block py-5 space-y-5">
               <p>
                 <span
                   class="uppercase font-display text-sm font-bold mr-10 lg:mr-20"
@@ -392,6 +407,25 @@ const isInCart = computed(() => {
                 >
                 304 Stainless Steel
               </p>
+              <div
+                v-if="
+                  productImg.isNew &&
+                  productImg.color !== 'Raspberry' &&
+                  productImg.color !== 'Waka Green'
+                "
+                class="text-rose-500"
+              >
+                <div>
+                  <span
+                    class="uppercase font-display text-sm font-bold mr-10 lg:mr-20"
+                    >Disclaimer</span
+                  >
+                </div>
+                <div>
+                  *The color of this new product is a mockup. However, it
+                  closely resembles the real product.
+                </div>
+              </div>
             </div>
             <!-- <hr class="hidden md:block" /> -->
             <div class="space-y-3">

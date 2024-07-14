@@ -52,6 +52,11 @@ const productSchema = new Schema({
     },
     colorCode: {
       type: String,
+    },
+    isNew: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   }]
 }, { timestamps: true })
