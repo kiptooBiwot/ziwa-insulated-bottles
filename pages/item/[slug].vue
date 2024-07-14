@@ -67,6 +67,13 @@ const bottleColor = [
   '#F0E7E2',
   '#D8C7BF',
   '#FA01A5',
+  // New Colors
+  // '#001541',
+  '#AFD2F2',
+  '#C29051',
+  '#D2B8D6',
+  '#FA01A5',
+  '#DCE80C',
 ]
 
 const productImg = ref('')
@@ -94,7 +101,7 @@ const availableColors = () => {
     //   productColors.value.includes(color)
     // })
 
-    console.log('MATCHING COLORS', prodColors)
+    // console.log('MATCHING COLORS', prodColors)
     bottleColorFiltered.push(prodColors)
     return prodColors
   }
@@ -368,7 +375,7 @@ const isInCart = computed(() => {
                 <div
                   v-for="color in bottleColorFiltered[0]"
                   :key="color"
-                  class="w-10 h-10 flex-shrink-0 rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
+                  class="w-10 h-10 flex-shrink-0 flex flex-wrap rounded-full border-[3px] cursor-pointer transition duration-300 ease-in-out hover:border-[#39519f]"
                   :style="{ backgroundColor: color }"
                   @mouseover="showImageWithColor(color)"
                   @click="showImageWithColor(color)"

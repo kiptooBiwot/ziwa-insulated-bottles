@@ -246,6 +246,9 @@ onMounted(async () => {
       <div class="py-4 px-4">
         <div v-if="selectedTab === 'Completed Orders'">
           <!-- Table below the dashboard -->
+
+          <DashboardCompletedOrders :orders="orderStore.allOrders" />
+
           <section class="container px-0 mx-auto">
             <div class="flex flex-col">
               <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -255,7 +258,102 @@ onMounted(async () => {
                   <div
                     class="overflow-hidden border border-gray-200 md:rounded-lg"
                   >
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table
+                      class="min-w-full table-fixed border-collapse border border-gray-300"
+                    >
+                      <thead
+                        class="min-w-full table-fixed border-collapse border border-gray-300"
+                      >
+                        <tr>
+                          <th class="w-1/6 border border-gray-300 p-2">
+                            Order ID
+                          </th>
+                          <th class="w-1/6 border border-gray-300 p-2">Date</th>
+                          <th class="w-1/6 border border-gray-300 p-2">
+                            Payment Status
+                          </th>
+                          <th class="w-1/6 border border-gray-300 p-2">
+                            Customer Details
+                          </th>
+                          <th class="w-1/6 border border-gray-300 p-2">
+                            Ordered Product
+                          </th>
+                          <th class="w-1/6 border border-gray-300 p-2">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="border border-gray-300 p-2 break-words">
+                            12345
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            2024-07-13
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Paid
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            John Doe, john@example.com
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Product Name with a very long description that
+                            should wrap inside the cell.
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Edit | Delete
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="border border-gray-300 p-2 break-words">
+                            12346
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            2024-07-14
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Pending
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Jane Smith, jane@example.com
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Another Product with a long description to test
+                            wrapping.
+                          </td>
+                          <td class="border border-gray-300 p-2 break-words">
+                            Edit | Delete
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- OLD TABLE -->
+
+                  <div
+                    class="overflow-hidden border border-gray-200 md:rounded-lg"
+                  >
+                    <table
+                      class="min-w-full table-fixed border-collapse border border-gray-300"
+                    >
+                      <!-- <thead>
+                        <tr>
+                          <th class="w-1/4 border border-gray-300 p-2">
+                            Header 1
+                          </th>
+                          <th class="w-1/4 border border-gray-300 p-2">
+                            Header 2
+                          </th>
+                          <th class="w-1/4 border border-gray-300 p-2">
+                            Header 3
+                          </th>
+                          <th class="w-1/4 border border-gray-300 p-2">
+                            Header 4
+                          </th>
+                        </tr>
+                      </thead> -->
                       <thead class="bg-gray-50">
                         <tr>
                           <th
@@ -301,12 +399,13 @@ onMounted(async () => {
                             Ordered Product
                           </th>
 
-                          <!-- <th scope="col" class="relative py-3.5 px-4">
+                          <th scope="col" class="relative py-3.5 px-4">
                             <span class="">Actions</span>
-                          </th> -->
+                          </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+
+                      <tbody>
                         <tr
                           v-for="(order, index) in orderStore.allOrders"
                           :key="index"
@@ -400,7 +499,166 @@ onMounted(async () => {
                               <br />
                               {{ order.products[0]._value.currentBottleColor }}
                             </td>
-                            <!-- <td class="px-4 py-4 text-sm whitespace-nowrap">
+                            <td class="px-4 py-4 text-sm whitespace-nowrap">
+                              <div class="flex items-center gap-x-6">
+                                <button
+                                  class="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none"
+                                >
+                                  View More
+                                </button>
+                              </div>
+                            </td>
+                          </NuxtLink>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- <table class="min-w-full divide-y divide-gray-200">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                          >
+                            <div class="flex items-center gap-x-3">-->
+                    <!-- <input
+                                type="checkbox"
+                                class="text-blue-500 border-gray-300 rounded"
+                              /> -->
+                    <!-- <button class="flex items-center gap-x-2">
+                                <span>Order ID</span>
+                              </button>
+                            </div>
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                          >
+                            Date
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                          >
+                            Payment Status
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                          >
+                            Customer Details
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="px-4 flex-1 w-16 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                          >
+                            Ordered Product
+                          </th>-->
+
+                    <!-- <th scope="col" class="relative py-3.5 px-4">
+                            <span class="">Actions</span>
+                          </th> -->
+                    <!-- </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr
+                          v-for="(order, index) in orderStore.allOrders"
+                          :key="index"
+                          class="hover:bg-blue-100 cursor-pointer"
+                        >
+                          <NuxtLink to="order._id">
+                            <td
+                              class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap"
+                            >
+                              <div class="inline-flex items-center gap-x-3">-->
+                    <!-- <input
+                                type="checkbox"
+                                class="text-blue-500 border-gray-300 rounded"
+                              /> -->
+
+                    <!--<span>{{
+                                  order?.payment?.MpesaReceiptNumber
+                                }}</span>
+                              </div>
+                            </td>
+                            <td
+                              class="px-4 py-4 text-sm text-gray-500 whitespace-nowrap"
+                            >-->
+                    <!-- Jan 6, 2022 -->
+                    <!-- {{
+                                format(
+                                  new Date(order.createdAt),
+                                  'EEE MMM dd, yyyy'
+                                )
+                              }} -->
+                    <!--</td>
+                            <td
+                              class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap"
+                            >
+                              <div
+                                v-if="order.isPaidFor"
+                                class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60"
+                              >
+                                <svg
+                                  width="12"
+                                  height="12"
+                                  viewBox="0 0 12 12"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M10 3L4.5 8.5L2 6"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+
+                                <h2 class="text-sm font-normal">Paid</h2>
+                              </div>
+                            </td>
+                            <td
+                              class="px-4 py-4 text-sm text-gray-500 whitespace-nowrap"
+                            >
+                              <div class="flex items-center gap-x-2">
+                                <Icon
+                                  name="material-symbols:account-circle-full"
+                                  class="w-8 h-8"
+                                />
+                                <div>
+                                  <h2 class="text-sm font-medium text-gray-800">-->
+                    <!-- Arthur Melo -->
+                    <!-- {{
+                                      order?.orderedBy?.firstName +
+                                      ' ' +
+                                      order?.orderedBy?.lastName
+                                    }}
+                                  </h2>
+                                  <p class="text-xs font-normal text-gray-600"> -->
+                    <!-- authurmelo@example.com -->
+                    <!-- {{ order?.orderedBy?.email }} -->
+                    <!-- </p>
+                                  <p class="text-xs font-normal text-gray-600"> -->
+                    <!-- 0723123456 -->
+                    <!-- {{ order?.orderedBy?.phoneNumber }}
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                            <td
+                              class="flex-1 w-16 px-4 py-4 text-sm text-gray-500 whitespace-nowrap"
+                            > -->
+                    <!-- Monthly subscription -->
+                    <!-- {{ order.products[0]._value.title }}
+                              <br />
+                              {{ order.products[0]._value.currentBottleColor }}
+                            </td> -->
+                    <!-- <td class="px-4 py-4 text-sm whitespace-nowrap">
                             <div class="flex items-center gap-x-6">
 
                               <button
@@ -410,10 +668,10 @@ onMounted(async () => {
                               </button>
                             </div>
                           </td> -->
-                          </NuxtLink>
+                    <!--</NuxtLink>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> -->
                   </div>
                 </div>
               </div>

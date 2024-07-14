@@ -25,7 +25,7 @@ const signIn = async () => {
 
   if (!v$.value.$error) {
     try {
-      // await account.deleteSession('current')
+      await account.deleteSession('current')
 
       const response = await account.createEmailSession(
         credentials.email,
