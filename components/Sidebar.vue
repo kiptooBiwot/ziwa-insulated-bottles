@@ -43,45 +43,45 @@ const showDropdown = ref(false)
 
       <nav class="mt-10">
         <p class="pl-4 text-xs font-semibold mb-4 text-gray-400">GENERAL</p>
-        <router-link
+        <NuxtLink
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
           to="/dashboard"
         >
           <Icon name="ic:round-dashboard" class="w-5 h-5" />
           <span class="mx-4">Dashboard</span>
-        </router-link>
+        </NuxtLink>
         <p class="pl-4 my-4 text-xs font-semibold mb-4 text-gray-400">
           Manage Application
         </p>
 
-        <router-link
+        <NuxtLink
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
-          to="/ui-elements"
+          to="/dashboard"
         >
           <Icon name="ic:sharp-view-list" class="w-5 h-5" />
           <span class="mx-4">Orders</span>
-        </router-link>
+        </NuxtLink>
 
-        <router-link
+        <!-- <NuxtLink
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Tables' ? activeClass : inactiveClass]"
-          to="/tables"
+          to="#"
         >
           <Icon name="ic:twotone-create-new-folder" class="w-5 h-5" />
 
           <span class="mx-4">Manage Products</span>
-        </router-link>
+        </NuxtLink> -->
 
-        <router-link
+        <NuxtLink
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
-          to="/forms"
+          to="/dashboard"
         >
           <Icon name="ic:baseline-supervisor-account" class="w-6 h-6" />
           <span class="mx-4">Users</span>
-        </router-link>
+        </NuxtLink>
 
         <div
           class="relative first-line:flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
@@ -136,7 +136,7 @@ const showDropdown = ref(false)
           </div>
         </div>
 
-        <!-- <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+        <!-- <NuxtLink class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Cards' ? activeClass : inactiveClass]" to="/cards">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
@@ -146,9 +146,9 @@ const showDropdown = ref(false)
           </svg>
 
           <span class="mx-4">Cards</span>
-        </router-link> -->
+        </NuxtLink> -->
 
-        <!-- <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+        <!-- <NuxtLink class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Modal' ? activeClass : inactiveClass]" to="/modal">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z" />
@@ -157,8 +157,8 @@ const showDropdown = ref(false)
           </svg>
 
           <span class="mx-4">Modal</span>
-        </router-link>
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+        </NuxtLink>
+        <NuxtLink class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Chart' ? activeClass : inactiveClass]" to="/charts">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
@@ -166,8 +166,8 @@ const showDropdown = ref(false)
           </svg>
 
           <span class="mx-4">Charts</span>
-        </router-link>
-        <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+        </NuxtLink>
+        <NuxtLink class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Blank' ? activeClass : inactiveClass]" to="/blank">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -175,7 +175,7 @@ const showDropdown = ref(false)
           </svg>
 
           <span class="mx-4">Blank</span>
-        </router-link>
+        </NuxtLink>
         <p class="pl-4 text-xs my-2 font-semibold mb-4 text-gray-400">About</p>
         <a target="_blank" class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Blank' ? activeClass : inactiveClass]" href="https://github.com/tal7aouy">

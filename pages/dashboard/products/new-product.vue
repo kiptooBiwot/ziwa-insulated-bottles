@@ -451,8 +451,9 @@ const saveProduct = async (index) => {
               isSavingProduct ? 'hover:cursor-not-allowed' : 'cursor-pointer',
             ]"
             @click.prevent="saveProduct"
-            :disabled="isSavingProduct"
+            disabled
           >
+            <!-- :disabled="isSavingProduct" -->
             <div
               v-if="isSavingProduct"
               class="flex items-center justify-center"

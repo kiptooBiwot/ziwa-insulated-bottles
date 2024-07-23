@@ -12,7 +12,7 @@ const props = defineProps({
   // },
 })
 
-console.log('PROPS:', props.orders)
+const showOrderDetails = (id) => {}
 </script>
 
 <template>
@@ -166,11 +166,12 @@ console.log('PROPS:', props.orders)
                     </td>
                     <td class="px-4 py-4 text-sm w-1/6">
                       <div class="flex items-center gap-x-6">
+                        <!-- @click.prevent="showOrderDetails(order._id)" -->
                         <NuxtLink
-                          :to="`dashboard/orders/${order._id}`"
-                          class="text-blue-500 transition-colors duration-200 py-1 px-4 rounded-md hover:text-white hover:bg-green-300 focus:outline-none hover:border"
+                          :to="`/dashboard/orders/${order._id}`"
+                          class="text-blue-500 transition-colors duration-200 py-1 px-2 rounded-md hover:text-white hover:bg-green-300 hover:border"
                         >
-                          View More
+                          View Details
                         </NuxtLink>
                       </div>
                     </td>

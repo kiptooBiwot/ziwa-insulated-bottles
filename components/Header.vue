@@ -2,6 +2,7 @@
 import { useGeneralStore } from '~/stores/general'
 import { account } from '~/utils/utils'
 import { useUserStore } from '~/stores/user'
+import { storeToRefs } from 'pinia'
 
 const generalStore = useGeneralStore()
 const userStore = useUserStore()

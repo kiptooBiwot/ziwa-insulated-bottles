@@ -5,6 +5,7 @@ import { required, email, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { client, account } from '~/utils/utils'
 import { useUserStore } from '~/stores/user'
+import { useToastStore } from '~/stores/toast'
 // import { sd } from 'appwrite'
 
 definePageMeta({
@@ -14,6 +15,7 @@ definePageMeta({
 const router = useRouter()
 
 const userStore = useUserStore()
+const toast = useToastStore()
 
 const credentials = reactive({
   email: '',
@@ -25,14 +27,26 @@ const signIn = async () => {
 
   if (!v$.value.$error) {
     try {
+      const user = await account.createEmailSession(
+        credentials.email,
+        credentials.password
+      )
       await account.deleteSession('current')
-
+      // const user = await account.get()
+      // console.log('USER:', user)
       const response = await account.createEmailSession(
         credentials.email,
         credentials.password
       )
 
+      // console.log('LOGIN RESPONSE:', response)
+
       if (response) {
+        toast.add({
+          type: 'success',
+          message: 'Welcome back. Access granted.',
+          timeout: 5000,
+        })
         // Set the user id as a token to manage authentication
         const token = useCookie('token')
 
@@ -49,7 +63,12 @@ const signIn = async () => {
         router.push('/dashboard/')
       }
     } catch (error) {
-      console.log('ERROR!', error)
+      // console.log('ERROR!', error)
+      toast.add({
+        type: 'error',
+        message: error,
+        timeout: 5000,
+      })
       // console.log(error.$message)
     }
   }

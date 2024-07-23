@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
 
     const orders = await Orders.find().populate('orderedBy').populate('payment').sort({ createdAt: -1 })
 
-
     if (!orders) {
       throw createError({
         statusCode: 400,
