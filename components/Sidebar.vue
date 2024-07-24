@@ -111,20 +111,23 @@ const showDropdown = ref(false)
             ]"
           >
             <!-- {{ showDropdown }} -->
+            <!-- to="/dashboard/products/all-products" -->
             <NuxtLink
-              to="/dashboard/products/all-products"
+              to="/dashboard"
               class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
             >
               List All Products
             </NuxtLink>
+            <!-- to="/dashboard/products/new-product" -->
             <NuxtLink
-              to="/dashboard/products/new-product"
+              to="/dashboard"
               class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
             >
               Add New Product
             </NuxtLink>
+            <!-- to="/dashboard/products/add-category" -->
             <NuxtLink
-              to="/dashboard/products/add-category"
+              to="/dashboard"
               class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
             >
               Add New Category
