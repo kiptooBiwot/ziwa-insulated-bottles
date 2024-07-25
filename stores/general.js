@@ -4,8 +4,8 @@ export const useGeneralStore = defineStore('general', {
     transactionData: false,
     newLinks: [
       { title: 'About', url: 'about-us' },
-      { title: 'Bottles', url: '#best-sellers' },
-      { title: 'Tumblers', url: '#best-sellers' },
+      { title: 'Bottles', url: '/shop/big-bottle' },
+      { title: 'Tumblers', url: '/shop/tumblers' },
       { title: 'Kids', url: 'kids' },
       { title: 'Bulk Orders', url: 'bulk-orders' },
       // { title: 'Shop', url: '#Shop' },
