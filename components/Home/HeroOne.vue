@@ -12,7 +12,7 @@
     <img
       src="/images/ziwa_hero.jpeg"
       alt=""
-      class="h-[250px] lg:h-[500px] w-full object-cover md:object-fill object-bottom"
+      class="absolute inset-0 h-[250px] lg:h-[500px] w-full object-cover md:object-fill object-bottom"
     />
     <!-- <img
       src="/images/fathers-day-discount.jpeg"

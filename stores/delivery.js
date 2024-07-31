@@ -166,6 +166,55 @@ export const useDeliveryStore = defineStore('delivery', {
           { estateName: 'Ruaka', cost: 400 }
         ]
       },
+      {
+        name: 'Countrywide Delivery',
+        estate: [
+          {
+            estateName: 'Muranga',
+            cost: 350
+          },
+          {
+            estateName: 'Gatundu via Libera Impex',
+            cost: 300
+          },
+          {
+            estateName: 'Mombasa via Bus(Tahmeed)',
+            cost: 800
+          },
+          {
+            estateName: 'Mombasa via Wells Fargo',
+            cost: 800
+          },
+          {
+            estateName: 'Kisumu via Easy Coach',
+            cost: 400
+          },
+          {
+            estateName: 'Kakamega via Easy Coach',
+            cost: 400
+          },
+          {
+            estateName: 'Nakuru',
+            cost: 350
+          },
+          {
+            estateName: 'Naivasha',
+            cost: 300
+          },
+          {
+            estateName: 'Meru via Kukena',
+            cost: 300
+          },
+          {
+            estateName: 'Machakos',
+            cost: 250
+          },
+          {
+            estateName: 'Kisii via Easy Coach',
+            cost: 400
+          },
+        ]
+      },
     ]
   }),
   actions: {
