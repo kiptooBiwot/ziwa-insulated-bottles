@@ -33,6 +33,7 @@
     "mongoose": "^7.4.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.4",
+    "nuxt-gtag": "^3.0.1",
     "nuxt-swiper": "^1.2.2",
     "nuxt3-meta-pixel": "^1.0.9",
     "pinia": "^2.1.4",

@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-swiper',
-    'nuxt3-meta-pixel'
+    'nuxt3-meta-pixel',
+    'nuxt-gtag'
   ],
   swiper: {
 
@@ -23,6 +24,9 @@ export default defineNuxtConfig({
     pixelId: process.env.FACEBOOK_PIXEL_ID,
     autoPageView: true,
     disabled: false
+  },
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID
   },
   pinia: {
     autoImports: [
