@@ -48,14 +48,24 @@ useHead({
   title: 'Ziwa | Home of Insulated Water bottles',
 })
 
+const isLoading = ref(true)
+
 onMounted(async () => {
-  isLoading.value = true
   productStore.getAllProducts()
 
   isLoading.value = false
 })
 
-const isLoading = ref(false)
+onBeforeRouteLeave((to, from, next) => {
+  if (isLoading.value) {
+    // alert('Wait, the page dis still loading!')
+    next(false)
+    return
+  } else {
+    next()
+  }
+})
+
 const images = reactive([
   image,
   img,
@@ -125,42 +135,47 @@ const closeModal = () => {
 <template>
   <div>
     <!-- bg-[#E8E8E9] -->
-    <div class="">
-      <!-- <HomeHero /> -->
-      <HomeHeroOne />
+    <div
+      v-if="isLoading"
+      class="w-full min-h-screen flex items-center justify-center"
+    >
+      <Spinner />
     </div>
-
-    <div id="best-sellers">
-      <HomeBestSellers />
-    </div>
-
-    <div class="w-full py-20">
-      <div class="max-w-2xl lg:mx-auto mx-5 space-y-10">
-        <h2 class="font-bold text-5xl text-center">
-          Premium Drinkware products to ensure you get to take us with you on
-          any adventure life takes you on
-        </h2>
-        <div class="">
-          <p class="text-[18px] leading-7 text-center">
-            Every Ziwa vessel is ingeniously created with you in mind. Whether
-            you’re an avid water drinker or a true tea enthusiast, Ziwa products
-            integrate seamlessly in your life, proving to be the trusty sidekick
-            you never knew you needed.
-          </p>
-          <div class="flex justify-center pt-10">
-            <NuxtLink
-              to="/about-us"
-              class="py-3 px-6 bg-yellow-400 text-white uppercase rounded-full"
-              >Read More</NuxtLink
-            >
+    <div v-else>
+      <div class="">
+        <!-- <HomeHero /> -->
+        <HomeHeroOne />
+      </div>
+      <div id="best-sellers">
+        <HomeBestSellers />
+      </div>
+      <div class="w-full py-20">
+        <div class="max-w-2xl lg:mx-auto mx-5 space-y-10">
+          <h2 class="font-bold text-5xl text-center">
+            Premium Drinkware products to ensure you get to take us with you on
+            any adventure life takes you on
+          </h2>
+          <div class="">
+            <p class="text-[18px] leading-7 text-center">
+              Every Ziwa vessel is ingeniously created with you in mind. Whether
+              you’re an avid water drinker or a true tea enthusiast, Ziwa
+              products integrate seamlessly in your life, proving to be the
+              trusty sidekick you never knew you needed.
+            </p>
+            <div class="flex justify-center pt-10">
+              <NuxtLink
+                to="/about-us"
+                class="py-3 px-6 bg-yellow-400 text-white uppercase rounded-full"
+                >Read More</NuxtLink
+              >
+            </div>
           </div>
         </div>
       </div>
+      <section>
+        <HomeTakeUsWithU />
+      </section>
     </div>
-
-    <section>
-      <HomeTakeUsWithU />
-    </section>
 
     <!-- Shop section -->
     <!-- <section

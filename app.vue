@@ -1,6 +1,5 @@
 <script>
 import ToastList from '@/components/ToastList'
-
 </script>
 
 <template>
