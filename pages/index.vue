@@ -53,7 +53,9 @@ const isLoading = ref(true)
 onMounted(async () => {
   productStore.getAllProducts()
 
-  isLoading.value = false
+  setTimeout(() => {
+    isLoading.value = false
+  }, 5000)
 })
 
 onBeforeRouteLeave((to, from, next) => {
@@ -139,7 +141,23 @@ const closeModal = () => {
       v-if="isLoading"
       class="w-full min-h-screen flex items-center justify-center"
     >
-      <Spinner />
+      <div class="flex flex-col gap-10">
+        <div class="flex flex-col items-center justify-center">
+          <img
+            src="@/assets/images/logo/ziwa-logo.png"
+            alt=""
+            class="w-[100px] h-full object-cover"
+          />
+          <h3
+            class="text-blue-500 font-medium font-logoFont text-2xl duration-1000 animate-pulse mt-10"
+          >
+            Loading...
+          </h3>
+        </div>
+        <!-- <div class="flex items-center">
+          <Spinner />
+        </div> -->
+      </div>
     </div>
     <div v-else>
       <div class="">
