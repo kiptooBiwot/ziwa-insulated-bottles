@@ -57,7 +57,7 @@ onMounted(async () => {
     isLoading.value = false
   }, 5000)
 })
-
+ 
 onBeforeRouteLeave((to, from, next) => {
   if (isLoading.value) {
     // alert('Wait, the page dis still loading!')

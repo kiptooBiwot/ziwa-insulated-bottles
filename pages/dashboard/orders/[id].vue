@@ -239,6 +239,25 @@ const products = computed(() => {
                     >
                       Product Number: {{ index + 1 }}
                     </h2>
+
+                    <div class="w-full flex space-x-3">
+                      <div class="w-1/2">
+                        <h2 class="text-gray-400 font-semibold text-xs">
+                          Product Color
+                        </h2>
+                        <p>
+                          {{ product.currentBottleColor }}
+                        </p>
+                      </div>
+                      <!-- <div class="w-1/2">
+                        <h2 class="text-gray-400 font-semibold text-xs">
+                          Price
+                        </h2>
+                        <p>
+                          {{ product.price }}
+                        </p>
+                      </div> -->
+                    </div>
                     <div class="w-full flex space-x-3">
                       <div class="w-1/2">
                         <h2 class="text-gray-400 font-semibold text-xs">

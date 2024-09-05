@@ -59,6 +59,7 @@ const sendId = (id) => {
                     v-for="img in product.images"
                     :key="img._id"
                     class="flex-shrink-0 m-6 md:m-2 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg"
+                    :class="[img.archived ? 'hidden' : '']"
                   >
                     <div
                       v-if="!img.inStock"
