@@ -58,6 +58,15 @@ const showDropdown = ref(false)
         <NuxtLink
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
+          to="/dashboard/coupons"
+        >
+          <Icon name="ic:sharp-view-list" class="w-5 h-5" />
+          <span class="mx-4">Coupons</span>
+        </NuxtLink>
+
+        <NuxtLink
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
           to="/dashboard"
         >
           <Icon name="ic:sharp-view-list" class="w-5 h-5" />

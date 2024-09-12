@@ -256,7 +256,7 @@ const isInCart = computed(() => {
                 Sold Out
               </div>
               <div
-                v-if="productImg.isNew"
+                v-if="productImg.isNewProduct"
                 class="absolute top-2 left-2 bg-orange-500 text-white text-sm px-3 py-1 font-bold rounded"
               >
                 New Arrival
@@ -409,7 +409,7 @@ const isInCart = computed(() => {
               </p>
               <div
                 v-if="
-                  productImg.isNew &&
+                  productImg.isNewProduct &&
                   productImg.color !== 'Raspberry' &&
                   productImg.color !== 'Waka Green'
                 "

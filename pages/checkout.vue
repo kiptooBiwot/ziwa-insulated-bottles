@@ -5,13 +5,14 @@ import { useToastStore } from '@/stores/toast'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
 import mpesa from '@/assets/images/lipa-na-mpesa.png'
+import { useCouponStore } from '@/stores/coupons'
 
 const productStore = useProductStore()
 const toast = useToastStore()
 const { mpesaProcessComplete, mpesaProcessCancelled, orderUserId } =
   storeToRefs(productStore)
-
-console.log('PRODUCT STORE', productStore)
+const couponStore = useCouponStore()
+const { validatedCoupon } = storeToRefs(couponStore)
 
 const formData = ref({
   firstName: '',
@@ -92,6 +93,11 @@ const isDisabled = computed(() => {
   return success.value == true || waiting.value == true
 })
 
+watch(validatedCoupon, () => {
+  getDiscountedCouponPrice
+  totalPriceComputed
+})
+
 let productPriceComputed = computed(() => {
   let total = 0
 
@@ -102,14 +108,37 @@ let productPriceComputed = computed(() => {
   return total
 })
 
+const getDiscountedCouponPrice = computed(() => {
+  let total = 0
+
+  if (couponStore?.validatedCoupon?.discount) {
+    if (couponStore.validatedCoupon.discountType == 'percentage') {
+      total =
+        productPriceComputed.value -
+        (productPriceComputed.value * couponStore.validatedCoupon.discount) /
+          100
+    } else if (couponStore?.validatedCoupon?.discountType == 'fixed') {
+      total =
+        productPriceComputed.value - couponStore?.validatedCoupon?.discount
+    }
+  }
+
+  return total
+})
+
 const totalPriceComputed = computed(() => {
   let total = 0
   if (productStore.deliveryCost > 0) {
-    total = productPriceComputed.value + productStore.deliveryCost
-    return total
+    // total = productPriceComputed.value + productStore.deliveryCost
+    // return total
+    if (couponStore?.validatedCoupon?.discount) {
+      total = getDiscountedCouponPrice.value + productStore.deliveryCost
+    } else {
+      total = productPriceComputed.value + productStore.deliveryCost
+    }
   }
 
-  total = productPriceComputed.value
+  // total = productPriceComputed.value
 
   return total
 })
@@ -497,7 +526,13 @@ const submit = async () => {
                 Cumulative water bottle cost
               </div>
               <div class="text-xl font-semibold">
-                <span class="font-semibold text-sm">{{
+                <span
+                  v-if="couponStore?.validatedCoupon?.discount"
+                  class="font-semibold text-sm"
+                  >{{ useCurrencyFormatter(getDiscountedCouponPrice) }}</span
+                >
+
+                <span v-else class="font-semibold text-sm">{{
                   useCurrencyFormatter(productPriceComputed)
                 }}</span>
               </div>

@@ -1,15 +1,23 @@
 <script setup>
-import { useDeliveryStore } from '@/stores/delivery'
+// import { useDeliveryStore } from '@/stores/delivery'
 import { useProductStore } from '@/stores/product'
 import notFound from '@/assets/images/feeling_blue.svg'
 import mpesa from '@/assets/images/lipa-na-mpesa.png'
+import { useCouponStore } from '@/stores/coupons'
+import { useDeliveryStore } from '@/stores/delivery'
+import { storeToRefs } from 'pinia'
+import { useToastStore } from '@/stores/toast'
 
 const productStore = useProductStore()
 const deliveryStore = useDeliveryStore()
+const couponStore = useCouponStore()
+const { validatedCoupon } = storeToRefs(couponStore)
+const toast = useToastStore()
 
 const isHover = ref(false)
 const isSelected = ref(false)
 const showMpesaModal = ref(false)
+const couponCode = ref('')
 
 // Calculate delivery fee
 const ctyRoute = ref('')
@@ -28,10 +36,37 @@ let productPriceComputed = computed(() => {
   return total
 })
 
+watch(validatedCoupon, () => {
+  getDiscountedCouponPrice
+  totalPriceComputed
+})
+
+const getDiscountedCouponPrice = computed(() => {
+  let total = 0
+
+  if (couponStore?.validatedCoupon?.discount) {
+    if (couponStore.validatedCoupon.discountType == 'percentage') {
+      total =
+        productPriceComputed.value -
+        (productPriceComputed.value * couponStore.validatedCoupon.discount) /
+          100
+    } else if (couponStore?.validatedCoupon?.discountType == 'fixed') {
+      total =
+        productPriceComputed.value - couponStore?.validatedCoupon?.discount
+    }
+  }
+
+  return total
+})
+
 const totalPriceComputed = computed(() => {
   let total = 0
   if (productStore.deliveryCost > 0) {
-    total = productPriceComputed.value + productStore.deliveryCost
+    if (couponStore?.validatedCoupon?.discount) {
+      total = getDiscountedCouponPrice.value + productStore.deliveryCost
+    } else {
+      total = productPriceComputed.value + productStore.deliveryCost
+    }
   }
 
   return total
@@ -78,6 +113,38 @@ const removeDeliveryFees = () => {
 const goToCheckout = () => {
   if (productStore.cart.length > 0) {
     return navigateTo('/checkout')
+  }
+}
+
+const applyCoupon = async () => {
+  try {
+    if (couponCode.value) {
+      const response = await couponStore.applyCoupon(couponCode.value)
+
+      // console.log(response.statusCode)
+
+      if (response.statusCode !== 400) {
+        toast.add({
+          type: 'success',
+          message: 'Your Coupon code is valid. The discount has been applied.',
+          timeout: 5000,
+        })
+      } else {
+        toast.add({
+          type: 'error',
+          message: "The entered coupon either doesn't exist or is expired!",
+          timeout: 5000,
+        })
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    // Coupon not found or expired
+    toast.add({
+      type: 'error',
+      message: error,
+      timeout: 5000,
+    })
   }
 }
 </script>
@@ -213,13 +280,42 @@ const goToCheckout = () => {
                     }}</span>
                   </div>
                 </div>
+                <!-- v-if="couponStore?.validatedCoupon?.discount" -->
                 <div class="flex items-center justify-between">
-                  <div class="font-medium text-sm">
+                  <div
+                    class="font-medium text-sm"
+                    :class="[
+                      couponStore?.validatedCoupon?.discount
+                        ? 'line-through text-rose-500'
+                        : '',
+                    ]"
+                  >
                     Cumulative water bottle cost
                   </div>
                   <div class="text-xl font-semibold">
+                    <span
+                      class="font-semibold text-sm"
+                      :class="[
+                        couponStore?.validatedCoupon?.discount
+                          ? 'line-through text-rose-500'
+                          : '',
+                      ]"
+                      >{{ useCurrencyFormatter(productPriceComputed) }}</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="flex items-center justify-between"
+                  :class="[
+                    couponStore?.validatedCoupon?.discount ? 'block' : 'hidden',
+                  ]"
+                >
+                  <div class="font-medium text-sm">
+                    Discounted by coupon cost
+                  </div>
+                  <div class="text-xl font-semibold">
                     <span class="font-semibold text-sm">{{
-                      useCurrencyFormatter(productPriceComputed)
+                      useCurrencyFormatter(getDiscountedCouponPrice)
                     }}</span>
                   </div>
                 </div>
@@ -241,6 +337,25 @@ const goToCheckout = () => {
                   >
                 </div>
               </div>
+              <hr class="my-4" />
+              <!-- v-model="couponCode" -->
+              <div class="block flex-1">
+                <label for="" class="text-xs">Enter your coupon code</label>
+                <div class="flex gap-4">
+                  <input
+                    v-model="couponCode"
+                    placeholder="Enter coupon code"
+                    class="flex-1 py-2 px-4 text-sm border placeholder:text-sm bg-white rounded-md"
+                  />
+                  <button
+                    @click="applyCoupon"
+                    class="bg-yellow-500 text-white hover:bg-yellow-400 hover:text-yellow-100 text-xs uppercase px-2 py-0 rounded-md shadow-sm"
+                  >
+                    Apply Coupon
+                  </button>
+                </div>
+              </div>
+              <!-- <p v-if="discount">Discount applied: {{ discountValue }}</p> -->
 
               <button
                 @click="goToCheckout"

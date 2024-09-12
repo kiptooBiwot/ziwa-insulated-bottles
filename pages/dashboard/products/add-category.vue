@@ -17,7 +17,7 @@ const saveCategory = async () => {
       body: cat,
     })
 
-    console.log('CATEGORY RESPONSE:', response)
+    // console.log('CATEGORY RESPONSE:', response)
 
     if (response.message === 'CategorySaved') {
       cat.category = ''

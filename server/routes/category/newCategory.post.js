@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
 
-    console.log('REQ.BODY:', body);
+    // console.log('REQ.BODY:', body);
 
     if (!body) {
       throw createError({
