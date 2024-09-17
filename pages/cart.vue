@@ -7,6 +7,8 @@ import { useCouponStore } from '@/stores/coupons'
 import { useDeliveryStore } from '@/stores/delivery'
 import { storeToRefs } from 'pinia'
 import { useToastStore } from '@/stores/toast'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, alpha, numeric, helpers } from '@vuelidate/validators'
 
 const productStore = useProductStore()
 const deliveryStore = useDeliveryStore()
@@ -25,6 +27,35 @@ const ctyEstate = ref('')
 const cityRoute = ref([])
 const estate = ref([])
 const deliveryCost = ref(0)
+
+const formData = ref({
+  ctyRoute: '',
+  ctyEstate: '',
+  // cityRoute: '',
+  // estate: '',
+  // deliveryCost: '',
+})
+
+const rules = computed(() => {
+  return {
+    // formData: {
+    ctyRoute: {
+      required: helpers.withMessage(
+        ' Your route or town is required.',
+        required
+      ),
+    },
+    ctyEstate: {
+      required: helpers.withMessage(
+        'Your estate or town is required.',
+        required
+      ),
+    },
+    // },
+  }
+})
+
+const v$ = useVuelidate(rules, formData)
 
 let productPriceComputed = computed(() => {
   let total = 0
@@ -105,14 +136,20 @@ const setDeliveryFees = (ctyEstate) => {
 const removeDeliveryFees = () => {
   if (productStore.deliveryCost > 0) {
     productStore.deliveryCost = 0
-    ctyEstate.value = ''
-    ctyRoute.value = ''
+    // ctyEstate.value = ''
+    // ctyRoute.value = ''
+    formData.value.ctyEstate = ''
+    formData.value.ctyRoute = ''
   }
 }
 
 const goToCheckout = () => {
-  if (productStore.cart.length > 0) {
-    return navigateTo('/checkout')
+  v$.value.$validate()
+
+  if (!v$.value.$error) {
+    if (productStore.cart.length > 0) {
+      return navigateTo('/checkout')
+    }
   }
 }
 
@@ -193,16 +230,23 @@ const applyCoupon = async () => {
                   class="flex flex-col md:space-y-0 border rounded-md w-full gap-5 p-4 space-y-2"
                 >
                   <div class="grid space-y-1">
-                    <label for="" class="text-xs">Select your Route</label>
+                    <label for="" class="text-xs"
+                      >Select your Route if around Nairobi or Upcountry</label
+                    >
                     <select
-                      v-model="ctyRoute"
-                      @change="getEstate(ctyRoute)"
+                      v-model="formData.ctyRoute"
+                      @change="getEstate(formData.ctyRoute)"
                       name=""
                       id=""
                       class="py-2 px-4 text-sm border placeholder:text-sm bg-white rounded-md"
+                      :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.ctyRoute.$error,
+                        'border-[#42d392] ': !v$.ctyRoute.$invalid,
+                      }"
                     >
                       <option value="" disabled selected>
-                        Select your delivery route
+                        Select your delivery route/estate or Town
                       </option>
                       <option
                         :value="route.name"
@@ -212,15 +256,30 @@ const applyCoupon = async () => {
                         {{ route.name }}
                       </option>
                     </select>
+                    <div>
+                      <span
+                        class="text-xs text-red-500"
+                        v-if="v$.ctyRoute.$error"
+                      >
+                        <!-- This field is required -->
+                        {{ v$.ctyRoute.$errors[0].$message }}
+                      </span>
+                    </div>
+                    <!-- @change="v$.firstName.$touch" -->
                   </div>
                   <div class="grid space-y-1">
                     <label for="" class="text-xs">Select your estate</label>
                     <select
-                      v-model="ctyEstate"
+                      v-model="formData.ctyEstate"
                       name=""
                       id=""
                       class="py-2 px-4 text-sm border bg-white placeholder:text-sm rounded-md"
-                      @change="setDeliveryFees(ctyEstate)"
+                      @change="setDeliveryFees(formData.ctyEstate)"
+                      :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.ctyEstate.$error,
+                        'border-[#42d392] ': !v$.ctyEstate.$invalid,
+                      }"
                     >
                       <option value="" disabled selected>
                         Select your estate
@@ -233,6 +292,15 @@ const applyCoupon = async () => {
                         {{ estate.estateName }}
                       </option>
                     </select>
+                    <div>
+                      <span
+                        class="text-xs text-red-500"
+                        v-if="v$.ctyEstate.$error"
+                      >
+                        <!-- This field is required -->
+                        {{ v$.ctyEstate.$errors[0].$message }}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div
