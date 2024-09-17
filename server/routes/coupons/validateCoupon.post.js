@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const { code } = await readBody(event)
   // const code = body.code
 
-  console.log('CODE SERVER: ' + code);
+  // console.log('CODE SERVER: ' + code);
 
 
   try {

@@ -343,7 +343,7 @@ const applyCoupon = async () => {
                 <label for="" class="text-xs">Enter your coupon code</label>
                 <div class="flex gap-4">
                   <input
-                    v-model="couponCode"
+                    v-model.trim="couponCode"
                     placeholder="Enter coupon code"
                     class="flex-1 py-2 px-4 text-sm border placeholder:text-sm bg-white rounded-md"
                   />
