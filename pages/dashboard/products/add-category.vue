@@ -12,16 +12,16 @@ const saveCategory = async () => {
   try {
     isSavingProduct.value = true
 
-    const response = await $fetch('/category/newCategory', {
-      method: 'post',
-      body: cat,
-    })
+    // const response = await $fetch('/category/newCategory', {
+    //   method: 'post',
+    //   body: cat,
+    // })
 
     // console.log('CATEGORY RESPONSE:', response)
 
-    if (response.message === 'CategorySaved') {
-      cat.category = ''
-    }
+    // if (response.message === 'CategorySaved') {
+    //   cat.category = ''
+    // }
 
     isSavingProduct.value = false
   } catch (error) {

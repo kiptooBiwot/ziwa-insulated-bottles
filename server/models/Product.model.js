@@ -21,11 +21,6 @@ const productSchema = new Schema({
     icon: String
   }],
   images: [{
-    // id: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
     url: {
       type: String,
     },

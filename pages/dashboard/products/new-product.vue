@@ -450,9 +450,11 @@ const saveProduct = async (index) => {
             :class="[
               isSavingProduct ? 'hover:cursor-not-allowed' : 'cursor-pointer',
             ]"
-            @click.prevent="saveProduct"
+            @click.prevent=""
             disabled
           >
+            <!-- Save Product Method -->
+            <!-- saveProduct -->
             <!-- :disabled="isSavingProduct" -->
             <div
               v-if="isSavingProduct"
