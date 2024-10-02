@@ -27,11 +27,11 @@ const unwrappedProducts = computed(() => {
 // })
 
 const formattedDate = computed(() => {
-  console.log('SINGLE ORDER:', orderStore.singleOrder)
+  // console.log('SINGLE ORDER:', orderStore.singleOrder)
   if (orderStore.singleOrder) {
     // console.log('STORE SINGLE ORDER:', orderStore.singleOrder)
     const date = orderStore.singleOrder?.payment?.TransactionDate
-    console.log('DATE:', date)
+    // console.log('DATE:', date)
 
     const parsedDate = parseISO(date)
     const formattedDate = format(

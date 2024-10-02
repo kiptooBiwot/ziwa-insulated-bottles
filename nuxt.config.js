@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-swiper',
     'nuxt3-meta-pixel',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    'dayjs-nuxt'
   ],
   swiper: {
 

@@ -9,7 +9,12 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const tabs = ['Completed Orders', 'Incomplete Orders', 'Payments', 'Others']
+const tabs = [
+  'Completed Orders',
+  'All orders (Plus Incomplete Orders)',
+  'Payments',
+  'Others',
+]
 
 const selectedTab = ref(tabs[0])
 const allOrders = ref([])
@@ -18,6 +23,8 @@ const allOrders = ref([])
 onMounted(async () => {
   await orderStore.getDashboardData()
   await orderStore.getAllOrders()
+  await orderStore.getAllPayments()
+  await orderStore.getIncompleteOrders()
 })
 </script>
 
@@ -259,15 +266,14 @@ onMounted(async () => {
 
           <DashboardCompletedOrders :orders="orderStore.allOrders" />
         </div>
-        <div v-if="selectedTab === 'Incomplete Orders'">
-          To be added soon!
+        <div v-if="selectedTab === 'All orders (Plus Incomplete Orders)'">
+          <!-- {{ orderStore.cartOrders }} -->
+          <DashboardCartItems :carts="orderStore.cartOrders" />
         </div>
         <div v-if="selectedTab === 'Payments'">
-          To be completed soon!
+          <DashboardPayments :payments="orderStore.payments" />
         </div>
-        <div v-if="selectedTab === 'Others'">
-          To be completed soon!
-        </div>
+        <div v-if="selectedTab === 'Others'">To be completed soon!</div>
       </div>
     </div>
   </div>

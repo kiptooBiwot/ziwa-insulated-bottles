@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
 
     const orders = await Orders.find()
-    const payments = await Payments.find()
+    const payments = await Payments.find().sort({ createdAt: -1 })
     const users = await Users.find()
     const products = await Products.find()
 

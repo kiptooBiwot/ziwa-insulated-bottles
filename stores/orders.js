@@ -2,7 +2,11 @@
 export const useOrderStore = defineStore('orders', {
   state: () => ({
     allOrders: [],
+    cartOrders: [],
+    payments: [],
+    otherData: [],
     singleOrder: null,
+    singleCartItem: null,
     dashboardSummary: [
       { title: 'Total Orders', color: 'bg-rose-500', icon: 'heroicons:shopping-cart', number: 0 },
       { title: 'Total Sales', color: 'bg-orange-500', icon: 'heroicons:credit-card', number: 0 },
@@ -56,7 +60,7 @@ export const useOrderStore = defineStore('orders', {
         method: 'GET'
       })
 
-      console.log('DASHBOARD DATA:', response);
+      // console.log('DASHBOARD DATA:', response);
 
       this.dashboardSummary = [
         { title: 'Total Orders', color: 'bg-rose-500', icon: 'heroicons:shopping-cart', number: response.allOrders },
@@ -65,6 +69,53 @@ export const useOrderStore = defineStore('orders', {
         { title: 'Products', color: 'bg-blue-500', icon: 'heroicons:gift', number: response.allProducts },
       ]
 
-    }
+    },
+
+    async getAllPayments() {
+      try {
+        const payments = await $fetch('/order/getAllPayments', {
+          method: 'GET',
+        })
+
+
+        if (payments.length > 0) {
+          this.payments = payments
+          // this.products.push(orders.products)
+        }
+      } catch (error) {
+        return error
+      }
+    },
+
+    async getIncompleteOrders() {
+      try {
+        const cartOrders = await $fetch('/order/getAllCartOrders', {
+          method: 'GET',
+        })
+
+
+        if (cartOrders.length > 0) {
+          this.cartOrders = cartOrders
+          // this.products.push(orders.products)
+        }
+      } catch (error) {
+        return error
+      }
+    },
+
+    async getSingleCartItem(id) {
+      try {
+        const item = this.cartOrders.find((item) => {
+          return item._id === id
+        })
+
+        // console.log('SINGLE ORDER STORE:', order);
+
+        this.singleCartItem = item
+
+      } catch (error) {
+        return error
+      }
+    },
   }
 })
