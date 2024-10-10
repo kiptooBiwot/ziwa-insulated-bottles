@@ -10,7 +10,7 @@ const activeClass = ref(
 const inactiveClass = ref(
   'border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'
 )
-const showDropdown = ref(false)
+const showSubmenu = ref(false)
 // TODO: Take isOpen to state level soon
 // const isOpen = generalStore.isOpen
 </script>
@@ -100,7 +100,7 @@ const showDropdown = ref(false)
           <button
             type="button"
             class="flex items-center"
-            @click="showDropdown = !showDropdown"
+            @click="showSubmenu = !showSubmenu"
           >
             <Icon name="ic:twotone-create-new-folder" class="w-5 h-5" />
             <span
@@ -114,12 +114,12 @@ const showDropdown = ref(false)
             id="dropdown-example"
             class="absolute right-0 ml-10 pl-8 pr-4 w-full text-xs py-2 space-y-2 transform transition duration-500 ease-in-out"
             :class="[
-              showDropdown
+              showSubmenu
                 ? 'translate-y-0 ease-out block transition duration-300'
                 : '-translate-y-full hidden ease-in transition duration-300',
             ]"
           >
-            <!-- {{ showDropdown }} -->
+            <!-- {{ showSubmenu }} -->
             <!-- to="/dashboard" -->
             <NuxtLink
               to="/dashboard/products/all-products"
