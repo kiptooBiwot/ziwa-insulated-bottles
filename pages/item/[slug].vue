@@ -74,6 +74,7 @@ const bottleColor = [
   '#D2B8D6',
   '#FA01A5',
   '#DCE80C',
+  '#CD1829'
 ]
 
 const productImg = ref('')
