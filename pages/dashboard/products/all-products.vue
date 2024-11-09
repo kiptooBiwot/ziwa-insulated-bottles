@@ -19,7 +19,7 @@ const isEditModalVisible = ref(false)
 const isEditMode = ref(false)
 
 const formData = ref({
-  isNewProduct: false,
+  isNew: false,
   url: '',
   color: '',
   price: 0,
@@ -38,7 +38,7 @@ watch(
   formData,
   (newVal) => {
     isChanged.value =
-      newVal.isNewProduct !== formDataCopy.value.isNewProduct ||
+      newVal.isNew !== formDataCopy.value.isNew ||
       newVal.url !== formDataCopy.value.url ||
       newVal.color !== formDataCopy.value.color ||
       newVal.price !== formDataCopy.value.price ||
@@ -52,7 +52,7 @@ watch(
 const closeEditModal = () => {
   isEditModalVisible.value = !isEditModalVisible.value
 
-  formData.value.isNewProduct = false
+  formData.value.isNew = false
   formData.value.url = ''
   formData.value.color = ''
   formData.value.price = 0
@@ -81,7 +81,7 @@ const showEditModal = async (productId, imageId) => {
     Object.assign(formData.value, productStore.imageDetails)
     formDataCopy.value = { ...productStore.imageDetails }
 
-    formData.value.isNewProduct = productStore.imageDetails.isNewProduct
+    formData.value.isNew = productStore.imageDetails.isNew
     formData.value.url = productStore.imageDetails.url
     formData.value.color = productStore.imageDetails.color
     formData.value.price = productStore.imageDetails.price
@@ -456,7 +456,7 @@ const handleItemUpdate = async (productId, payload) => {
                 <div class="flex justify-between space-y-1">
                   <label class="inline-flex items-center cursor-pointer">
                     <input
-                      v-model="formData.isNewProduct"
+                      v-model="formData.isNew"
                       type="checkbox"
                       value=""
                       class="sr-only peer"
@@ -466,7 +466,7 @@ const handleItemUpdate = async (productId, payload) => {
                       class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
                     ></div>
                     <span class="ms-3 text-sm"
-                      >Is a new product? ({{ formData.isNewProduct }})</span
+                      >Is a new product? ({{ formData.isNew }})</span
                     >
                   </label>
 

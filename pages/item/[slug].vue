@@ -74,7 +74,7 @@ const bottleColor = [
   '#D2B8D6',
   '#FA01A5',
   '#DCE80C',
-  '#CD1829'
+  '#CD1829',
 ]
 
 const productImg = ref('')
@@ -257,7 +257,7 @@ const isInCart = computed(() => {
                 Sold Out
               </div>
               <div
-                v-if="productImg.isNewProduct"
+                v-if="productImg.isNew"
                 class="absolute top-2 left-2 bg-orange-500 text-white text-sm px-3 py-1 font-bold rounded"
               >
                 New Arrival
@@ -410,7 +410,7 @@ const isInCart = computed(() => {
               </p>
               <div
                 v-if="
-                  productImg.isNewProduct &&
+                  productImg.isNew &&
                   productImg.color !== 'Raspberry' &&
                   productImg.color !== 'Waka Green'
                 "

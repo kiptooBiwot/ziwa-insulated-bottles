@@ -48,7 +48,7 @@ const productSchema = new Schema({
     colorCode: {
       type: String,
     },
-    isNewProduct: {
+    isNew: {
       type: Boolean,
       required: true,
       default: false

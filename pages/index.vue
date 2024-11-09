@@ -57,7 +57,7 @@ onMounted(async () => {
     isLoading.value = false
   }, 5000)
 })
- 
+
 onBeforeRouteLeave((to, from, next) => {
   if (isLoading.value) {
     // alert('Wait, the page dis still loading!')
@@ -132,6 +132,32 @@ const products = ref([])
 const closeModal = () => {
   loadCarousel.value = !loadCarousel.value
 }
+
+const christmasHero = ref([
+  {
+    // image: '/images/hero_img_1.jpg',
+    image: '/images/hero_images/first_hero.jpeg',
+    // title: 'Horti Grid',
+    // subHeading: 'Your Agribusiness Solutions Partner!',
+    // description:
+    //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
+    showButton: true,
+    height: 'full',
+    // toUrl: '/products',
+  },
+
+  {
+    // image: '/images/hero_img_1.jpg',
+    image: '/images/hero_images/second_hero.jpeg',
+    // title: 'Horti Grid',
+    // subHeading: 'Your Agribusiness Solutions Partner!',
+    // description:
+    //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
+    // showButton: true,
+    height: 'full',
+    // toUrl: '/products',
+  },
+])
 </script>
 
 <template>
@@ -162,7 +188,10 @@ const closeModal = () => {
     <div v-else>
       <div class="">
         <!-- <HomeHero /> -->
-        <HomeHeroOne />
+        <section>
+          <HomeHeroSlider :christmas-hero="christmasHero" />
+        </section>
+        <!-- <HomeHeroOne /> -->
       </div>
       <div id="best-sellers">
         <HomeBestSellers />

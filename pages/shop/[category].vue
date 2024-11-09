@@ -31,6 +31,32 @@ const sendId = (id) => {
     </div>
     <div v-else class="w-full py-0">
       <div v-if="productStore.filteredProduct" class="w-6xl lg:mx-auto mx-5">
+        <section
+          class="bg-cover relative"
+          style="background-image: url(/images/xmas-bg.jpg)"
+        >
+          <div class="absolute inset-0 bg-[#B80D1A] bg-opacity-20"></div>
+          <div class="max-w-6xl mx-auto flex justify-center">
+            <img
+              v-if="router.params.category === 'big-bottle'"
+              src="/images/xmas-ziwa-bottle.jpeg"
+              alt=""
+              class="object-contain w-80 shadow-md h-auto"
+            />
+            <img
+              v-else-if="router.params.category === 'tumblers'"
+              src="/images/xmass-ziwa-tumbler.jpeg"
+              alt=""
+              class="object-contain w-80 rounded-lg shadow-md h-auto"
+            />
+            <img
+              v-else
+              src="/images/xmas-ziwa-tumber-pic.jpeg"
+              alt=""
+              class="object-contain w-96 rounded-lg shadow-md h-auto"
+            />
+          </div>
+        </section>
         <!-- Shop section -->
         <section
           id="Shop"
@@ -73,6 +99,16 @@ const sendId = (id) => {
                     >
                       New Arrival
                     </div>
+
+                    <!-- Christmas Bubble Added to the right -->
+                    <!-- v-if="img.isNew" -->
+                    <!-- <div class="absolute top-2 right-2 px-0 py-0 rounded">
+                      <img
+                        src="/images/xmas-ball.png"
+                        alt=""
+                        class="w-12 h-12 object-contain"
+                      />
+                    </div> -->
                     <!-- [#89CFF0] -->
                     <NuxtLink
                       :to="{
