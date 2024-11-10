@@ -35,9 +35,16 @@ export const useGeneralStore = defineStore('general', {
       // { title: '', url: '' },
     ],
 
+    // bestSellers: [
+    //   { title: 'Ziwa Bottle', image: '/images/hero_2.png', category: 'big-bottle' },
+    //   { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png', category: 'tumblers' },
+    //   { title: 'Little Ziwa', image: '/images/kids_navy.png', category: 'kids-bottle' },
+    // ],
+
+    // Christmas Edition images
     bestSellers: [
-      { title: 'Ziwa Bottle', image: '/images/hero_2.png', category: 'big-bottle' },
-      { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png', category: 'tumblers' },
+      { title: 'Ziwa Bottle', image: '/images/xmas-ziwa-bottle.jpeg', category: 'big-bottle' },
+      { title: 'Msafiri Tumbler', image: '/images/xmass-ziwa-tumbler.jpeg', category: 'tumblers' },
       { title: 'Little Ziwa', image: '/images/kids_navy.png', category: 'kids-bottle' },
     ],
 
