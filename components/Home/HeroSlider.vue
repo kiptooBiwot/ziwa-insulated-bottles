@@ -38,7 +38,7 @@ const props = defineProps({
         class="min-h-screen"
       >
         <div
-          class="bg-contain bg-center w-full flex items-center justify-center"
+          class="bg-cover bg-center w-full flex items-center justify-center"
           :class="[item.height === 'full' ? 'h-screen' : 'h-[500px]']"
           :style="`background-image: url(${item.image})`"
         >
