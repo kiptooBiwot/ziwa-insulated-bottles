@@ -143,7 +143,7 @@ const christmasHero = ref([
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     showButton: true,
     height: 'full',
-    // toUrl: '/products',
+    toUrl: '/shop/preorder',
   },
 
   {

@@ -131,12 +131,37 @@ export const useProductStore = defineStore('product', {
         this.getAllProducts()
       }
 
-      const product = this.dbProducts.filter(
-        (prod) => prod.category === payload
-      )
+      if (payload === 'preorder') {
+        // const filteredProducts = this.dbProducts.images.filter(
+        //   (prod) => prod.inStock === false
+        // )
 
-      this.filteredProduct = product
-      this.isLoading = false
+        // const outOfStockImages = this.dbProducts.flatMap(product =>
+        //   product.images.filter(image => image.inStock === false)
+        // );
+        const categorizedOutOfStockImages = this.dbProducts.map(product => ({
+          id: product.id,
+          title: product.title,
+          description: product.description,
+          slug: product.slug,
+          features: product.features,
+          category: product.category,
+          outOfStockImages: product.images.filter(image => image.inStock === false)
+        })).filter(category => category.outOfStockImages.length > 0);
+
+
+        this.filteredProduct = categorizedOutOfStockImages
+        this.isLoading = false
+      }
+
+      else {
+        const product = this.dbProducts.filter(
+          (prod) => prod.category === payload
+        )
+
+        this.filteredProduct = product
+        this.isLoading = false
+      }
     }
   },
 })

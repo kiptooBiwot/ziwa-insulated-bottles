@@ -64,9 +64,24 @@ const sendId = (id) => {
         >
           <div class="max-w-6xl mx-auto px-5">
             <h3 class="text-[#39519f] font-semibold">Shop</h3>
-            <h2 class="text-gray-900 font-medium text-3xl tracking-tight mb-4">
+
+            <h2
+              v-if="router.params.category !== 'preorder'"
+              class="text-gray-900 font-medium text-3xl tracking-tight mb-4"
+            >
               {{ productStore.filteredProduct[0].title }}
             </h2>
+            <div v-else>
+              <h2
+                class="text-gray-900 font-medium text-3xl tracking-tight mb-4"
+              >
+                Make a Pre-Order
+              </h2>
+              <p>
+                These items are out of stock. Make a pre-order of any product of
+                your choice. (This might take from a few days to a few weeks)
+              </p>
+            </div>
             <div class="relative">
               <!-- <div
                 v-if="isLoading"
@@ -82,7 +97,7 @@ const sendId = (id) => {
                   :key="index"
                 >
                   <div
-                    v-for="img in product.images"
+                    v-for="img in product.images || product.outOfStockImages"
                     :key="img._id"
                     class="flex-shrink-0 m-6 md:m-2 relative overflow-hidden bg-blue-200 rounded-lg w-auto md:max-w-xs shadow-lg"
                     :class="[img.archived ? 'hidden' : '']"
