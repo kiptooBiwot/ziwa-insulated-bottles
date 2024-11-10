@@ -254,7 +254,7 @@ const isInCart = computed(() => {
                 v-if="!productImg.inStock"
                 class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
               >
-                Sold Out
+                Pre-Order
               </div>
               <div
                 v-if="productImg.isNew"

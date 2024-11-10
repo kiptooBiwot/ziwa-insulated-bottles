@@ -36,10 +36,15 @@ const generalStore = useGeneralStore()
             <img
               :src="bestSeller.image"
               alt="best sellers"
-              class="object-cover absolute h-[80%] transition duration-500 ease-in-out"
+              class="object-cover absolute rounded-lg shadow-md h-[80%] transition duration-500 ease-in-out"
             />
-            <h5
+            <!-- <h5
               class="text-2xl text-blue-600 mt-5 z-20 absolute bottom-1 font-medium group-hover:text-gray-900"
+            >
+              {{ bestSeller.title }}
+            </h5> -->
+            <h5
+              class="text-2xl text-rose-700 pt-10 z-20 absolute bottom-1 font-medium group-hover:text-rose-900"
             >
               {{ bestSeller.title }}
             </h5>
