@@ -35,16 +35,16 @@ const props = defineProps({
       <SwiperSlide
         v-for="(item, index) in christmasHero"
         :key="index"
-        class="min-h-screen"
+        class="h-auto"
       >
         <div
-          class="bg-cover bg-center w-full flex items-center justify-center"
-          :class="[item.height === 'full' ? 'h-screen' : 'h-[500px]']"
+          class="bg-cover bg-no-repeat lg:bg-cover bg-center w-full flex items-center justify-center"
+          :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
           :style="`background-image: url(${item.image})`"
         >
           <div
-            class="absolute inset-0 bg-black bg-opacity-40"
-            :class="[item.height === 'full' ? 'h-screen' : 'h-[500px]']"
+            class="absolute inset-0 md:bg-black md:bg-opacity-30"
+            :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
           ></div>
           <div
             class="text-center text-white max-w-3xl mx-5 lg:mx-auto space-y-5 z-0"
