@@ -87,13 +87,15 @@ const openPage = (id) => {
                         <div
                           class="flex items-center justify-between text-[#4b4c4e] text-[20px] font-bold"
                         >
-                          <div class="flex items-center gap-5">
+                          <div class="relative flex items-center gap-5">
                             <img
                               :src="submenu.imageUrl"
                               alt=""
                               class="h-16 w-auto object-cover"
                             />
                             {{ submenu.title }}
+                            <!-- Christmas Bubble Added to the right -->
+                            <!-- v-if="img.isNew" -->
                           </div>
 
                           <div>

@@ -262,6 +262,15 @@ const isInCart = computed(() => {
               >
                 New Arrival
               </div>
+              <!-- Christmas Bubble Added to the right -->
+              <!-- v-if="img.isNew" -->
+              <div class="absolute top-2 right-2 px-0 py-0 rounded">
+                <img
+                  src="/images/xmas-hat.png"
+                  alt=""
+                  class="w-16 h-16 object-contain"
+                />
+              </div>
               <svg
                 class="absolute bottom-0 left-0 mb-8"
                 viewBox="0 0 375 283"

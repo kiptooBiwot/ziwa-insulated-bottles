@@ -117,13 +117,13 @@ const sendId = (id) => {
 
                     <!-- Christmas Bubble Added to the right -->
                     <!-- v-if="img.isNew" -->
-                    <!-- <div class="absolute top-2 right-2 px-0 py-0 rounded">
+                    <div class="absolute top-2 right-2 px-0 py-0 rounded">
                       <img
-                        src="/images/xmas-ball.png"
+                        src="/images/xmas-hat.png"
                         alt=""
                         class="w-12 h-12 object-contain"
                       />
-                    </div> -->
+                    </div>
                     <!-- [#89CFF0] -->
                     <NuxtLink
                       :to="{
