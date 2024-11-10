@@ -71,16 +71,33 @@ const sendId = (id) => {
             >
               {{ productStore.filteredProduct[0].title }}
             </h2>
-            <div v-else>
+            <div v-else class="max-w-5xl mx-auto mb-10">
               <h2
                 class="text-gray-900 font-medium text-3xl tracking-tight mb-4"
               >
-                Make a Pre-Order
+                🌲Karibu to the VIP Access.🌲
               </h2>
               <p>
-                These items are out of stock. Make a pre-order of any product of
-                your choice. (This might take from a few days to a few weeks)
+                Be the first to grab the perfect holiday gifts for your loved
+                ones with our exclusive VIP pre-order access! Pre-order now to
+                unlock these perks:
               </p>
+              <div class="pl-10 space-y-3">
+                <p>
+                  ✨ Ksh 200 Off – Get an instant discount on your pre-order.
+                  Use code
+                  <span class="font-bold text-red-800">VIPACCESS24</span>
+                </p>
+                <p>🎁 Free Gift – Enjoy a surprise gift, just for you!</p>
+                <p>
+                  🌈 First Pick – Choose their favorite colors before they sell
+                  out
+                </p>
+                <p>
+                  🎁 Personalized Selections – Thoughtful, personalized gifts
+                  they would love every day
+                </p>
+              </div>
             </div>
             <div class="relative">
               <!-- <div

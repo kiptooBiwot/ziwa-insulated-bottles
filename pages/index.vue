@@ -136,25 +136,25 @@ const closeModal = () => {
 const christmasHero = ref([
   {
     // image: '/images/hero_img_1.jpg',
-    image: '/images/hero_images/first_hero.jpeg',
+    image: '/images/hero_images/hero1.jpeg',
     // title: 'Horti Grid',
     // subHeading: 'Your Agribusiness Solutions Partner!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     showButton: true,
-    height: 'full',
+    height: 'three-quarters',
     toUrl: '/shop/preorder',
   },
 
   {
     // image: '/images/hero_img_1.jpg',
-    image: '/images/hero_images/second_hero.jpeg',
+    image: '/images/hero_images/hero2.jpeg',
     // title: 'Horti Grid',
     // subHeading: 'Your Agribusiness Solutions Partner!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     // showButton: true,
-    height: 'full',
+    height: 'three-quarters',
     // toUrl: '/products',
   },
 ])
