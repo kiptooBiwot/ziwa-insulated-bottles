@@ -112,7 +112,7 @@ const showSubmenu = ref(false)
           </button>
           <div
             id="dropdown-example"
-            class="absolute right-0 ml-10 pl-8 pr-4 w-full text-xs py-2 space-y-2 transform transition duration-500 ease-in-out"
+            class="absolute right-0 ml-10 pl-8 pr-4 w-full text-xs rounded-md py-2 space-y-2 transform transition duration-500 ease-in-out"
             :class="[
               showSubmenu
                 ? 'translate-y-0 ease-out block transition duration-300'
@@ -123,21 +123,21 @@ const showSubmenu = ref(false)
             <!-- to="/dashboard" -->
             <NuxtLink
               to="/dashboard/products/all-products"
-              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-gray-900 pl-11"
             >
               List All Products
             </NuxtLink>
             <!-- to="/dashboard" -->
             <NuxtLink
               to="/dashboard/products/new-product"
-              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-white pl-11"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-gray-900 pl-11"
             >
               Add New Product
             </NuxtLink>
             <!-- to="/dashboard" -->
             <NuxtLink
               to="/dashboard/products/add-category"
-              class="flex items-center w-full p-2 text-sm font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11"
+              class="flex items-center w-full p-2 text-sm font-normal text-gray-300 transition duration-75 rounded-lg group hover:bg-gray-100 hover:text-gray-900 pl-11"
             >
               Add New Category
             </NuxtLink>
