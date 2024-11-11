@@ -29,6 +29,17 @@ const getBackgroundImage = (item) => {
     return screenWidth.value <= 768 ? item.mobileImage : item.image
   })
 }
+
+// Computed property to set height based on screen width
+const getImageHeight = (item) => {
+  return computed(() => {
+    return screenWidth.value <= 768
+      ? '800px'
+      : item.height === 'full'
+      ? '100vh'
+      : '415px'
+  })
+}
 </script>
 
 <template>
@@ -63,13 +74,17 @@ const getBackgroundImage = (item) => {
       >
         <div
           class="bg-cover bg-no-repeat lg:bg-cover bg-center w-full flex items-center justify-center"
-          :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
-          :style="`background-image: url(${getBackgroundImage(item).value})`"
+          :style="`background-image: url(${
+            getBackgroundImage(item).value
+          }); height: ${getImageHeight(item).value}`"
         >
+          <!-- :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
+          :style="`background-image: url(${getBackgroundImage(item).value})`" -->
           <div
             class="absolute inset-0 md:bg-black md:bg-opacity-30"
-            :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
+            :style="`height: ${getImageHeight(item).value}`"
           ></div>
+          <!-- :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']" -->
           <div
             class="text-center text-white max-w-3xl mx-5 lg:mx-auto space-y-5 z-0"
           >
