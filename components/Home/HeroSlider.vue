@@ -5,6 +5,30 @@ const props = defineProps({
     required: true,
   },
 })
+
+// Reactive state to hold the current screen width
+const screenWidth = ref(window.innerWidth)
+
+// Update screen width on resize
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth
+}
+
+// Add and remove event listener on component mount and unmount
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateScreenWidth)
+})
+
+// Computed property to get the correct image based on screen width
+const getBackgroundImage = (item) => {
+  return computed(() => {
+    return screenWidth.value <= 768 ? item.mobileImage : item.image
+  })
+}
 </script>
 
 <template>
@@ -40,7 +64,7 @@ const props = defineProps({
         <div
           class="bg-cover bg-no-repeat lg:bg-cover bg-center w-full flex items-center justify-center"
           :class="[item.height === 'full' ? 'h-screen' : 'h-[415px]']"
-          :style="`background-image: url(${item.image})`"
+          :style="`background-image: url(${getBackgroundImage(item).value})`"
         >
           <div
             class="absolute inset-0 md:bg-black md:bg-opacity-30"
