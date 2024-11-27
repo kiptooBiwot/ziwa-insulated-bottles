@@ -24,7 +24,20 @@ export const useGeneralStore = defineStore('general', {
         ]
 
       },
-      // { title: 'Accessories', url: '/accessories', type: 'dropdown' },
+      {
+        title: 'Special Editions',
+        url: '/special-ed',
+        type: 'dropdown',
+        isOpen: false,
+        children: [
+          {
+            title: 'Christmas Edition',
+            category: 'xmas-edition',
+            imageUrl: '/images/x-jungle-green-xmas.png',
+            id: ''
+          }
+        ]
+      },
       { title: 'Bulk Custom', url: '/bulk-orders', type: 'link' },
     ],
 

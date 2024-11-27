@@ -96,9 +96,11 @@ const getImageHeight = (item) => {
                 {{ item.subHeading }}
               </p>
             </div>
-            <p class="text-lg md:text-2xl font-body leading-relaxed">
-              {{ item.description }}
-            </p>
+            <div>
+              <p class="text-lg md:text-2xl font-body leading-relaxed">
+                {{ item.description }}
+              </p>
+            </div>
 
             <div class="py-5" :class="[item.showButton ? 'block' : 'hidden']">
               <NuxtLink

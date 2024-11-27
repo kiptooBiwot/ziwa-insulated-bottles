@@ -99,6 +99,11 @@ const sendId = (id) => {
                 </p>
               </div>
             </div>
+
+            <div v-if="router.params.category === 'xmas-edition'">
+              <ShopXmas />
+              
+            </div>
             <div class="relative">
               <!-- <div
                 v-if="isLoading"

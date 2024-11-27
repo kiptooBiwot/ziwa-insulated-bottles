@@ -417,7 +417,7 @@ const isInCart = computed(() => {
                 >
                 304 Stainless Steel
               </p>
-              <div
+              <!-- <div
                 v-if="
                   productImg.isNew &&
                   productImg.color !== 'Raspberry' &&
@@ -435,7 +435,7 @@ const isInCart = computed(() => {
                   *The color of this new product is a mockup. However, it
                   closely resembles the real product.
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- <hr class="hidden md:block" /> -->
             <div class="space-y-3">
