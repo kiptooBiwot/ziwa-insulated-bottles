@@ -136,6 +136,12 @@ const sendId = (id) => {
                     >
                       New Arrival
                     </div>
+                    <div
+                      v-if="img.isNew && router.params.category === 'xmas-edition'"
+                      class="absolute top-2 left-2 bg-yellow-500 text-white text-sm px-3 py-1 font-bold rounded"
+                    >
+                      Holiday Collection
+                    </div>
 
                     <!-- Christmas Bubble Added to the right -->
                     <!-- v-if="img.isNew" -->

@@ -260,7 +260,11 @@ const isInCart = computed(() => {
                 v-if="productImg.isNew"
                 class="absolute top-2 left-2 bg-orange-500 text-white text-sm px-3 py-1 font-bold rounded"
               >
-                New Arrival
+                {{
+                  productStore.product.category === 'xmas-edition'
+                    ? 'Holiday Collection'
+                    : 'New Arrival'
+                }}
               </div>
               <!-- Christmas Bubble Added to the right -->
               <!-- v-if="img.isNew" -->
