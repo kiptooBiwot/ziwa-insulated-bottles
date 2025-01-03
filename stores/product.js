@@ -104,7 +104,12 @@ export const useProductStore = defineStore('product', {
     },
 
 
-    getSingleProduct(slug) {
+    async getSingleProduct(slug) {
+
+      if (this.dbProducts.length < 1) {
+        await this.getAllProducts()
+      }
+
       this.dbProducts.find((product) => {
         if (product.slug === slug) {
           this.product = product
@@ -114,6 +119,10 @@ export const useProductStore = defineStore('product', {
 
 
     async getKidsProducts() {
+
+      if (this.bdProducts.length < 1) {
+        await this.getAllProducts()
+      }
 
       if (this.dbProducts.length > 0) {
         const matchingProduct = this.dbProducts.find((item) => {
@@ -127,7 +136,7 @@ export const useProductStore = defineStore('product', {
     getProductCategory(payload) {
       this.isLoading = true
 
-      if (this.dbProducts.length === 0) {
+      if (this.dbProducts.length < 1) {
         this.getAllProducts()
       }
 

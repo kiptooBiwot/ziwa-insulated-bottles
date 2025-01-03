@@ -3,6 +3,10 @@ import { useProductStore } from '@/stores/product'
 import { useDeliveryStore } from '@/stores/delivery'
 import { useToastStore } from '@/stores/toast'
 
+definePageMeta({
+  scrollToTop: true,
+})
+
 const productStore = useProductStore()
 const deliveryStore = useDeliveryStore()
 const toast = useToastStore()
