@@ -271,14 +271,16 @@ const isInCart = computed(() => {
                 }}
               </div>
               <!-- Christmas Bubble Added to the right -->
+              <!-- TODO: Activate this for christmas -->
               <!-- v-if="img.isNew" -->
-              <div class="absolute top-2 right-2 px-0 py-0 rounded">
+              <!-- <div class="absolute top-2 right-2 px-0 py-0 rounded">
                 <img
                   src="/images/xmas-hat.png"
                   alt=""
                   class="w-16 h-16 object-contain"
                 />
-              </div>
+              </div> -->
+
               <svg
                 class="absolute bottom-0 left-0 mb-8"
                 viewBox="0 0 375 283"
@@ -423,7 +425,11 @@ const isInCart = computed(() => {
                   class="uppercase font-display text-sm font-bold mr-10 lg:mr-20"
                   >Material</span
                 >
-                304 Stainless Steel
+                {{
+                  productStore?.product?.category === 'msafiri-boot'
+                    ? 'Silicone'
+                    : '304 Stainless Steel'
+                }}
               </p>
               <!-- <div
                 v-if="
@@ -457,7 +463,7 @@ const isInCart = computed(() => {
               <hr />
               <div v-if="!productImg.inStock" class="text-rose-500">
                 <h3 class="font-display font-bold text-rose-500">
-                  Product Out of Stock (Pre-order)
+                  Product Out of Stock
                 </h3>
                 <p>*Perks of pre-ordering</p>
                 <ul class="list-disc ml-5">

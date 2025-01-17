@@ -31,7 +31,7 @@ const sendId = (id) => {
     </div>
     <div v-else class="w-full py-0">
       <div v-if="productStore.filteredProduct" class="w-6xl lg:mx-auto mx-5">
-        <section
+        <!-- <section
           class="bg-cover relative"
           style="background-image: url(/images/xmas-bg.jpg)"
         >
@@ -56,7 +56,7 @@ const sendId = (id) => {
               class="object-contain w-96 rounded-lg shadow-md h-auto"
             />
           </div>
-        </section>
+        </section> -->
         <!-- Shop section -->
         <section
           id="Shop"
@@ -102,7 +102,6 @@ const sendId = (id) => {
 
             <div v-if="router.params.category === 'xmas-edition'">
               <ShopXmas />
-              
             </div>
             <div class="relative">
               <!-- <div
@@ -128,7 +127,8 @@ const sendId = (id) => {
                       v-if="!img.inStock"
                       class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
                     >
-                      Pre-Order
+                      <!-- Pre-Order -->
+                      Sold Out
                     </div>
                     <div
                       v-if="img.isNew"
@@ -137,21 +137,24 @@ const sendId = (id) => {
                       New Arrival
                     </div>
                     <div
-                      v-if="img.isNew && router.params.category === 'xmas-edition'"
+                      v-if="
+                        img.isNew && router.params.category === 'xmas-edition'
+                      "
                       class="absolute top-2 left-2 bg-yellow-500 text-white text-sm px-3 py-1 font-bold rounded"
                     >
                       Holiday Collection
                     </div>
 
                     <!-- Christmas Bubble Added to the right -->
+                    <!-- TODO: Activate this every christmas season -->
                     <!-- v-if="img.isNew" -->
-                    <div class="absolute top-2 right-2 px-0 py-0 rounded">
+                    <!-- <div class="absolute top-2 right-2 px-0 py-0 rounded">
                       <img
                         src="/images/xmas-hat.png"
                         alt=""
                         class="w-12 h-12 object-contain"
                       />
-                    </div>
+                    </div> -->
                     <!-- [#89CFF0] -->
                     <NuxtLink
                       :to="{
@@ -206,6 +209,12 @@ const sendId = (id) => {
                         <img
                           v-else-if="product.category === 'tumblers'"
                           class="relative w-auto h-[250px]"
+                          :src="img.url"
+                          alt=""
+                        />
+                        <img
+                          v-else-if="product.category === 'msafiri-boot'"
+                          class="relative w-auto h-auto object-cover"
                           :src="img.url"
                           alt=""
                         />

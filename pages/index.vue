@@ -133,6 +133,34 @@ const closeModal = () => {
   loadCarousel.value = !loadCarousel.value
 }
 
+// const christmasHero = ref([
+//   {
+//     // image: '/images/hero_img_1.jpg',
+//     image: '/images/hero_images/hero1.jpeg',
+//     mobileImage: '/images/hero_images/hero_mobile1.jpeg',
+//     // title: 'Horti Grid',
+//     // subHeading: 'Your Agribusiness Solutions Partner!',
+//     // description:
+//     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
+//     showButton: true,
+//     height: 'three-quarters',
+//     toUrl: '/shop/preorder',
+//   },
+
+//   {
+//     // image: '/images/hero_img_1.jpg',
+//     image: '/images/hero_images/hero2.jpeg',
+//     mobileImage: '/images/hero_images/hero_mobile2.jpeg',
+//     // title: 'Horti Grid',
+//     // subHeading: 'Your Agribusiness Solutions Partner!',
+//     // description:
+//     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
+//     // showButton: true,
+//     height: 'three-quarters',
+//     // toUrl: '/products',
+//   },
+// ])
+
 const christmasHero = ref([
   {
     // image: '/images/hero_img_1.jpg',
