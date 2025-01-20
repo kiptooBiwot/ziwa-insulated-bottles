@@ -164,27 +164,29 @@ const closeModal = () => {
 const christmasHero = ref([
   {
     // image: '/images/hero_img_1.jpg',
-    image: '/images/hero_images/hero1.jpeg',
-    mobileImage: '/images/hero_images/hero_mobile1.jpeg',
-    // title: 'Horti Grid',
+    // image: '/images/hero_images/hero1.jpeg',
+    image: '/images/hero_images/girls_hero_1.jpeg',
+    // mobileImage: '/images/hero_images/hero_mobile1.jpeg',
+    title: 'Celebrate your gal',
     // subHeading: 'Your Agribusiness Solutions Partner!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
-    showButton: true,
-    height: 'three-quarters',
-    toUrl: '/shop/preorder',
+    showButton: false,
+    height: 'full',
+    // toUrl: '/shop/preorder',
   },
 
   {
     // image: '/images/hero_img_1.jpg',
-    image: '/images/hero_images/hero2.jpeg',
-    mobileImage: '/images/hero_images/hero_mobile2.jpeg',
-    // title: 'Horti Grid',
+    // image: '/images/hero_images/hero2.jpeg',
+    image: '/images/hero_images/hero_girls.jpeg',
+    // mobileImage: '/images/hero_images/hero_mobile2.jpeg',
+    title: 'Celebrate your gal',
     // subHeading: 'Your Agribusiness Solutions Partner!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     // showButton: true,
-    height: 'three-quarters',
+    height: 'full',
     // toUrl: '/products',
   },
 ])

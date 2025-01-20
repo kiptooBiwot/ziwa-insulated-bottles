@@ -50,7 +50,7 @@ const getImageHeight = (item) => {
       :loop="true"
       :effect="'creative'"
       :autoplay="{
-        delay: 4000,
+        delay: 3000,
         disableOnInteraction: true,
       }"
       :creative-effect="{
@@ -89,7 +89,7 @@ const getImageHeight = (item) => {
             class="text-center text-white max-w-3xl mx-5 lg:mx-auto space-y-5 z-0"
           >
             <div class="mb-4">
-              <h1 class="text-5xl md:text-8xl text-white font-normal mb-1">
+              <h1 class="text-5xl md:text-8xl text-white font-script mb-1">
                 {{ item.title }}
               </h1>
               <p v-if="item.subHeading" class="text-base font-heading italic">
