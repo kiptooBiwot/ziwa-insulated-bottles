@@ -138,38 +138,39 @@ export const useProductStore = defineStore('product', {
 
       if (this.dbProducts.length < 1) {
         this.getAllProducts()
-      }
+      } else {
 
-      if (payload === 'preorder') {
-        // const filteredProducts = this.dbProducts.images.filter(
-        //   (prod) => prod.inStock === false
-        // )
+        if (payload === 'preorder') {
+          // const filteredProducts = this.dbProducts.images.filter(
+          //   (prod) => prod.inStock === false
+          // )
 
-        // const outOfStockImages = this.dbProducts.flatMap(product =>
-        //   product.images.filter(image => image.inStock === false)
-        // );
-        const categorizedOutOfStockImages = this.dbProducts.map(product => ({
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          slug: product.slug,
-          features: product.features,
-          category: product.category,
-          outOfStockImages: product.images.filter(image => image.inStock === false)
-        })).filter(category => category.outOfStockImages.length > 0);
+          // const outOfStockImages = this.dbProducts.flatMap(product =>
+          //   product.images.filter(image => image.inStock === false)
+          // );
+          const categorizedOutOfStockImages = this.dbProducts.map(product => ({
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            slug: product.slug,
+            features: product.features,
+            category: product.category,
+            outOfStockImages: product.images.filter(image => image.inStock === false)
+          })).filter(category => category.outOfStockImages.length > 0);
 
 
-        this.filteredProduct = categorizedOutOfStockImages
-        this.isLoading = false
-      }
+          this.filteredProduct = categorizedOutOfStockImages
+          this.isLoading = false
+        }
 
-      else {
-        const product = this.dbProducts.filter(
-          (prod) => prod.category === payload
-        )
+        else {
+          const product = this.dbProducts.filter(
+            (prod) => prod.category === payload
+          )
 
-        this.filteredProduct = product
-        this.isLoading = false
+          this.filteredProduct = product
+          this.isLoading = false
+        }
       }
     }
   },
