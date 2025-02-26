@@ -168,8 +168,8 @@ const christmasHero = ref([
     image: '/images/hero_images/girls_hero_1.jpeg',
     mobileImage: '/images/hero_images/girls_hero_1.jpeg',
     // mobileImage: '/images/hero_images/hero_mobile1.jpeg',
-    title: 'Celebrate your gal',
-    // subHeading: 'Your Agribusiness Solutions Partner!',
+    title: 'Every Sip, Just the Way You Love It',
+    subHeading: 'Hot or cold, for longer!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     showButton: false,
@@ -183,8 +183,8 @@ const christmasHero = ref([
     image: '/images/hero_images/hero_girls.jpeg',
     mobileImage: '/images/hero_images/hero_girls.jpeg',
     // mobileImage: '/images/hero_images/hero_mobile2.jpeg',
-    title: 'Celebrate your gal',
-    // subHeading: 'Your Agribusiness Solutions Partner!',
+    title: 'Every Sip, Just the Way You Love It',
+    subHeading: 'Hot or cold, for longer!',
     // description:
     //   'Explore our crop production, consultancy and market linkage services for niche horticultural value chains. Let’s grow success together!',
     // showButton: true,
