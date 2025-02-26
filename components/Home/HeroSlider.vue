@@ -94,7 +94,7 @@ const getImageHeight = (item) => {
               </h1>
               <p
                 v-if="item.subHeading"
-                class="text-2xl md:text-4xl mt-5 text-rose-300 font-heading font-medium italic"
+                class="text-2xl md:text-4xl mt-5 text-[#39519f] font-heading font-medium italic"
               >
                 {{ item.subHeading }}
               </p>
