@@ -155,14 +155,14 @@ const goToCheckout = () => {
 
 const applyCoupon = async () => {
   try {
-    if (productPriceComputed.value < 3000) {
-      toast.add({
-        type: 'error',
-        message: 'Coupons can only be applied for orders above KSH,3000/=',
-        timeout: 5000,
-      })
-      return
-    }
+    // if (productPriceComputed.value < 3000) {
+    //  toast.add({
+    //    type: 'error',
+    //    message: 'Coupons can only be applied for orders above KSH,3000/=',
+    //    timeout: 5000,
+    //  })
+    //  return
+    // }
 
     if (couponCode.value) {
       const response = await couponStore.applyCoupon(couponCode.value)
@@ -416,9 +416,9 @@ const applyCoupon = async () => {
               </div>
               <hr class="my-4" />
               <!-- v-model="couponCode" -->
-              <h5 class="text-xs text-rose-500 font-semibold">
+              <!-- <h5 class="text-xs text-rose-500 font-semibold">
                 Coupons are only applicable for orders above KSH.3,000/=
-              </h5>
+              </h5> -->
               <div class="block flex-1">
                 <label for="" class="text-xs">Enter your coupon code</label>
                 <div class="flex gap-4">
