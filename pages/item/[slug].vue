@@ -524,7 +524,7 @@ const isInCart = computed(() => {
               <!-- v-if="productStore.product.category === 'big-bottle'" -->
               <!-- :disabled="!productImg.inStock" -->
               <div
-                v-if="productImg.inStock && productImg.status === 'available'"
+                v-if="productImg.inStock && productImg.status !== 'coming_soon'"
               >
                 <button
                   @click="customizeBottle = !customizeBottle"
@@ -533,12 +533,12 @@ const isInCart = computed(() => {
                   <span
                     v-if="
                       productStore.product.category === 'big-bottle' ||
-                      'kids-bottle' ||
-                      'tumblers'
+                      productStore.product.category === 'kids-bottle' ||
+                      productStore.product.category === 'tumblers'
                     "
                     >Customize for Free</span
                   >
-                  <span v-else>Customize for Ksh.400</span>
+                  <!-- <span v-else>Customize for Ksh.400</span> -->
                 </button>
                 <button
                   @click="addToCart"
@@ -551,7 +551,9 @@ const isInCart = computed(() => {
                     <span v-else>Pre-Order this Product</span>
                   </div>
                   <div v-else>
-                    <span v-if="productImg.inStock">Add to Cart</span>
+                    <span v-if="productImg.inStock || productImg.isNew"
+                      >Add to Cart</span
+                    >
                     <span v-else>Pre-order this Product</span>
                   </div>
                 </button>
