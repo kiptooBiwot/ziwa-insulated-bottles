@@ -79,6 +79,17 @@ const bottleColor = [
   '#FA01A5',
   '#DCE80C',
   '#CD1829',
+  // Lid Colors
+  '#D38F60',
+  '#8B2064',
+  '#F0F4F3',
+  '#9971AD',
+  '#537AC9',
+  '#B8CEC2',
+  '#C6BFAC',
+  '#074B94',
+  '#AD4641',
+  '#2A3137',
 ]
 
 const productImg = ref('')
@@ -255,10 +266,18 @@ const isInCart = computed(() => {
               <!-- [#89CFF0] bg-[#89CFF0] -->
               <!-- :class="`bg-${product.bgColor}`" -->
               <div
-                v-if="!productImg.inStock"
+                v-if="
+                  !productImg.inStock && !productImg.status === 'coming_soon'
+                "
                 class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
               >
                 Pre-Order
+              </div>
+              <div
+                v-if="productImg.status === 'coming_soon'"
+                class="absolute top-2 left-2 bg-purple-500 text-white text-sm px-3 py-1 font-bold rounded"
+              >
+                {{ 'Coming Soon' }}
               </div>
               <div
                 v-if="productImg.isNew"
@@ -325,7 +344,10 @@ const isInCart = computed(() => {
                   />
                 </template>
                 <template
-                  v-else-if="productStore.product.category === 'tumblers'"
+                  v-else-if="
+                    productStore.product.category === 'tumblers' ||
+                    productStore.product.category === 'leak-proof-lids'
+                  "
                 >
                   <img
                     v-if="productImg.url"
@@ -346,7 +368,7 @@ const isInCart = computed(() => {
             </div>
             <div class="md:hidden">
               <h3 class="text-lg text-gray-800 py-3">
-                Choose the Bottle's Color
+                Choose the Item's Color
               </h3>
               <div class="flex gap-2">
                 <!-- <template v-for="product in productStore.product" :key="product._id"> -->
@@ -404,7 +426,7 @@ const isInCart = computed(() => {
             <hr />
             <div class="hidden md:block">
               <h3 class="text-lg text-gray-800 py-3">
-                Choose the Bottle Color
+                Choose the Item's Color
               </h3>
               <div class="flex gap-2">
                 <div
@@ -426,7 +448,8 @@ const isInCart = computed(() => {
                   >Material</span
                 >
                 {{
-                  productStore?.product?.category === 'msafiri-boot'
+                  productStore?.product?.category === 'msafiri-boot' ||
+                  productStore?.product?.category === 'leak-proof-lids'
                     ? 'Silicone'
                     : '304 Stainless Steel'
                 }}
@@ -460,8 +483,17 @@ const isInCart = computed(() => {
                 </div>
                 <!-- <span class="bg-[#f5f5f5] border text-[#c08562] text-[9px] font-semibold px-1.5 rounded-sm">On Offer</span> -->
               </div>
-              <hr />
-              <div v-if="!productImg.inStock" class="text-rose-500">
+              <hr
+                v-if="
+                  !productImg.inStock && !productImg.status === 'coming_soon'
+                "
+              />
+              <div
+                v-if="
+                  !productImg.inStock && !productImg.status === 'coming_soon'
+                "
+                class="text-rose-500"
+              >
                 <h3 class="font-display font-bold text-rose-500">
                   Product Out of Stock
                 </h3>
@@ -491,36 +523,49 @@ const isInCart = computed(() => {
               <hr v-if="productStore.customizedBottle" />
               <!-- v-if="productStore.product.category === 'big-bottle'" -->
               <!-- :disabled="!productImg.inStock" -->
-              <button
-                @click="customizeBottle = !customizeBottle"
-                class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
+              <div
+                v-if="productImg.inStock && productImg.status === 'available'"
               >
-                <span
-                  v-if="
-                    productStore.product.category === 'big-bottle' ||
-                    'kids-bottle' ||
-                    'tumblers'
-                  "
-                  >Customize for Free</span
+                <button
+                  @click="customizeBottle = !customizeBottle"
+                  class="px-6 w-full py-3 text-white text-sm font-semibold uppercase shadow-md rounded bg-purple-600"
                 >
-                <span v-else>Customize for Ksh.400</span>
-              </button>
-              <button
-                @click="addToCart"
-                class="px-6 w-full py-3 text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500"
-              >
-                <div v-if="isInCart">
-                  <span v-if="productImg.inStock"
-                    >Add Another Bottle to Cart</span
+                  <span
+                    v-if="
+                      productStore.product.category === 'big-bottle' ||
+                      'kids-bottle' ||
+                      'tumblers'
+                    "
+                    >Customize for Free</span
                   >
-                  <span v-else>Pre-Order this Product</span>
-                </div>
-                <div v-else>
-                  <span v-if="productImg.inStock">Add to Cart</span>
-                  <span v-else>Pre-order this Product</span>
-                </div>
-              </button>
+                  <span v-else>Customize for Ksh.400</span>
+                </button>
+                <button
+                  @click="addToCart"
+                  class="px-6 w-full py-3 text-white text-sm uppercase font-semibold shadow-md rounded bg-green-500"
+                >
+                  <div v-if="isInCart">
+                    <span v-if="productImg.inStock"
+                      >Add Another Bottle to Cart</span
+                    >
+                    <span v-else>Pre-Order this Product</span>
+                  </div>
+                  <div v-else>
+                    <span v-if="productImg.inStock">Add to Cart</span>
+                    <span v-else>Pre-order this Product</span>
+                  </div>
+                </button>
+              </div>
+
+              <div
+                v-if="
+                  !productImg.inStock && productImg.status === 'coming_soon'
+                "
+              >
+                <WaitlistNew />
+              </div>
             </div>
+
             <!-- </template> -->
           </div>
         </div>

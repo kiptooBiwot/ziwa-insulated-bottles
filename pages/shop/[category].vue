@@ -219,6 +219,12 @@ const sendId = (id) => {
                           alt=""
                         />
                         <img
+                          v-else-if="product.category === 'leak-proof-lids'"
+                          class="relative w-auto h-[250px] object-cover"
+                          :src="img.url"
+                          alt=""
+                        />
+                        <img
                           v-else
                           class="relative w-full h-[460px] object-none"
                           :src="img.url"
