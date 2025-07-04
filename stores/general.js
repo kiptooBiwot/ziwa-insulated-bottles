@@ -35,7 +35,13 @@ export const useGeneralStore = defineStore('general', {
             category: 'msafiri-boot',
             imageUrl: '/images/boot_aqua_purple_white.png',
             id: ''
-          }
+          },
+          {
+            title: 'Leak-Proof Lids',
+            category: 'leak-proof-lids',
+            imageUrl: '/images/toffee-lid.png',
+            id: ''
+          },
         ]
       },
       {
