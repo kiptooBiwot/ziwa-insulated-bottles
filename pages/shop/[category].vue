@@ -245,6 +245,16 @@ const sendId = (id) => {
                           <span v-else>(30 Oz)</span>
                         </span>
                         <span
+                          v-else-if="product.category === 'leak-proof-lids'"
+                          class="block opacity-75 -mb-1 text-gray-600 text-xs"
+                          >{{ img.color }} Leak-Proof Lid
+                        </span>
+                        <span
+                          v-else-if="product.category === 'msafiri-boot'"
+                          class="block opacity-75 -mb-1 text-gray-600 text-xs"
+                          >{{ img.color }} Msafiri Boot
+                        </span>
+                        <span
                           v-else
                           class="block opacity-75 -mb-1 text-gray-600 text-xs"
                           >Little Ziwa in {{ img.color }}</span
