@@ -201,7 +201,10 @@ const sendId = (id) => {
                           "
                         ></div>
                         <img
-                          v-if="product.category === 'big-bottle'"
+                          v-if="
+                            product.category === 'big-bottle' ||
+                            product.category == 'ziwa-3.0'
+                          "
                           class="relative w-auto h-[250px]"
                           :src="img.url"
                           alt=""

@@ -19,6 +19,7 @@ export const useGeneralStore = defineStore('general', {
         isOpen: false,
         children: [
           { title: 'Ziwa Bottle', category: 'big-bottle', url: '/item/ziwa-insulated-bottle', imageUrl: '/images/hero_2.png', id: '6554e7f1ed069baf070d7694' },
+          { title: 'The Ziwa 3.0', category: 'ziwa-3.0', url: '/item/ziwa-3.0', imageUrl: '/images/sage-1000.png', id: '6554e7f1ed069baf070d7695' },
           { title: 'Msafiri Tumbler', category: 'tumblers', url: '/item/msafiri-tumbler-the-hydration-dynamo', imageUrl: '/images/tumbler_1.png', id: '65ba57cdf8f16cdd0fbbcf94' },
           { title: 'Little Ziwa', category: 'kids-bottle', url: '/item/kids-bottle', imageUrl: '/images/kids_navy.png', id: '664fb9cc4ffbdd783af1a648' },
         ]

@@ -90,6 +90,17 @@ const bottleColor = [
   '#074B94',
   '#AD4641',
   '#2A3137',
+  '#B7CDFA',
+  '#E2D0F8',
+  '#838A83',
+  '#074B94',
+  '#E2D0F8',
+  '#E5E3EF',
+  '#838A83',
+  '#B7CDFA',
+  '#EDCCD3',
+  '#262A29',
+  '#AE4A0F',
 ]
 
 const productImg = ref('')
