@@ -241,6 +241,11 @@ const sendId = (id) => {
                           >{{ img.capacity }} ml {{ img.color }} Water Bottle
                         </span>
                         <span
+                          v-if="product.category === 'ziwa-3.0'"
+                          class="block opacity-75 -mb-1 text-gray-600 text-xs"
+                          >{{ img.capacity }} ml {{ img.color }} Ziwa 3.0 Bottle
+                        </span>
+                        <span
                           v-else-if="product.category === 'tumblers'"
                           class="block opacity-75 -mb-1 text-gray-600 text-xs"
                           >{{ img.color }} Tumbler

@@ -346,7 +346,12 @@ const isInCart = computed(() => {
                     opacity: 0.2;
                   "
                 ></div>
-                <template v-if="productStore.product.category === 'big-bottle'">
+                <template
+                  v-if="
+                    productStore.product.category === 'big-bottle' ||
+                    productStore.product.category === 'ziwa-3.0'
+                  "
+                >
                   <img
                     v-if="productImg.url"
                     class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
