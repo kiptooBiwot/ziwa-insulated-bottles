@@ -101,6 +101,13 @@ const bottleColor = [
   '#EDCCD3',
   '#262A29',
   '#AE4A0F',
+  // roam-glide-tumbler Colors
+  '#0070BA',
+  '#E1AAD1',
+  '#F93CA0',
+  '#D57D95',
+  '#B5B6C8',
+  '#0B061C',
 ]
 
 const productImg = ref('')

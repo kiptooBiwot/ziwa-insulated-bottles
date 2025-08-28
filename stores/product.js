@@ -168,6 +168,7 @@ export const useProductStore = defineStore('product', {
             (prod) => prod.category === payload
           )
 
+
           this.filteredProduct = product
           this.isLoading = false
         }
