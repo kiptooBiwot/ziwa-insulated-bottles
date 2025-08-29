@@ -9,11 +9,22 @@ const productStore = useProductStore()
 const router = useRoute()
 
 // const filteredProduct = ref(null)
-// const isLoading = ref(false)
+const isLoading = ref(false)
 
 onMounted(async () => {
   // console.log(router.params.category)
-  productStore.getProductCategory(router.params.category)
+
+  try {
+    isLoading.value = true
+    if (!productStore.dbProducts) {
+      await productStore.getAllProducts()
+    }
+    productStore.getProductCategory(router.params.category)
+  } catch (error) {
+    alert(error.message)
+  } finally {
+    isLoading.value = false
+  }
 })
 
 const sendId = (id) => {
@@ -24,7 +35,7 @@ const sendId = (id) => {
 <template>
   <div class="min-h-screen">
     <div
-      v-if="productStore.isLoading"
+      v-if="isLoading"
       class="w-full min-h-screen flex items-center justify-center"
     >
       <Spinner />
@@ -216,6 +227,12 @@ const sendId = (id) => {
                           alt=""
                         />
                         <img
+                          v-else-if="product.category === 'roam-glide-tumbler'"
+                          class="relative w-full h-[250px]"
+                          :src="img.url"
+                          alt=""
+                        />
+                        <img
                           v-else-if="product.category === 'msafiri-boot'"
                           class="relative w-auto h-auto object-cover"
                           :src="img.url"
@@ -243,7 +260,8 @@ const sendId = (id) => {
                         <span
                           v-if="product.category === 'ziwa-3.0'"
                           class="block opacity-75 -mb-1 text-gray-600 text-xs"
-                          >{{ img.capacity }} ml {{ img.color }} Ziwa 3.0 Bottle
+                          >Ziwa 3.0 Bottle - {{ img.color }} ({{ img.capacity }}
+                          ml)
                         </span>
                         <span
                           v-else-if="product.category === 'tumblers'"
@@ -261,6 +279,14 @@ const sendId = (id) => {
                           v-else-if="product.category === 'msafiri-boot'"
                           class="block opacity-75 -mb-1 text-gray-600 text-xs"
                           >{{ img.color }} Msafiri Boot
+                        </span>
+                        <span
+                          v-else-if="product.category === 'roam-glide-tumbler'"
+                          class="block opacity-75 -mb-1 text-gray-600 text-xs"
+                          >Roam Travel Tumbler - {{ img.color }} ({{
+                            img.capacity
+                          }}
+                          ml)
                         </span>
                         <span
                           v-else
