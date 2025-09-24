@@ -228,7 +228,7 @@ const sendId = (id) => {
                         />
                         <img
                           v-else-if="product.category === 'roam-glide-tumbler'"
-                          class="relative w-full h-[250px]"
+                          class="relative rounded-lg object-cover w-auto h-[300px] md:h-[300px] mx-auto"
                           :src="img.url"
                           alt=""
                         />
