@@ -361,7 +361,7 @@ const isInCart = computed(() => {
                 >
                   <img
                     v-if="productImg.url"
-                    class="relative rounded-lg object-fit w-auto h-[300px] md:h-[400px] mx-auto transition duration-700 ease-in-out"
+                    class="relative rounded-lg object-fit w-auto h-auto md:h-auto mx-auto transition duration-700 ease-in-out"
                     :src="productImg.url"
                     alt=""
                   />

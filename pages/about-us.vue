@@ -1,8 +1,8 @@
 <script setup>
 import bottle from '~/assets/images/products/bottle1-bg.png'
-import about_img from '~/assets/images/MOK_4820.jpg'
-import about_img1 from '~/assets/images/MOK_4835.jpg'
-import hero_img from '~/assets/images/hero_img-no-bg.png'
+import about_img from '/images/about-new1.jpeg'
+import about_img1 from '/images/about-new2.jpeg'
+import hero_img from '/images/about-new-hero.png'
 
 useHead({
   title: 'Ziwa | About Us',
@@ -34,7 +34,7 @@ nuxtApp.$fb.enable()
       </div>
     </div>
     <div class="max-w-6xl mx-auto py-10 px-5 xl:px-0">
-      <h3 class="text-[#39519f] font-medium text-lg">About Us</h3>
+      <h3 class="text-[#39519f] font-semibold text-2xl">About Us</h3>
       <!-- <h2
         class="text-gray-900 font-medium text-[36px] md:text-[36px] tracking-tight"
       >
@@ -101,14 +101,14 @@ nuxtApp.$fb.enable()
           <!-- Image -->
           <div class="block order-first md:order-last">
             <img
-              :src="about_img"
-              alt=""
-              class="hidden md:flex w-auto h-[350px] mx-auto object-cover rounded-lg mb-5"
-            />
-            <img
               :src="about_img1"
               alt=""
-              class="flex w-auto h-[350px] mx-auto object-cover rounded-lg"
+              class="hidden md:flex w-[300px] h-[350px] mx-auto object-cover rounded-lg mb-5"
+            />
+            <img
+              :src="about_img"
+              alt=""
+              class="flex w-[300px] h-[350px] mx-auto object-cover rounded-lg"
             />
           </div>
         </div>

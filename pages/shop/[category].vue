@@ -216,7 +216,7 @@ const sendId = (id) => {
                             product.category === 'big-bottle' ||
                             product.category == 'ziwa-3.0'
                           "
-                          class="relative w-auto h-[250px]"
+                          class="relative w-auto h-auto"
                           :src="img.url"
                           alt=""
                         />
