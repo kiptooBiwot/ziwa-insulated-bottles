@@ -94,13 +94,8 @@ const showEditModal = async (productId, imageId) => {
 const handleItemUpdate = async (productId, payload) => {
   try {
     if (isChanged.value) {
-      console.log('PAYLOAD FE:', payload)
-      console.log('PRODUCT ID FE:', productId)
-
       // Call the store method to update the product
       const response = await productStore.updateProduct(productId, payload)
-
-      // console.log('UPDATE PRODUCT RESPONSE:', response)
 
       if (response.success === true) {
         toast.add({
@@ -136,10 +131,14 @@ const handleItemUpdate = async (productId, payload) => {
         >
           {{
             product.category === 'big-bottle' ? 'Bottles (750ml & 1000ml)' : ''
-          }}{{ product.category === 'tumblers' ? 'Tumblers 30oz & 40oz' : ''
-          }}{{
-            product.category === 'kids-bottle' ? 'Ziwa Little (500ml)' : ''
+          }}{{ product.category === 'tumblers' ? 'Tumblers 30oz & 40oz' : '' }}
+          {{ product.category === 'ziwa-3.0' ? 'Ziwa 3.0' : '' }}
+          {{
+            product.category === 'roam-glide-tumbler'
+              ? 'Roam Glide n’ Sip Tumbler'
+              : ''
           }}
+          {{ product.category === 'kids-bottle' ? 'Ziwa Little (500ml)' : '' }}
           {{ product.category === 'leak-proof-lids' ? 'Leak-Proof Lids' : '' }}
           {{ product.category === 'msafiri-boot' ? 'Msafiri Boot' : '' }}
         </h2>
@@ -207,6 +206,164 @@ const handleItemUpdate = async (productId, payload) => {
                   <button
                     @click="showEditModal(product._id, image._id)"
                     class="px-2 py-1 rounded-md text-white bg-green-600 text-sm hover:bg-text-500 flex items-center justify-center"
+                  >
+                    <span>
+                      <Icon
+                        name="heroicons:pencil-square"
+                        class="text-white w-5 h-5 mr-1"
+                      />
+                    </span>
+                    Edit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-else-if="product.category === 'ziwa-3.0'"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5"
+        >
+          <div v-for="image in product.images" :key="image._id">
+            <div
+              class="border border-gray-300 shadow-md p-4 rounded-lg space-y-4"
+            >
+              <div class="bg-slate-100 rounded-lg py-4">
+                <img
+                  :src="image.url"
+                  :alt="product.title"
+                  class="object-contain shrink-0 w-full h-[150px]"
+                />
+              </div>
+
+              <div>
+                <h3 class="text-sm font-bold mb-3">{{ product.title }}</h3>
+                <div class="flex flex-wrap justify-between gap-x-10 gap-y-2">
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Color
+                    </h2>
+                    <p class="text-sm">{{ image.color }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Price
+                    </h2>
+                    <p class="text-sm">KSH.{{ image.price }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Capacity
+                    </h2>
+                    <p class="text-sm">{{ image.capacity }} ml</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Color Code
+                    </h2>
+                    <p class="text-sm">{{ image.colorCode }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      In Stock
+                    </h2>
+                    <p
+                      class="text-sm"
+                      :class="[
+                        image.inStock ? 'text-green-500' : 'text-rose-500',
+                      ]"
+                    >
+                      {{
+                        image.inStock === true ? 'Available' : 'Out of Stock'
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <hr class="mt-3" />
+                <div class="flex justify-end mt-3">
+                  <button
+                    @click="showEditModal(product._id, image._id)"
+                    class="px-2 py-1 rounded-md text-white bg-green-600 text-sm hover:bg-green-500 flex items-center justify-center"
+                  >
+                    <span>
+                      <Icon
+                        name="heroicons:pencil-square"
+                        class="text-white w-5 h-5 mr-1"
+                      />
+                    </span>
+                    Edit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-else-if="product.category === 'roam-glide-tumbler'"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-5"
+        >
+          <div v-for="image in product.images" :key="image._id">
+            <div
+              class="border border-gray-300 shadow-md p-4 rounded-lg space-y-4"
+            >
+              <div class="bg-slate-100 rounded-lg py-4">
+                <img
+                  :src="image.url"
+                  :alt="product.title"
+                  class="object-contain shrink-0 w-full h-[150px]"
+                />
+              </div>
+
+              <div>
+                <h3 class="text-sm font-bold mb-3">{{ product.title }}</h3>
+                <div class="flex flex-wrap justify-between gap-x-10 gap-y-2">
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Color
+                    </h2>
+                    <p class="text-sm">{{ image.color }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Price
+                    </h2>
+                    <p class="text-sm">KSH.{{ image.price }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Capacity
+                    </h2>
+                    <p class="text-sm">{{ image.capacity }} ml</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      Color Code
+                    </h2>
+                    <p class="text-sm">{{ image.colorCode }}</p>
+                  </div>
+                  <div class="">
+                    <h2 class="text-gray-400 font-semibold text-xs -mb-1">
+                      In Stock
+                    </h2>
+                    <p
+                      class="text-sm"
+                      :class="[
+                        image.inStock ? 'text-green-500' : 'text-rose-500',
+                      ]"
+                    >
+                      {{
+                        image.inStock === true ? 'Available' : 'Out of Stock'
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <hr class="mt-3" />
+                <div class="flex justify-end mt-3">
+                  <button
+                    @click="showEditModal(product._id, image._id)"
+                    class="px-2 py-1 rounded-md text-white bg-green-600 text-sm hover:bg-green-500 flex items-center justify-center"
                   >
                     <span>
                       <Icon
