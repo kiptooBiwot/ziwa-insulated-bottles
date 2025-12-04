@@ -138,11 +138,10 @@ const sendId = (id) => {
                       v-if="!img.inStock"
                       class="absolute top-2 left-2 bg-rose-500 text-white text-sm px-3 py-1 font-bold rounded"
                     >
-                      <!-- Pre-Order -->
                       Sold Out
                     </div>
                     <div
-                      v-if="img.isNew"
+                      v-if="img.isNew && img.inStock"
                       class="absolute top-2 left-2 bg-orange-500 text-white text-sm px-3 py-1 font-bold rounded"
                     >
                       New Arrival
