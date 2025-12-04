@@ -73,7 +73,8 @@ export const useGeneralStore = defineStore('general', {
     bestSellers: [
       { title: 'Ziwa Bottle 3.0', image: '/images/ochre-600.png', category: 'ziwa-3.0' },
       { title: 'Msafiri Tumbler', image: '/images/tumbler_1.png', category: 'tumblers' },
-      { title: 'Little Ziwa', image: '/images/kids_navy.png', category: 'kids-bottle' },
+      // { title: 'Little Ziwa', image: '/images/kids_navy.png', category: 'kids-bottle' },
+      { title: 'Roam Glide n’ Sip Tumbler', image: '/images/glide-nakuru-sky.png', category: 'roam-glide-tumbler' },
     ],
 
     // Christmas Edition images
